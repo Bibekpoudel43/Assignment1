@@ -33,7 +33,7 @@ namespace Assignment1
             od.Filter = "Text(*.txt)|*.txt";
             od.Title = "Open File";
             // Show the Dialog.  
-            // If the user clicked OK in the dialog and  
+            // If the user clicked OK in the dialog and  ,
             if (od.ShowDialog() == DialogResult.OK)
             {
                 FileStream fs = (FileStream)od.OpenFile();
