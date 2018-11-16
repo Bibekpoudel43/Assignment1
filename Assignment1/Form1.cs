@@ -13,13 +13,18 @@ namespace Assignment1
 {
     public partial class Form1 : Form
     {
-        public Dictionary<string, List<string>> list = new Dictionary<string, List<string>>();
+        public Dictionary<string, List<string>> hrData = new Dictionary<string, List<string>>();
+        private Dictionary<string, string> param = new Dictionary<string, string>();
+        public List<string> paramsArrays = new List<string>();
         public List<string> heartRate = new List<string>();
         public List<string> speed = new List<string>();
         public List<string> cadence = new List<string>();
         public List<string> altitude = new List<string>();
         public List<string> power = new List<string>();
         public List<string> powerBalancePedalling = new List<string>();
+        int counter = 0;
+        char[] findOf = { '\t', ' ', '=' };
+
         public Form1()
         {
             InitializeComponent();
@@ -28,12 +33,15 @@ namespace Assignment1
 
         private void openFile(object sender, EventArgs e)
         {
+            dataGridView.DataSource = null;
+            dataGridView.Rows.Clear();
             ReadFromFile();
+            viewHrData();
+            summaryCalc();
         }
 
 
-        //read the value from the file
-        //state load function
+        //read the text from  file
         public void ReadFromFile()
         {
             string line = "";
@@ -41,62 +49,148 @@ namespace Assignment1
             od.Filter = "HRM|*.hrm|Text Document|*.txt";
             od.Title = "Open File";
             // Show the Dialog.  
-            // If the user clicked OK in the dialog and  ,
+            // If the user clicked OK in the dialog then  ,
             if (od.ShowDialog() == DialogResult.OK)
             {
                 FileStream fs = (FileStream)od.OpenFile();
                 StreamReader sr = new StreamReader(fs);
-                char[] delimiterChars = { ' ' };
 
+                while (!(line = sr.ReadLine()).Contains("[Note]"))
 
-                while ((line = sr.ReadLine()) != null)
                 {
+                    counter++;
 
-                    sortDataIntoArray(line);
-                    int counter = 0;
-                    foreach(var value in heartRate)
+                    string newline = string.Join(" ", line.Split(findOf, StringSplitOptions.RemoveEmptyEntries));
+                    List<string> val = newline.Split(' ').ToList();
+
+                    for (int i = 0; i < val.Count(); i++)
                     {
-                        dataGridView.Rows.Add(heartRate[counter] +
-                            " bpm", speed[counter] +
-                            " km/hr", cadence[counter] +
-                            " rpm", altitude[counter] + 
-                            " m/ft", power[counter] + 
-                            " watt", powerBalancePedalling[counter]);
-                        counter++;
+                        paramsArrays.Add(val[i]);
+                    }
+
+                }
+
+                for (int i=1; i < paramsArrays.Count(); i+=2)
+                {
+                    param.Add(paramsArrays[i], paramsArrays[1 + i]);
+                }
+
+                while (!sr.EndOfStream)
+                {
+                    if ((line = sr.ReadLine()).Contains("[HRData]"))
+                    {
+                        while ((line = sr.ReadLine()) != null)
+                        {
+                            //add specific type data to array 
+                            sortDataIntoArray(line);
+                        }
                     }
                 }
+
+                //adding hr data to dictionary for easy access
+                hrDataToDictionary();
+
+                foreach (var text in paramsArrays)
+                {
+                    listBox1.Items.Add(text);
+                }
+
             }
         }
 
+        //split data and adding into list array
         public void sortDataIntoArray(string line)
         {
             try
             {
 
-                string newline = string.Join(" ", line.Split(new[] { '\t' }, StringSplitOptions.RemoveEmptyEntries));
-                List<string> parts = newline.Split(' ').ToList();
-                heartRate.Add(parts[0]);
-                speed.Add(parts[1]);
-                cadence.Add(parts[2]);
-                altitude.Add(parts[3]);
-                power.Add(parts[4]);
-                powerBalancePedalling.Add(parts[5]);
+                string newline = string.Join(" ", line.Split(findOf, StringSplitOptions.RemoveEmptyEntries));
+                List<string> val = newline.Split(' ').ToList();
+                heartRate.Add(val[0]);
+                speed.Add(val[1]);
+                cadence.Add(val[2]);
+                altitude.Add(val[3]);
+                power.Add(val[4]);
+                powerBalancePedalling.Add(val[5]);
+                val = null;
 
-
-                parts = null;
             }
             catch (IndexOutOfRangeException ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
+
+        //displayed list data to grid view table
+        public void viewHrData()
+        {
+
+            int counter = 0;
+            foreach (var value in speed)
+            {
+                dataGridView.Rows.Add(heartRate[counter]
+                    , speed[counter]
+                    , cadence[counter]
+                    , altitude[counter]
+                    , power[counter]
+                    , powerBalancePedalling[counter]);
+                counter++;
+            }            
+        }
+
+        //adding HRdata to dictionary 
+        private void hrDataToDictionary()
+        {
+            hrData.Add("heartRate", heartRate);
+            hrData.Add("speed", speed);
+            hrData.Add("cadence", cadence);
+            hrData.Add("altitude", altitude);
+            hrData.Add("power", power);
+            hrData.Add("powerBalancePedalling", powerBalancePedalling);
+        }
+
+
+        //summary calculation
+        private void summaryCalc()
+        {
+            var maxSpeed = Summary.Max(hrData["speed"]);
+            //var totalDistanceCovered = Summary.Sum(hrData["cadence"]);
+            var averageSpeed =  Summary.Average(hrData["speed"]);
+            var averageHeartRate = Summary.Average(hrData["heartRate"]);
+            var maximumHeartRate = Summary.Max(hrData["heartRate"]);
+            var minimumHeartRate = Summary.Min(hrData["heartRate"]);
+
+            var averagePower = Summary.Average(hrData["power"]);
+            var maximumPower = Summary.Max(hrData["power"]);
+
+            var averageAltitude = Summary.Average(hrData["altitude"]);
+            var maximumAltitude = Summary.Max(hrData["altitude"]);
+
+            //summary of data 
+            totalDistance.Text = null;
+            avgSpeed.Text =  averageSpeed.ToString();
+            //maximumSpeed.Text = maxSpeed.ToString();
+            avgHeartRate.Text = averageHeartRate.ToString();
+            maxHeartRate.Text = maximumHeartRate.ToString();
+            minHeartRate.Text = minimumHeartRate.ToString();
+            avgPower.Text = averagePower.ToString();
+            maxPower.Text = maximumPower.ToString();
+            avgAltitude.Text = averageAltitude.ToString();
+
+
+        }
+
+
+        //specifying column header
         private void InitGrid()
         {
-            dataGridView.ColumnCount = 4;
-            dataGridView.Columns[0].Name = "Cadence";
-            dataGridView.Columns[1].Name = "Altitude";
-            dataGridView.Columns[2].Name = "Heart rate";
-            dataGridView.Columns[3].Name = "Power in watts";
+            dataGridView.ColumnCount = 6;
+            dataGridView.Columns[0].Name = "Heart Rate";
+            dataGridView.Columns[1].Name = "Speed";
+            dataGridView.Columns[2].Name = "Cadence";
+            dataGridView.Columns[3].Name = "Altitude";
+            dataGridView.Columns[4].Name = "Power";
+            dataGridView.Columns[5].Name = "Power balance padelling";
 
         }
     }
