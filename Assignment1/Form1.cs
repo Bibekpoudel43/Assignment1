@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,7 @@ namespace Assignment1
         public List<string> powerBalancePedalling = new List<string>();
         int counter = 0;
         char[] findOf = { '\t', ' ', '=' };
+
 
         public Form1()
         {
@@ -69,10 +71,15 @@ namespace Assignment1
                     }
 
                 }
-
-                for (int i=1; i < paramsArrays.Count(); i+=2)
+                try {
+                    for (int i = 1; i < paramsArrays.Count(); i += 2)
+                    {
+                        param.Add(paramsArrays[i], paramsArrays[1 + i]);
+                    }
+                }
+                catch (IndexOutOfRangeException ex)
                 {
-                    param.Add(paramsArrays[i], paramsArrays[1 + i]);
+                    MessageBox.Show(ex.Message);
                 }
 
                 while (!sr.EndOfStream)
@@ -90,10 +97,24 @@ namespace Assignment1
                 //adding hr data to dictionary for easy access
                 hrDataToDictionary();
 
-                foreach (var text in paramsArrays)
+
+                if (param.ContainsKey("Date"))
                 {
-                    listBox1.Items.Add(text);
+                    string dateTime = param["Date"];
+                    DateTime date01 = DateTime.ParseExact(dateTime, "yyyyMMdd", CultureInfo.InvariantCulture);
+                    lblDate.Text = date01.ToString("dddd, MMMM dd yyyy");
                 }
+                if (param.ContainsKey("StartTime"))
+                {
+                    string time = param["StartTime"];
+                    lblStartTime.Text = time;
+                }
+                if (param.ContainsKey("Interval"))
+                {
+                    string intval = param["Interval"];
+                    lblInterval.Text = intval;
+                }
+
 
             }
         }
@@ -132,8 +153,7 @@ namespace Assignment1
                     , speed[counter]
                     , cadence[counter]
                     , altitude[counter]
-                    , power[counter]
-                    , powerBalancePedalling[counter]);
+                    , power[counter]);
                 counter++;
             }            
         }
@@ -146,7 +166,6 @@ namespace Assignment1
             hrData.Add("cadence", cadence);
             hrData.Add("altitude", altitude);
             hrData.Add("power", power);
-            hrData.Add("powerBalancePedalling", powerBalancePedalling);
         }
 
 
@@ -169,7 +188,7 @@ namespace Assignment1
             //summary of data 
             totalDistance.Text = null;
             avgSpeed.Text =  averageSpeed.ToString();
-            //maximumSpeed.Text = maxSpeed.ToString();
+            maximumSpeed.Text = maxSpeed.ToString();
             avgHeartRate.Text = averageHeartRate.ToString();
             maxHeartRate.Text = maximumHeartRate.ToString();
             minHeartRate.Text = minimumHeartRate.ToString();
@@ -184,14 +203,12 @@ namespace Assignment1
         //specifying column header
         private void InitGrid()
         {
-            dataGridView.ColumnCount = 6;
+            dataGridView.ColumnCount = 5;
             dataGridView.Columns[0].Name = "Heart Rate";
             dataGridView.Columns[1].Name = "Speed";
             dataGridView.Columns[2].Name = "Cadence";
             dataGridView.Columns[3].Name = "Altitude";
             dataGridView.Columns[4].Name = "Power";
-            dataGridView.Columns[5].Name = "Power balance padelling";
-
         }
     }
 }
