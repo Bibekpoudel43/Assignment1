@@ -204,11 +204,17 @@ namespace Assignment1
         private void InitGrid()
         {
             dataGridView.ColumnCount = 5;
-            dataGridView.Columns[0].Name = "Heart Rate";
-            dataGridView.Columns[1].Name = "Speed";
-            dataGridView.Columns[2].Name = "Cadence";
-            dataGridView.Columns[3].Name = "Altitude";
-            dataGridView.Columns[4].Name = "Power";
+            dataGridView.Columns[0].Name = "Heart Rate (bpm)";
+            dataGridView.Columns[1].Name = "Speed (km/h)";
+            dataGridView.Columns[2].Name = "Cadence (rpm)";
+            dataGridView.Columns[3].Name = "Altitude (m/ft)";
+            dataGridView.Columns[4].Name = "Power (watts)";
+        }
+
+        private void btnGraph_Click(object sender, EventArgs e)
+        {
+            SummaryGraph sm = new SummaryGraph();
+            sm.Show();
         }
     }
 }

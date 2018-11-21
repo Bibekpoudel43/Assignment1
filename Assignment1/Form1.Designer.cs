@@ -465,6 +465,7 @@
             this.btnGraph.TabIndex = 29;
             this.btnGraph.Text = "View Graph";
             this.btnGraph.UseVisualStyleBackColor = true;
+            this.btnGraph.Click += new System.EventHandler(this.btnGraph_Click);
             // 
             // panelHeader
             // 
