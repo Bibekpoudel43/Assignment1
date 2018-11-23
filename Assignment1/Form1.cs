@@ -213,7 +213,7 @@ namespace Assignment1
 
         private void btnGraph_Click(object sender, EventArgs e)
         {
-            SummaryGraph sm = new SummaryGraph();
+            SummaryGraph sm = new SummaryGraph(heartRate, speed, cadence, altitude, power);
             sm.Show();
         }
     }

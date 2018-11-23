@@ -14,9 +14,21 @@ namespace Assignment1
     public partial class SummaryGraph : Form
     {
         Form1 f1 = new Form1();
-        public SummaryGraph()
+        List<string> _heartRate = null;
+        List<string> _speed = null;
+        List<string> _cadence = null;
+        List<string> _altitude = null;
+        List<string> _power = null;
+        
+
+        public SummaryGraph(List<string> heartRate, List<string> speed, List<string> cadence, List<string> altitude, List<string> power)
         {
             InitializeComponent();
+            _heartRate = heartRate;
+            _speed = speed;
+            _cadence = cadence;
+            _altitude = altitude;
+            _power = power;
         }
 
         private void SummaryGraph_Resize(object sender, EventArgs e)
@@ -31,35 +43,19 @@ namespace Assignment1
         }
         private PointPairList buildPointPairList(int[] value)
         {
-            List<string> heart = f1.heartRate;
             PointPairList pr = new PointPairList();
-            int[] hr = {};
             for (int i = 0; i < value.Count(); i++)
             {
-                pr.Add(i, value['i']);
+                pr.Add(i, (value[i]));
             }
             return pr;
         }
-        private PointPairList buildPointPairList(double[] data)
-        {
-            PointPairList pt = new PointPairList();
-
-            for (int counter = 0; counter < data.Count(); counter++)
-            {
-                pt.Add(counter, (data[counter]));
-            }
-            return pt;
-
-        }
-
-
-
         private void plotGraph()
         {
             GraphPane myPane = zedGraphControl1.GraphPane;
 
             // Set the Titles
-            myPane.Title = "Combined view of ";
+            myPane.Title = "Analysis of HeartRate, Speed, Cadence, Power, and Altitude in every second";
             myPane.XAxis.Title = "Time in seconds";
             myPane.YAxis.Title = "Value";
             /* myPane.XAxis.Scale.MajorStep = 50;
@@ -72,31 +68,32 @@ namespace Assignment1
             PointPairList powerPairList = new PointPairList();
             PointPairList altitudePairList = new PointPairList();
 
-            var c1 = f1.heartRate.Select(int.Parse);
-            heartPairList = buildPointPairList(c1.ToArray());
-            var c2 = f1.speed.Select(int.Parse);
+             List<int> hr = _heartRate.Select(s => Convert.ToInt32(s)).ToList();
+             heartPairList = buildPointPairList(hr.ToArray());
+            List<int> c2 = _speed.Select(s => Convert.ToInt32(s)).ToList();
             speedPairList = buildPointPairList(c2.ToArray());
-            var c3 = f1.cadence.Select(int.Parse);
+            List<int> c3 = _cadence.Select(s => Convert.ToInt32(s)).ToList();
             cadencePairList = buildPointPairList(c3.ToArray());
-            var c4 = f1.power.Select(int.Parse);
+            List<int> c4 = _power.Select(s => Convert.ToInt32(s)).ToList();
             powerPairList = buildPointPairList(c4.ToArray());
-            var c5 = f1.altitude.Select(int.Parse);
+            List<int> c5 = _altitude.Select(s => Convert.ToInt32(s)).ToList();
             altitudePairList = buildPointPairList(c5.ToArray());
 
-            LineItem heartCurve = myPane.AddCurve("Heart",
-                   heartPairList, Color.Red, SymbolType.Triangle);
+            LineItem heartCurve = myPane.AddCurve("HeartRate",
+                   heartPairList, Color.Red, SymbolType.None);
 
             LineItem speedCurve = myPane.AddCurve("Speed",
-                  speedPairList, Color.Blue, SymbolType.Circle);
+                  speedPairList, Color.Blue, SymbolType.None);
 
             LineItem cadenceCurve = myPane.AddCurve("Cadence",
-                   cadencePairList, Color.Black, SymbolType.Star);
+                   cadencePairList, Color.Black, SymbolType.None);
 
             LineItem powerCurve = myPane.AddCurve("Power",
-                  speedPairList, Color.Cyan, SymbolType.Diamond);
+                  speedPairList, Color.Cyan, SymbolType.None);
 
             LineItem altitudeCurve = myPane.AddCurve("Altitude",
-                  altitudePairList, Color.Crimson, SymbolType.XCross);
+                  altitudePairList, Color.Crimson, SymbolType.None
+                  );
 
             zedGraphControl1.AxisChange();
         }
