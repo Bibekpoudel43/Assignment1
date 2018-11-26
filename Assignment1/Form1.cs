@@ -17,13 +17,17 @@ namespace Assignment1
         public Dictionary<string, List<string>> hrData = new Dictionary<string, List<string>>();
         private Dictionary<string, string> param = new Dictionary<string, string>();
         public List<string> paramsArrays = new List<string>();
+        public int[] arrayTime = {};
         public List<string> heartRate = new List<string>();
         public List<string> speed = new List<string>();
         public List<string> cadence = new List<string>();
         public List<string> altitude = new List<string>();
         public List<string> power = new List<string>();
         public List<string> powerBalancePedalling = new List<string>();
+        public string[] device = new string[] { };
         int counter = 0;
+        int interval = 0;
+        DateTime dt = new DateTime();
         char[] findOf = { '\t', ' ', '=' };
 
 
@@ -71,17 +75,14 @@ namespace Assignment1
                     }
 
                 }
-                try {
                     for (int i = 1; i < paramsArrays.Count(); i += 2)
                     {
                         param.Add(paramsArrays[i], paramsArrays[1 + i]);
+                        if (paramsArrays.Any()) //prevent IndexOutOfRangeException for empty list
+                        {
+                            paramsArrays.RemoveAt(paramsArrays.Count - 1);
+                        }
                     }
-                }
-                catch (IndexOutOfRangeException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-
                 while (!sr.EndOfStream)
                 {
                     if ((line = sr.ReadLine()).Contains("[HRData]"))
@@ -104,6 +105,9 @@ namespace Assignment1
                     DateTime date01 = DateTime.ParseExact(dateTime, "yyyyMMdd", CultureInfo.InvariantCulture);
                     lblDate.Text = date01.ToString("dddd, MMMM dd yyyy");
                 }
+
+                deviceName.Text = deviceN(param["Monitor"]);
+               
                 if (param.ContainsKey("StartTime"))
                 {
                     string time = param["StartTime"];
@@ -142,6 +146,15 @@ namespace Assignment1
             }
         }
 
+        public string calculateTimeInterval(string time)
+        {
+            // fetch the en-GB culture
+            CultureInfo ukCulture = new CultureInfo("en-GB");
+            dt = DateTime.ParseExact(time, "HH:mm:ss", ukCulture.DateTimeFormat);
+            string result = dt.AddSeconds(interval).ToString("HH:mm:ss");
+            return result;
+        }
+
         //displayed list data to grid view table
         public void viewHrData()
         {
@@ -149,12 +162,15 @@ namespace Assignment1
             int counter = 0;
             foreach (var value in speed)
             {
-                dataGridView.Rows.Add(heartRate[counter]
+                dataGridView.Rows.Add(calculateTimeInterval(param["StartTime"])
+                    , heartRate[counter]
                     , speed[counter]
                     , cadence[counter]
                     , altitude[counter]
-                    , power[counter]);
+                    , power[counter]
+                    );
                 counter++;
+                interval = interval + 1;
             }            
         }
 
@@ -203,18 +219,59 @@ namespace Assignment1
         //specifying column header
         private void InitGrid()
         {
-            dataGridView.ColumnCount = 5;
-            dataGridView.Columns[0].Name = "Heart Rate (bpm)";
-            dataGridView.Columns[1].Name = "Speed (km/h)";
-            dataGridView.Columns[2].Name = "Cadence (rpm)";
-            dataGridView.Columns[3].Name = "Altitude (m/ft)";
-            dataGridView.Columns[4].Name = "Power (watts)";
+            dataGridView.ColumnCount = 6;
+            dataGridView.Columns[0].Name = "Time (HH:MM:SS)";
+            dataGridView.Columns[1].Name = "Heart Rate (bpm)";
+            dataGridView.Columns[2].Name = "Speed (km/h)";
+            dataGridView.Columns[3].Name = "Cadence (rpm)";
+            dataGridView.Columns[4].Name = "Altitude (m/ft)";
+            dataGridView.Columns[5].Name = "Power (watts)";
         }
 
+        private string deviceN(string val)
+        {
+            string[] device = {
+                "Polar Sport Tester / Vantage XL",
+                "Polar Vantage NV(VNV)",                "Polar Accurex Plus",                "Polar XTrainer Plus",                "N/A",                "Polar S520",                "Polar Coach",
+                "Polar S210",
+                "Polar S410",
+                "Polar S510",
+                "Polar S610 / S610i",
+                "Polar S710 / S710i / S720i",
+                "Polar S810 / S810i",
+                "N/A",
+                "Polar E600",
+                "N/A", "N/A", "N/A", "N/A",
+                "Polar AXN500",
+                "Polar AXN700",
+                "Polar S625X / S725X",
+                "Polar S725",
+                 "N/A","N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A",
+                 "Polar CS400",
+                 "Polar CS600X",
+                 "Polar CS600",
+                 "Polar RS400",
+                 "Polar RS800",
+                 "Polar RS800X"
+        };
+            string dName = device[Convert.ToInt16(val)];
+            return dName;
+        }
         private void btnGraph_Click(object sender, EventArgs e)
         {
             SummaryGraph sm = new SummaryGraph(heartRate, speed, cadence, altitude, power);
             sm.Show();
+        }
+
+        private void btnIndividualGraph_Click(object sender, EventArgs e)
+        {
+            IndividualGraph id = new IndividualGraph(heartRate, speed, cadence, altitude, power);
+            id.Show();
+        }
+
+        private void panelHeader_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

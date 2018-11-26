@@ -80,12 +80,14 @@
             this.lblInterval = new System.Windows.Forms.Label();
             this.lblStartTime = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
+            this.deviceName = new System.Windows.Forms.GroupBox();
             this.menuStrip1.SuspendLayout();
             this.panelDataGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelHeader.SuspendLayout();
+            this.deviceName.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -94,7 +96,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(905, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(924, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -127,7 +129,7 @@
             this.panelDataGrid.Controls.Add(this.dataGridView);
             this.panelDataGrid.Location = new System.Drawing.Point(360, 27);
             this.panelDataGrid.Name = "panelDataGrid";
-            this.panelDataGrid.Size = new System.Drawing.Size(533, 517);
+            this.panelDataGrid.Size = new System.Drawing.Size(552, 517);
             this.panelDataGrid.TabIndex = 1;
             // 
             // dataGridView
@@ -135,16 +137,16 @@
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Location = new System.Drawing.Point(7, 3);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(545, 486);
+            this.dataGridView.Size = new System.Drawing.Size(542, 486);
             this.dataGridView.TabIndex = 0;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.deviceName);
             this.panel1.Controls.Add(this.label25);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.btnIndividualGraph);
             this.panel1.Controls.Add(this.btnGraph);
-            this.panel1.Controls.Add(this.panelHeader);
             this.panel1.Location = new System.Drawing.Point(13, 27);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(348, 517);
@@ -450,16 +452,17 @@
             // 
             // btnIndividualGraph
             // 
-            this.btnIndividualGraph.Location = new System.Drawing.Point(182, 186);
+            this.btnIndividualGraph.Location = new System.Drawing.Point(173, 195);
             this.btnIndividualGraph.Name = "btnIndividualGraph";
             this.btnIndividualGraph.Size = new System.Drawing.Size(128, 23);
             this.btnIndividualGraph.TabIndex = 30;
             this.btnIndividualGraph.Text = "View Individual Graph";
             this.btnIndividualGraph.UseVisualStyleBackColor = true;
+            this.btnIndividualGraph.Click += new System.EventHandler(this.btnIndividualGraph_Click);
             // 
             // btnGraph
             // 
-            this.btnGraph.Location = new System.Drawing.Point(27, 186);
+            this.btnGraph.Location = new System.Drawing.Point(31, 195);
             this.btnGraph.Name = "btnGraph";
             this.btnGraph.Size = new System.Drawing.Size(98, 23);
             this.btnGraph.TabIndex = 29;
@@ -479,16 +482,18 @@
             this.panelHeader.Controls.Add(this.lblInterval);
             this.panelHeader.Controls.Add(this.lblStartTime);
             this.panelHeader.Controls.Add(this.lblDate);
-            this.panelHeader.Location = new System.Drawing.Point(34, 20);
+            this.panelHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panelHeader.Location = new System.Drawing.Point(6, 18);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(258, 136);
+            this.panelHeader.Size = new System.Drawing.Size(259, 139);
             this.panelHeader.TabIndex = 28;
+            this.panelHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.panelHeader_Paint);
             // 
             // label22
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(81, 99);
+            this.label22.Location = new System.Drawing.Point(85, 100);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(12, 16);
             this.label22.TabIndex = 31;
@@ -499,7 +504,7 @@
             this.label21.AutoSize = true;
             this.label21.Location = new System.Drawing.Point(19, 101);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(42, 13);
+            this.label21.Size = new System.Drawing.Size(46, 15);
             this.label21.TabIndex = 33;
             this.label21.Text = "Interval";
             // 
@@ -507,7 +512,7 @@
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(81, 61);
+            this.label23.Location = new System.Drawing.Point(85, 62);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(12, 16);
             this.label23.TabIndex = 30;
@@ -518,7 +523,7 @@
             this.label20.AutoSize = true;
             this.label20.Location = new System.Drawing.Point(19, 63);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(55, 13);
+            this.label20.Size = new System.Drawing.Size(63, 15);
             this.label20.TabIndex = 32;
             this.label20.Text = "Start Time";
             // 
@@ -526,7 +531,7 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(81, 20);
+            this.label24.Location = new System.Drawing.Point(85, 20);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(12, 16);
             this.label24.TabIndex = 29;
@@ -537,42 +542,53 @@
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(19, 22);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(30, 13);
+            this.label19.Size = new System.Drawing.Size(33, 15);
             this.label19.TabIndex = 29;
             this.label19.Text = "Date";
             // 
             // lblInterval
             // 
             this.lblInterval.AutoSize = true;
-            this.lblInterval.Location = new System.Drawing.Point(110, 102);
+            this.lblInterval.Location = new System.Drawing.Point(119, 101);
             this.lblInterval.Name = "lblInterval";
-            this.lblInterval.Size = new System.Drawing.Size(27, 13);
+            this.lblInterval.Size = new System.Drawing.Size(26, 15);
             this.lblInterval.TabIndex = 31;
             this.lblInterval.Text = "N/A";
             // 
             // lblStartTime
             // 
             this.lblStartTime.AutoSize = true;
-            this.lblStartTime.Location = new System.Drawing.Point(110, 64);
+            this.lblStartTime.Location = new System.Drawing.Point(119, 63);
             this.lblStartTime.Name = "lblStartTime";
-            this.lblStartTime.Size = new System.Drawing.Size(27, 13);
+            this.lblStartTime.Size = new System.Drawing.Size(26, 15);
             this.lblStartTime.TabIndex = 30;
             this.lblStartTime.Text = "N/A";
             // 
             // lblDate
             // 
             this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(110, 23);
+            this.lblDate.Location = new System.Drawing.Point(119, 21);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(27, 13);
+            this.lblDate.Size = new System.Drawing.Size(26, 15);
             this.lblDate.TabIndex = 29;
             this.lblDate.Text = "N/A";
+            // 
+            // deviceName
+            // 
+            this.deviceName.Controls.Add(this.panelHeader);
+            this.deviceName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deviceName.Location = new System.Drawing.Point(31, 19);
+            this.deviceName.Name = "deviceName";
+            this.deviceName.Size = new System.Drawing.Size(275, 170);
+            this.deviceName.TabIndex = 56;
+            this.deviceName.TabStop = false;
+            this.deviceName.Text = "DeviceName";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(905, 547);
+            this.ClientSize = new System.Drawing.Size(924, 547);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelDataGrid);
             this.Controls.Add(this.menuStrip1);
@@ -589,6 +605,7 @@
             this.panel2.PerformLayout();
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
+            this.deviceName.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -647,6 +664,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.GroupBox deviceName;
     }
 }
 
