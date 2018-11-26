@@ -48,15 +48,15 @@ namespace Assignment1
             return maxVal;
         }
 
-        public static double Min(List<string> value)
+        public static int Min(List<string> value)
         {
-            double minVal = double.Parse(value.ElementAt(0));
+            int minVal = Int32.Parse(value.ElementAt(0));
 
             for (int i = 0; i < value.Count; i++)
             {
-                if (minVal > double.Parse(value.ElementAt(i)))
+                if (minVal > Int32.Parse(value.ElementAt(i)))
                 {
-                    minVal = double.Parse(value.ElementAt(i));
+                    minVal = Int32.Parse(value.ElementAt(i));
                 }
             }
 

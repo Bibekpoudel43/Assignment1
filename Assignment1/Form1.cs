@@ -46,6 +46,8 @@ namespace Assignment1
         {
             InitializeComponent();
             InitGrid();
+            comboBox1.SelectedIndex = 0;
+
         }
 
         private void openFile(object sender, EventArgs e)
@@ -86,7 +88,8 @@ namespace Assignment1
 
                 }
 
-                for (int i = 1; i < paramsArrays.Count(); i += 2)
+                try{
+                    for (int i = 1; i < paramsArrays.Count(); i += 2)
                     {
                         param.Add(paramsArrays[i], paramsArrays[1 + i]);
                         if (paramsArrays.Any()) //prevent IndexOutOfRangeException for empty list
@@ -94,6 +97,11 @@ namespace Assignment1
                             paramsArrays.RemoveAt(paramsArrays.Count - 1);
                         }
                     }
+                }
+                catch(ArgumentOutOfRangeException e)
+                {
+                    MessageBox.Show(e.Message);
+                }
 
                 smode = param["SMode"];
                 SMODE(smode);
@@ -169,7 +177,7 @@ namespace Assignment1
                 }
                 heartRate.Add(hrt.ToString());
                 speed.Add((sd * 0.1).ToString());
-                speed_miles.Add((sd * 0.1 * 0.621371).ToString());
+                speed_miles.Add(Math.Round((sd * 0.1 * 0.621371), 2, MidpointRounding.AwayFromZero).ToString());
                 cadence.Add(cad.ToString());
                 altitude.Add(al.ToString());
                 power.Add(pwr.ToString());
@@ -187,15 +195,16 @@ namespace Assignment1
         {
             // fetch the en-GB culture
             CultureInfo ukCulture = new CultureInfo("en-GB");
-            dt = DateTime.ParseExact(time, "HH:mm:ss", ukCulture.DateTimeFormat);
-            string result = dt.AddSeconds(interval).ToString("HH:mm:ss");
+            dt = DateTime.ParseExact(time, "HH:mm:ss.f", ukCulture.DateTimeFormat);
+            string result = dt.AddSeconds(interval).ToString("HH:mm:ss.f");
             return result;
         }
 
         //displayed list data to grid view table
         public void viewHrData()
         {
-            if ( kmhMenu.Checked == true)
+            
+            if (comboBox1.SelectedIndex == 0)
             {
                 int counter = 0;
                 foreach (var value in speed)
@@ -203,22 +212,6 @@ namespace Assignment1
                     dataGridView.Rows.Add(calculateTimeInterval(param["StartTime"])
                     , heartRate[counter]
                     , speed[counter]
-                    , cadence[counter]
-                    , altitude[counter]
-                    , power[counter]
-                    );
-                    counter++;
-                    interval = interval + 1;
-
-                }
-            }
-            else if(mphMenu.Checked == true)
-            {
-                int counter = 0;
-                foreach (var value in speed)
-                {
-                    dataGridView.Rows.Add(calculateTimeInterval(param["StartTime"])
-                    , heartRate[counter]
                     , speed_miles[counter]
                     , cadence[counter]
                     , altitude[counter]
@@ -229,24 +222,7 @@ namespace Assignment1
 
                 }
             }
-            else
-            {
-                int counter = 0;
-                foreach (var value in speed)
-                {
-                    double spd = Convert.ToDouble(speed[counter]) * 0.1;
-                    dataGridView.Rows.Add(calculateTimeInterval(param["StartTime"])
-                    , heartRate[counter]
-                    , spd
-                    , cadence[counter]
-                    , altitude[counter]
-                    , power[counter]
-                    );
-                    counter++;
-                    interval = interval + 1;
-
-                }
-            }        
+          
         }
         private void kmhMenu_Click(object sender, EventArgs e)
         {
@@ -288,14 +264,14 @@ namespace Assignment1
 
             //summary of data 
             totalDistance.Text = null;
-            avgSpeed.Text =  averageSpeed.ToString();
-            maximumSpeed.Text = maxSpeed.ToString();
-            avgHeartRate.Text = averageHeartRate.ToString();
-            maxHeartRate.Text = maximumHeartRate.ToString();
-            minHeartRate.Text = minimumHeartRate.ToString();
-            avgPower.Text = averagePower.ToString();
-            maxPower.Text = maximumPower.ToString();
-            avgAltitude.Text = averageAltitude.ToString();
+            avgSpeed.Text =  averageSpeed.ToString() + " km/h";
+            maximumSpeed.Text = maxSpeed.ToString() + " km/h";
+            avgHeartRate.Text = averageHeartRate.ToString() + " bpm";
+            maxHeartRate.Text = maximumHeartRate.ToString() + " bpm";
+            minHeartRate.Text = minimumHeartRate.ToString() + " bpm";
+            avgPower.Text = averagePower.ToString() + " watts";
+            maxPower.Text = maximumPower.ToString() + " watts";
+            avgAltitude.Text = averageAltitude.ToString() + " m/ft";
 
 
         }
@@ -304,20 +280,26 @@ namespace Assignment1
         //specifying column header
         private void InitGrid()
         {
-            dataGridView.ColumnCount = 6;
-            dataGridView.Columns[0].Name = "Time (HH:MM:SS)";
+            dataGridView.ColumnCount = 7;
+            dataGridView.Columns[0].Name = "TimeInterval (HH:MM:SS)";
             dataGridView.Columns[1].Name = "Heart Rate (bpm)";
             dataGridView.Columns[2].Name = "Speed (km/h)";
-            dataGridView.Columns[3].Name = "Cadence (rpm)";
-            dataGridView.Columns[4].Name = "Altitude (m/ft)";
-            dataGridView.Columns[5].Name = "Power (watts)";
+            dataGridView.Columns[3].Name = "Speed (mph)";
+            dataGridView.Columns[4].Name = "Cadence (rpm)";
+            dataGridView.Columns[5].Name = "Altitude (m/ft)";
+            dataGridView.Columns[6].Name = "Power (watts)";
         }
 
         private string deviceN(string val)
         {
             string[] device = {
                 "Polar Sport Tester / Vantage XL",
-                "Polar Vantage NV(VNV)",                "Polar Accurex Plus",                "Polar XTrainer Plus",                "N/A",                "Polar S520",                "Polar Coach",
+                "Polar Vantage NV(VNV)",
+                "Polar Accurex Plus",
+                "Polar XTrainer Plus",
+                "N/A",
+                "Polar S520",
+                "Polar Coach",
                 "Polar S210",
                 "Polar S410",
                 "Polar S510",
@@ -385,7 +367,23 @@ namespace Assignment1
             powerCheck = int.Parse(mode.Substring(4, 1));
     }
 
-      
+        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex == 0)
+            {
+                dataGridView.Columns[2].Visible = true;
+                dataGridView.Columns[3].Visible = false;
+                return;
+            }
+            dataGridView.Columns[3].Visible = true;
+            dataGridView.Columns[2].Visible = false;
+        }
+
         private void btnGraph_Click(object sender, EventArgs e)
         {
             SummaryGraph sm = new SummaryGraph(heartRate, speed, cadence, altitude, power);
