@@ -32,6 +32,9 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.speedUnitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kmhMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.mphMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -39,6 +42,17 @@
             this.panelDataGrid = new System.Windows.Forms.Panel();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.deviceName = new System.Windows.Forms.GroupBox();
+            this.panelHeader = new System.Windows.Forms.Panel();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.lblInterval = new System.Windows.Forms.Label();
+            this.lblStartTime = new System.Windows.Forms.Label();
+            this.lblDate = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.avgAltitude = new System.Windows.Forms.Label();
@@ -70,30 +84,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnIndividualGraph = new System.Windows.Forms.Button();
             this.btnGraph = new System.Windows.Forms.Button();
-            this.panelHeader = new System.Windows.Forms.Panel();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.lblInterval = new System.Windows.Forms.Label();
-            this.lblStartTime = new System.Windows.Forms.Label();
-            this.lblDate = new System.Windows.Forms.Label();
-            this.deviceName = new System.Windows.Forms.GroupBox();
             this.menuStrip1.SuspendLayout();
             this.panelDataGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panelHeader.SuspendLayout();
             this.deviceName.SuspendLayout();
+            this.panelHeader.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.speedUnitToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(924, 24);
@@ -111,9 +115,32 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openFile);
+            // 
+            // speedUnitToolStripMenuItem
+            // 
+            this.speedUnitToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.kmhMenu,
+            this.mphMenu});
+            this.speedUnitToolStripMenuItem.Name = "speedUnitToolStripMenuItem";
+            this.speedUnitToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
+            this.speedUnitToolStripMenuItem.Text = "Speed Unit";
+            // 
+            // kmhMenu
+            // 
+            this.kmhMenu.Name = "kmhMenu";
+            this.kmhMenu.Size = new System.Drawing.Size(152, 22);
+            this.kmhMenu.Text = "km/h";
+            this.kmhMenu.Click += new System.EventHandler(this.kmhMenu_Click);
+            // 
+            // mphMenu
+            // 
+            this.mphMenu.Name = "mphMenu";
+            this.mphMenu.Size = new System.Drawing.Size(152, 22);
+            this.mphMenu.Text = "mph";
+            this.mphMenu.Click += new System.EventHandler(this.mphMenu_Click);
             // 
             // contextMenuStrip1
             // 
@@ -152,12 +179,126 @@
             this.panel1.Size = new System.Drawing.Size(348, 517);
             this.panel1.TabIndex = 2;
             // 
+            // deviceName
+            // 
+            this.deviceName.Controls.Add(this.panelHeader);
+            this.deviceName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deviceName.Location = new System.Drawing.Point(31, 13);
+            this.deviceName.Name = "deviceName";
+            this.deviceName.Size = new System.Drawing.Size(275, 150);
+            this.deviceName.TabIndex = 56;
+            this.deviceName.TabStop = false;
+            this.deviceName.Text = "DeviceName";
+            // 
+            // panelHeader
+            // 
+            this.panelHeader.BackColor = System.Drawing.Color.LightGray;
+            this.panelHeader.Controls.Add(this.label22);
+            this.panelHeader.Controls.Add(this.label21);
+            this.panelHeader.Controls.Add(this.label23);
+            this.panelHeader.Controls.Add(this.label20);
+            this.panelHeader.Controls.Add(this.label24);
+            this.panelHeader.Controls.Add(this.label19);
+            this.panelHeader.Controls.Add(this.lblInterval);
+            this.panelHeader.Controls.Add(this.lblStartTime);
+            this.panelHeader.Controls.Add(this.lblDate);
+            this.panelHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panelHeader.Location = new System.Drawing.Point(6, 21);
+            this.panelHeader.Name = "panelHeader";
+            this.panelHeader.Size = new System.Drawing.Size(259, 121);
+            this.panelHeader.TabIndex = 28;
+            this.panelHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.panelHeader_Paint);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(85, 92);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(12, 16);
+            this.label22.TabIndex = 31;
+            this.label22.Text = ":";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(19, 93);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(46, 15);
+            this.label21.TabIndex = 33;
+            this.label21.Text = "Interval";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(85, 54);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(12, 16);
+            this.label23.TabIndex = 30;
+            this.label23.Text = ":";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(19, 55);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(63, 15);
+            this.label20.TabIndex = 32;
+            this.label20.Text = "Start Time";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(85, 12);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(12, 16);
+            this.label24.TabIndex = 29;
+            this.label24.Text = ":";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(19, 14);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(33, 15);
+            this.label19.TabIndex = 29;
+            this.label19.Text = "Date";
+            // 
+            // lblInterval
+            // 
+            this.lblInterval.AutoSize = true;
+            this.lblInterval.Location = new System.Drawing.Point(119, 93);
+            this.lblInterval.Name = "lblInterval";
+            this.lblInterval.Size = new System.Drawing.Size(26, 15);
+            this.lblInterval.TabIndex = 31;
+            this.lblInterval.Text = "N/A";
+            // 
+            // lblStartTime
+            // 
+            this.lblStartTime.AutoSize = true;
+            this.lblStartTime.Location = new System.Drawing.Point(119, 55);
+            this.lblStartTime.Name = "lblStartTime";
+            this.lblStartTime.Size = new System.Drawing.Size(26, 15);
+            this.lblStartTime.TabIndex = 30;
+            this.lblStartTime.Text = "N/A";
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.Location = new System.Drawing.Point(119, 13);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(26, 15);
+            this.lblDate.TabIndex = 29;
+            this.lblDate.Text = "N/A";
+            // 
             // label25
             // 
             this.label25.AutoSize = true;
             this.label25.BackColor = System.Drawing.Color.LightGray;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(86, 230);
+            this.label25.Location = new System.Drawing.Point(80, 228);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(144, 24);
             this.label25.TabIndex = 55;
@@ -193,7 +334,7 @@
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(34, 257);
+            this.panel2.Location = new System.Drawing.Point(29, 255);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(258, 232);
             this.panel2.TabIndex = 34;
@@ -452,7 +593,7 @@
             // 
             // btnIndividualGraph
             // 
-            this.btnIndividualGraph.Location = new System.Drawing.Point(173, 195);
+            this.btnIndividualGraph.Location = new System.Drawing.Point(159, 182);
             this.btnIndividualGraph.Name = "btnIndividualGraph";
             this.btnIndividualGraph.Size = new System.Drawing.Size(128, 23);
             this.btnIndividualGraph.TabIndex = 30;
@@ -462,127 +603,13 @@
             // 
             // btnGraph
             // 
-            this.btnGraph.Location = new System.Drawing.Point(31, 195);
+            this.btnGraph.Location = new System.Drawing.Point(21, 182);
             this.btnGraph.Name = "btnGraph";
             this.btnGraph.Size = new System.Drawing.Size(98, 23);
             this.btnGraph.TabIndex = 29;
             this.btnGraph.Text = "View Graph";
             this.btnGraph.UseVisualStyleBackColor = true;
             this.btnGraph.Click += new System.EventHandler(this.btnGraph_Click);
-            // 
-            // panelHeader
-            // 
-            this.panelHeader.BackColor = System.Drawing.Color.LightGray;
-            this.panelHeader.Controls.Add(this.label22);
-            this.panelHeader.Controls.Add(this.label21);
-            this.panelHeader.Controls.Add(this.label23);
-            this.panelHeader.Controls.Add(this.label20);
-            this.panelHeader.Controls.Add(this.label24);
-            this.panelHeader.Controls.Add(this.label19);
-            this.panelHeader.Controls.Add(this.lblInterval);
-            this.panelHeader.Controls.Add(this.lblStartTime);
-            this.panelHeader.Controls.Add(this.lblDate);
-            this.panelHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelHeader.Location = new System.Drawing.Point(6, 18);
-            this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(259, 139);
-            this.panelHeader.TabIndex = 28;
-            this.panelHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.panelHeader_Paint);
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(85, 100);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(12, 16);
-            this.label22.TabIndex = 31;
-            this.label22.Text = ":";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(19, 101);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(46, 15);
-            this.label21.TabIndex = 33;
-            this.label21.Text = "Interval";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(85, 62);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(12, 16);
-            this.label23.TabIndex = 30;
-            this.label23.Text = ":";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(19, 63);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(63, 15);
-            this.label20.TabIndex = 32;
-            this.label20.Text = "Start Time";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(85, 20);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(12, 16);
-            this.label24.TabIndex = 29;
-            this.label24.Text = ":";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(19, 22);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(33, 15);
-            this.label19.TabIndex = 29;
-            this.label19.Text = "Date";
-            // 
-            // lblInterval
-            // 
-            this.lblInterval.AutoSize = true;
-            this.lblInterval.Location = new System.Drawing.Point(119, 101);
-            this.lblInterval.Name = "lblInterval";
-            this.lblInterval.Size = new System.Drawing.Size(26, 15);
-            this.lblInterval.TabIndex = 31;
-            this.lblInterval.Text = "N/A";
-            // 
-            // lblStartTime
-            // 
-            this.lblStartTime.AutoSize = true;
-            this.lblStartTime.Location = new System.Drawing.Point(119, 63);
-            this.lblStartTime.Name = "lblStartTime";
-            this.lblStartTime.Size = new System.Drawing.Size(26, 15);
-            this.lblStartTime.TabIndex = 30;
-            this.lblStartTime.Text = "N/A";
-            // 
-            // lblDate
-            // 
-            this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(119, 21);
-            this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(26, 15);
-            this.lblDate.TabIndex = 29;
-            this.lblDate.Text = "N/A";
-            // 
-            // deviceName
-            // 
-            this.deviceName.Controls.Add(this.panelHeader);
-            this.deviceName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deviceName.Location = new System.Drawing.Point(31, 19);
-            this.deviceName.Name = "deviceName";
-            this.deviceName.Size = new System.Drawing.Size(275, 170);
-            this.deviceName.TabIndex = 56;
-            this.deviceName.TabStop = false;
-            this.deviceName.Text = "DeviceName";
             // 
             // Form1
             // 
@@ -601,11 +628,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.deviceName.ResumeLayout(false);
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
-            this.deviceName.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -665,6 +692,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.GroupBox deviceName;
+        private System.Windows.Forms.ToolStripMenuItem speedUnitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kmhMenu;
+        private System.Windows.Forms.ToolStripMenuItem mphMenu;
     }
 }
 

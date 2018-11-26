@@ -17,18 +17,29 @@ namespace Assignment1
         public Dictionary<string, List<string>> hrData = new Dictionary<string, List<string>>();
         private Dictionary<string, string> param = new Dictionary<string, string>();
         public List<string> paramsArrays = new List<string>();
-        public int[] arrayTime = {};
+        public int[] arrayTime = new int[] {};
         public List<string> heartRate = new List<string>();
         public List<string> speed = new List<string>();
+        public List<string> speed_miles = new List<string>();
         public List<string> cadence = new List<string>();
         public List<string> altitude = new List<string>();
         public List<string> power = new List<string>();
         public List<string> powerBalancePedalling = new List<string>();
         public string[] device = new string[] { };
+        public string[] unit = { "km/h", "mph" };
         int counter = 0;
         int interval = 0;
         DateTime dt = new DateTime();
         char[] findOf = { '\t', ' ', '=' };
+
+        int cad, hrt, pwr, al;
+        double sd;
+             int heartCheck =0;
+            int speedCheck = 0;
+            int cadenceCheck = 0;
+            int altitudeCheck = 0;
+            int powerCheck = 0;
+            string smode = "";
 
 
         public Form1()
@@ -39,8 +50,6 @@ namespace Assignment1
 
         private void openFile(object sender, EventArgs e)
         {
-            dataGridView.DataSource = null;
-            dataGridView.Rows.Clear();
             ReadFromFile();
             viewHrData();
             summaryCalc();
@@ -50,6 +59,7 @@ namespace Assignment1
         //read the text from  file
         public void ReadFromFile()
         {
+            
             string line = "";
             OpenFileDialog od = new OpenFileDialog();
             od.Filter = "HRM|*.hrm|Text Document|*.txt";
@@ -75,7 +85,8 @@ namespace Assignment1
                     }
 
                 }
-                    for (int i = 1; i < paramsArrays.Count(); i += 2)
+
+                for (int i = 1; i < paramsArrays.Count(); i += 2)
                     {
                         param.Add(paramsArrays[i], paramsArrays[1 + i]);
                         if (paramsArrays.Any()) //prevent IndexOutOfRangeException for empty list
@@ -83,6 +94,10 @@ namespace Assignment1
                             paramsArrays.RemoveAt(paramsArrays.Count - 1);
                         }
                     }
+
+                smode = param["SMode"];
+                SMODE(smode);
+
                 while (!sr.EndOfStream)
                 {
                     if ((line = sr.ReadLine()).Contains("[HRData]"))
@@ -131,11 +146,33 @@ namespace Assignment1
 
                 string newline = string.Join(" ", line.Split(findOf, StringSplitOptions.RemoveEmptyEntries));
                 List<string> val = newline.Split(' ').ToList();
-                heartRate.Add(val[0]);
-                speed.Add(val[1]);
-                cadence.Add(val[2]);
-                altitude.Add(val[3]);
-                power.Add(val[4]);
+                if (heartCheck == 1)
+                {
+                    hrt = int.Parse(val[0]);
+                }
+               if (speedCheck == 1)
+                {
+                    sd = int.Parse(val[1]);
+                }
+                if (cadenceCheck == 1)
+                {
+                    cad = int.Parse(val[2]);
+                }
+                if (powerCheck == 1)
+                {
+                    pwr = int.Parse(val[4]);
+
+                }
+                if (altitudeCheck == 1)
+                {
+                    al = int.Parse(val[3]);
+                }
+                heartRate.Add(hrt.ToString());
+                speed.Add((sd * 0.1).ToString());
+                speed_miles.Add((sd * 0.1 * 0.621371).ToString());
+                cadence.Add(cad.ToString());
+                altitude.Add(al.ToString());
+                power.Add(pwr.ToString());
                 powerBalancePedalling.Add(val[5]);
                 val = null;
 
@@ -158,20 +195,68 @@ namespace Assignment1
         //displayed list data to grid view table
         public void viewHrData()
         {
-
-            int counter = 0;
-            foreach (var value in speed)
+            if ( kmhMenu.Checked == true)
             {
-                dataGridView.Rows.Add(calculateTimeInterval(param["StartTime"])
+                int counter = 0;
+                foreach (var value in speed)
+                {
+                    dataGridView.Rows.Add(calculateTimeInterval(param["StartTime"])
                     , heartRate[counter]
                     , speed[counter]
                     , cadence[counter]
                     , altitude[counter]
                     , power[counter]
                     );
-                counter++;
-                interval = interval + 1;
-            }            
+                    counter++;
+                    interval = interval + 1;
+
+                }
+            }
+            else if(mphMenu.Checked == true)
+            {
+                int counter = 0;
+                foreach (var value in speed)
+                {
+                    dataGridView.Rows.Add(calculateTimeInterval(param["StartTime"])
+                    , heartRate[counter]
+                    , speed_miles[counter]
+                    , cadence[counter]
+                    , altitude[counter]
+                    , power[counter]
+                    );
+                    counter++;
+                    interval = interval + 1;
+
+                }
+            }
+            else
+            {
+                int counter = 0;
+                foreach (var value in speed)
+                {
+                    double spd = Convert.ToDouble(speed[counter]) * 0.1;
+                    dataGridView.Rows.Add(calculateTimeInterval(param["StartTime"])
+                    , heartRate[counter]
+                    , spd
+                    , cadence[counter]
+                    , altitude[counter]
+                    , power[counter]
+                    );
+                    counter++;
+                    interval = interval + 1;
+
+                }
+            }        
+        }
+        private void kmhMenu_Click(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void mphMenu_Click(object sender, EventArgs e)
+        {
+
         }
 
         //adding HRdata to dictionary 
@@ -257,6 +342,50 @@ namespace Assignment1
             string dName = device[Convert.ToInt16(val)];
             return dName;
         }
+
+        private void arrayNuller()
+        {
+          hrData = new Dictionary<string, List<string>>();
+          param = new Dictionary<string, string>();
+         paramsArrays = new List<string>();
+            arrayTime =new int[]{};
+            heartRate = new List<string>();
+         speed = new List<string>();
+         cadence = new List<string>();
+         altitude = new List<string>();
+         power = new List<string>();
+         powerBalancePedalling = new List<string>();
+         device = new string[] { };
+        counter = 0;
+        interval = 0;
+        findOf = new char[] { };
+        dataGridView.DataSource = null;
+        dataGridView.Rows.Clear();
+
+        totalDistance.Text = "";
+            avgSpeed.Text = "";
+            maximumSpeed.Text = "";
+            avgHeartRate.Text = "";
+            maxHeartRate.Text = "";
+            minHeartRate.Text = "";
+            avgPower.Text = "";
+            maxPower.Text = "";
+            avgAltitude.Text = "";
+            deviceName.Text = "";
+            lblStartTime.Text = "";
+            lblInterval.Text = "";
+            }
+
+        private void SMODE(string mode)
+        {
+            heartCheck = int.Parse(mode.Substring(0, 1));
+            speedCheck = int.Parse(mode.Substring(1, 1));
+            cadenceCheck = int.Parse(mode.Substring(2, 1));
+            altitudeCheck = int.Parse(mode.Substring(3, 1));
+            powerCheck = int.Parse(mode.Substring(4, 1));
+    }
+
+      
         private void btnGraph_Click(object sender, EventArgs e)
         {
             SummaryGraph sm = new SummaryGraph(heartRate, speed, cadence, altitude, power);
@@ -273,5 +402,7 @@ namespace Assignment1
         {
 
         }
+
+
     }
 }
