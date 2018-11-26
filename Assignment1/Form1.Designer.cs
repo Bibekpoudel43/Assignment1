@@ -370,81 +370,81 @@
             this.avgAltitude.AutoSize = true;
             this.avgAltitude.Location = new System.Drawing.Point(158, 209);
             this.avgAltitude.Name = "avgAltitude";
-            this.avgAltitude.Size = new System.Drawing.Size(27, 13);
+            this.avgAltitude.Size = new System.Drawing.Size(13, 13);
             this.avgAltitude.TabIndex = 54;
-            this.avgAltitude.Text = "N/A";
+            this.avgAltitude.Text = "0";
             // 
             // maxPower
             // 
             this.maxPower.AutoSize = true;
             this.maxPower.Location = new System.Drawing.Point(158, 185);
             this.maxPower.Name = "maxPower";
-            this.maxPower.Size = new System.Drawing.Size(27, 13);
+            this.maxPower.Size = new System.Drawing.Size(13, 13);
             this.maxPower.TabIndex = 53;
-            this.maxPower.Text = "N/A";
+            this.maxPower.Text = "0";
             // 
             // avgPower
             // 
             this.avgPower.AutoSize = true;
             this.avgPower.Location = new System.Drawing.Point(158, 164);
             this.avgPower.Name = "avgPower";
-            this.avgPower.Size = new System.Drawing.Size(27, 13);
+            this.avgPower.Size = new System.Drawing.Size(13, 13);
             this.avgPower.TabIndex = 52;
-            this.avgPower.Text = "N/A";
+            this.avgPower.Text = "0";
             // 
             // minHeartRate
             // 
             this.minHeartRate.AutoSize = true;
             this.minHeartRate.Location = new System.Drawing.Point(158, 142);
             this.minHeartRate.Name = "minHeartRate";
-            this.minHeartRate.Size = new System.Drawing.Size(27, 13);
+            this.minHeartRate.Size = new System.Drawing.Size(13, 13);
             this.minHeartRate.TabIndex = 51;
-            this.minHeartRate.Text = "N/A";
+            this.minHeartRate.Text = "0";
             // 
             // maxHeartRate
             // 
             this.maxHeartRate.AutoSize = true;
             this.maxHeartRate.Location = new System.Drawing.Point(158, 119);
             this.maxHeartRate.Name = "maxHeartRate";
-            this.maxHeartRate.Size = new System.Drawing.Size(27, 13);
+            this.maxHeartRate.Size = new System.Drawing.Size(13, 13);
             this.maxHeartRate.TabIndex = 50;
-            this.maxHeartRate.Text = "N/A";
+            this.maxHeartRate.Text = "0";
             // 
             // avgHeartRate
             // 
             this.avgHeartRate.AutoSize = true;
             this.avgHeartRate.Location = new System.Drawing.Point(158, 95);
             this.avgHeartRate.Name = "avgHeartRate";
-            this.avgHeartRate.Size = new System.Drawing.Size(27, 13);
+            this.avgHeartRate.Size = new System.Drawing.Size(13, 13);
             this.avgHeartRate.TabIndex = 49;
-            this.avgHeartRate.Text = "N/A";
+            this.avgHeartRate.Text = "0";
             // 
             // maximumSpeed
             // 
             this.maximumSpeed.AutoSize = true;
             this.maximumSpeed.Location = new System.Drawing.Point(158, 72);
             this.maximumSpeed.Name = "maximumSpeed";
-            this.maximumSpeed.Size = new System.Drawing.Size(27, 13);
+            this.maximumSpeed.Size = new System.Drawing.Size(13, 13);
             this.maximumSpeed.TabIndex = 48;
-            this.maximumSpeed.Text = "N/A";
+            this.maximumSpeed.Text = "0";
             // 
             // avgSpeed
             // 
             this.avgSpeed.AutoSize = true;
             this.avgSpeed.Location = new System.Drawing.Point(158, 46);
             this.avgSpeed.Name = "avgSpeed";
-            this.avgSpeed.Size = new System.Drawing.Size(27, 13);
+            this.avgSpeed.Size = new System.Drawing.Size(13, 13);
             this.avgSpeed.TabIndex = 47;
-            this.avgSpeed.Text = "N/A";
+            this.avgSpeed.Text = "0";
             // 
             // totalDistance
             // 
             this.totalDistance.AutoSize = true;
             this.totalDistance.Location = new System.Drawing.Point(158, 21);
             this.totalDistance.Name = "totalDistance";
-            this.totalDistance.Size = new System.Drawing.Size(27, 13);
+            this.totalDistance.Size = new System.Drawing.Size(13, 13);
             this.totalDistance.TabIndex = 46;
-            this.totalDistance.Text = "N/A";
+            this.totalDistance.Text = "0";
             // 
             // label18
             // 

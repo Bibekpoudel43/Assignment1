@@ -55,6 +55,7 @@ namespace Assignment1
             ReadFromFile();
             viewHrData();
             summaryCalc();
+
         }
 
 
@@ -240,6 +241,7 @@ namespace Assignment1
         {
             hrData.Add("heartRate", heartRate);
             hrData.Add("speed", speed);
+            hrData.Add("speed_miles", speed_miles);
             hrData.Add("cadence", cadence);
             hrData.Add("altitude", altitude);
             hrData.Add("power", power);
@@ -251,10 +253,15 @@ namespace Assignment1
         {
             var maxSpeed = Summary.Max(hrData["speed"]);
             //var totalDistanceCovered = Summary.Sum(hrData["cadence"]);
-            var averageSpeed =  Summary.Average(hrData["speed"]);
+            double averageSpeed = Summary.Average(hrData["speed"]);
+            double avSpeed = Summary.Average(hrData["speed"]);
             var averageHeartRate = Summary.Average(hrData["heartRate"]);
             var maximumHeartRate = Summary.Max(hrData["heartRate"]);
             var minimumHeartRate = Summary.Min(hrData["heartRate"]);
+
+            MessageBox.Show(dataGridView.RowCount + "");
+            var totalDis = Summary.TotalDistance(avSpeed, dataGridView.RowCount, Int32.Parse(param["Interval"]));
+
 
             var averagePower = Summary.Average(hrData["power"]);
             var maximumPower = Summary.Max(hrData["power"]);
@@ -263,15 +270,16 @@ namespace Assignment1
             var maximumAltitude = Summary.Max(hrData["altitude"]);
 
             //summary of data 
-            totalDistance.Text = null;
-            avgSpeed.Text =  averageSpeed.ToString() + " km/h";
-            maximumSpeed.Text = maxSpeed.ToString() + " km/h";
-            avgHeartRate.Text = averageHeartRate.ToString() + " bpm";
-            maxHeartRate.Text = maximumHeartRate.ToString() + " bpm";
-            minHeartRate.Text = minimumHeartRate.ToString() + " bpm";
-            avgPower.Text = averagePower.ToString() + " watts";
-            maxPower.Text = maximumPower.ToString() + " watts";
-            avgAltitude.Text = averageAltitude.ToString() + " m/ft";
+            totalDistance.Text = roundOff(totalDis) + " Km/h";
+            avgSpeed.Text = roundOff(averageSpeed) + " km/h";
+            maximumSpeed.Text = roundOff(maxSpeed)+ " km/h";
+            avgHeartRate.Text = roundOff(averageHeartRate) + " bpm";
+            maxHeartRate.Text = roundOff(maximumHeartRate) + " bpm";
+            minHeartRate.Text = roundOff(minimumHeartRate) + " bpm";
+            avgPower.Text = roundOff(averagePower) + " watts";
+            maxPower.Text =roundOff(maximumPower) + " watts";
+            avgAltitude.Text =roundOff(averageAltitude) + " m";
+
 
 
         }
@@ -286,7 +294,7 @@ namespace Assignment1
             dataGridView.Columns[2].Name = "Speed (km/h)";
             dataGridView.Columns[3].Name = "Speed (mph)";
             dataGridView.Columns[4].Name = "Cadence (rpm)";
-            dataGridView.Columns[5].Name = "Altitude (m/ft)";
+            dataGridView.Columns[5].Name = "Altitude (m)";
             dataGridView.Columns[6].Name = "Power (watts)";
         }
 
@@ -325,39 +333,6 @@ namespace Assignment1
             return dName;
         }
 
-        private void arrayNuller()
-        {
-          hrData = new Dictionary<string, List<string>>();
-          param = new Dictionary<string, string>();
-         paramsArrays = new List<string>();
-            arrayTime =new int[]{};
-            heartRate = new List<string>();
-         speed = new List<string>();
-         cadence = new List<string>();
-         altitude = new List<string>();
-         power = new List<string>();
-         powerBalancePedalling = new List<string>();
-         device = new string[] { };
-        counter = 0;
-        interval = 0;
-        findOf = new char[] { };
-        dataGridView.DataSource = null;
-        dataGridView.Rows.Clear();
-
-        totalDistance.Text = "";
-            avgSpeed.Text = "";
-            maximumSpeed.Text = "";
-            avgHeartRate.Text = "";
-            maxHeartRate.Text = "";
-            minHeartRate.Text = "";
-            avgPower.Text = "";
-            maxPower.Text = "";
-            avgAltitude.Text = "";
-            deviceName.Text = "";
-            lblStartTime.Text = "";
-            lblInterval.Text = "";
-            }
-
         private void SMODE(string mode)
         {
             heartCheck = int.Parse(mode.Substring(0, 1));
@@ -382,6 +357,7 @@ namespace Assignment1
             }
             dataGridView.Columns[3].Visible = true;
             dataGridView.Columns[2].Visible = false;
+
         }
 
         private void btnGraph_Click(object sender, EventArgs e)
@@ -401,6 +377,11 @@ namespace Assignment1
 
         }
 
+        private static double roundOff(double val)
+        {
+            double data = Math.Round(val, 2, MidpointRounding.AwayFromZero);
+            return data;
+        }
 
     }
 }
