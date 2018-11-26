@@ -13,7 +13,6 @@ namespace Assignment1
 {
     public partial class SummaryGraph : Form
     {
-        Form1 f1 = new Form1();
         List<string> _heartRate = null;
         List<string> _speed = null;
         List<string> _cadence = null;
@@ -50,6 +49,15 @@ namespace Assignment1
             }
             return pr;
         }
+        private PointPairList buildPointPairList(double[] value)
+        {
+            PointPairList pr = new PointPairList();
+            for (int i = 0; i < value.Count(); i++)
+            {
+                pr.Add(i, (value[i]));
+            }
+            return pr;
+        }
         private void plotGraph()
         {
             GraphPane myPane = zedGraphControl1.GraphPane;
@@ -70,7 +78,7 @@ namespace Assignment1
 
              List<int> hr = _heartRate.Select(s => Convert.ToInt32(s)).ToList();
              heartPairList = buildPointPairList(hr.ToArray());
-            List<int> c2 = _speed.Select(s => Convert.ToInt32(s)).ToList();
+            List<double> c2 = _speed.Select(s => Convert.ToDouble(s)).ToList();
             speedPairList = buildPointPairList(c2.ToArray());
             List<int> c3 = _cadence.Select(s => Convert.ToInt32(s)).ToList();
             cadencePairList = buildPointPairList(c3.ToArray());
