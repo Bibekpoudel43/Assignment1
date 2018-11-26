@@ -71,6 +71,7 @@
             this.zedGraphControl4.PointValueFormat = "G";
             this.zedGraphControl4.Size = new System.Drawing.Size(806, 151);
             this.zedGraphControl4.TabIndex = 3;
+            this.zedGraphControl4.Load += new System.EventHandler(this.zedGraphControl4_Load);
             // 
             // zedGraphControl5
             // 

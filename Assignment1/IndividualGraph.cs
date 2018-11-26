@@ -42,100 +42,74 @@ namespace Assignment1
         private void plotGraph()
         {
             GraphPane myPane = zedGraphControl11.GraphPane;
+            GraphPane myPane2 = zedGraphControl2.GraphPane;
+            GraphPane myPane3 = zedGraphControl3.GraphPane;
+            GraphPane myPane4 = zedGraphControl4.GraphPane;
+            GraphPane myPane5 = zedGraphControl5.GraphPane;
 
             // Set the Titles
             myPane.Title = "Analysis of HeartRate";
             myPane.XAxis.Title = "Time in seconds";
             myPane.YAxis.Title = "Value";
-            /* myPane.XAxis.Scale.MajorStep = 50;
-             myPane.YAxis.Scale.Mag = 0;
-             myPane.XAxis.Scale.Max = 1000;*/
 
-            PointPairList heartPairList = new PointPairList();
-            List<int> hr = _heartRate.Select(s => Convert.ToInt32(s)).ToList();
-            heartPairList = buildPointPairList(hr.ToArray());
-            LineItem heartCurve = myPane.AddCurve("HeartRate",
-            heartPairList, Color.Red, SymbolType.None);
-            zedGraphControl11.AxisChange();
-
-
-            GraphPane myPane2 = zedGraphControl2.GraphPane;
-
-            // Set the Titles
             myPane2.Title = "Analysis of Speed";
             myPane2.XAxis.Title = "Time in seconds";
             myPane2.YAxis.Title = "Value";
-            PointPairList speedPairList = new PointPairList();
-            List<int> c2 = _speed.Select(s => Convert.ToInt32(s)).ToList();
-            speedPairList = buildPointPairList(c2.ToArray());
-            LineItem speedCurve = myPane.AddCurve("Speed",
-            speedPairList, Color.Blue, SymbolType.None);
-            zedGraphControl2.AxisChange();
 
-
-            GraphPane myPane3 = zedGraphControl3.GraphPane;
-
-            // Set the Titles
-            myPane3.Title = "Analysis of Cadence";
-            myPane3.XAxis.Title = "Time in seconds";
-            myPane3.YAxis.Title = "Value";
-            PointPairList cadencePairList = new PointPairList();
-            List<int> c3 = _cadence.Select(s => Convert.ToInt32(s)).ToList();
-            cadencePairList = buildPointPairList(c3.ToArray());
-            LineItem cadenceCurve = myPane.AddCurve("Cadence",
-            cadencePairList, Color.Black, SymbolType.None);
-            zedGraphControl3.AxisChange();
-
-            GraphPane myPane4 = zedGraphControl4.GraphPane;
-
-            // Set the Titles
             myPane4.Title = "Analysis of Power";
             myPane4.XAxis.Title = "Time in seconds";
             myPane4.YAxis.Title = "Value";
-            PointPairList powerPairList = new PointPairList();
-            List<int> c4 = _power.Select(s => Convert.ToInt32(s)).ToList();
-            powerPairList = buildPointPairList(c4.ToArray());
-            LineItem powerCurve = myPane.AddCurve("Power",
-            speedPairList, Color.Cyan, SymbolType.None);
-            zedGraphControl4.AxisChange();
 
+            myPane3.Title = "Analysis of Cadence";
+            myPane3.XAxis.Title = "Time in seconds";
+            myPane3.YAxis.Title = "Value";
 
-            GraphPane myPane5 = zedGraphControl5.GraphPane;
-
-            // Set the Titles
             myPane5.Title = "Analysis of Altitude";
             myPane5.XAxis.Title = "Time in seconds";
             myPane5.YAxis.Title = "Value";
-            PointPairList altitudePairList = new PointPairList();   
+
+
+            PointPairList heartPairList = new PointPairList();
+            PointPairList speedPairList = new PointPairList();
+            PointPairList cadencePairList = new PointPairList();
+            PointPairList powerPairList = new PointPairList();
+            PointPairList altitudePairList = new PointPairList();
+
+
+            List<int> hr = _heartRate.Select(s => Convert.ToInt32(s)).ToList();
+            heartPairList = buildPointPairList(hr.ToArray());
+            List<int> c2 = _speed.Select(s => Convert.ToInt32(s)).ToList();
+            speedPairList = buildPointPairList(c2.ToArray());
+            List<int> c3 = _cadence.Select(s => Convert.ToInt32(s)).ToList();
+            cadencePairList = buildPointPairList(c3.ToArray());
+            List<int> c4 = _power.Select(s => Convert.ToInt32(s)).ToList();
+            powerPairList = buildPointPairList(c4.ToArray());
             List<int> c5 = _altitude.Select(s => Convert.ToInt32(s)).ToList();
             altitudePairList = buildPointPairList(c5.ToArray());
-            LineItem altitudeCurve = myPane.AddCurve("Altitude",
+
+
+            LineItem heartCurve = myPane.AddCurve("HeartRate",
+            heartPairList, Color.Red, SymbolType.None);
+            
+       
+            LineItem speedCurve = myPane2.AddCurve("Speed",
+            speedPairList, Color.Blue, SymbolType.None);
+           
+            LineItem cadenceCurve = myPane3.AddCurve("Cadence",
+            cadencePairList, Color.Black, SymbolType.None);
+                     
+            LineItem powerCurve = myPane4.AddCurve("Power",
+            speedPairList, Color.Cyan, SymbolType.None);
+
+            LineItem altitudeCurve = myPane5.AddCurve("Altitude",
                   altitudePairList, Color.Crimson, SymbolType.None
                   );
-            zedGraphControl.AxisChange();
-        }
 
-        private void SetSize()
-        {
-            zedGraphControl11.Location = new Point(0, 0);
-            zedGraphControl11.IsShowPointValues = true;
-            zedGraphControl11.Size = new Size(this.ClientRectangle.Width - 20, this.ClientRectangle.Height - 50);
-
-            zedGraphControl2.Location = new Point(0, 0);
-            zedGraphControl2.IsShowPointValues = true;
-            zedGraphControl2.Size = new Size(this.ClientRectangle.Width - 20, this.ClientRectangle.Height - 50);
-
-            zedGraphControl3.Location = new Point(0, 0);
-            zedGraphControl3.IsShowPointValues = true;
-            zedGraphControl3.Size = new Size(this.ClientRectangle.Width - 20, this.ClientRectangle.Height - 50);
-
-            zedGraphControl4.Location = new Point(0, 0);
-            zedGraphControl4.IsShowPointValues = true;
-            zedGraphControl4.Size = new Size(this.ClientRectangle.Width - 20, this.ClientRectangle.Height - 50);
-
-            zedGraphControl5.Location = new Point(0, 0);
-            zedGraphControl5.IsShowPointValues = true;
-            zedGraphControl5.Size = new Size(this.ClientRectangle.Width - 20, this.ClientRectangle.Height - 50);
+            zedGraphControl11.AxisChange();
+            zedGraphControl2.AxisChange();
+            zedGraphControl3.AxisChange();
+            zedGraphControl4.AxisChange();
+            zedGraphControl5.AxisChange();
         }
 
         private void zedGraphControl2_Resize(object sender, EventArgs e)
@@ -146,12 +120,16 @@ namespace Assignment1
         private void IndividualGraph_Load(object sender, EventArgs e)
         {
             plotGraph();
-            SetSize();
         }
 
         private void IndividualGraph_Resize(object sender, EventArgs e)
         {
-            SetSize();
+
+        }
+
+        private void zedGraphControl4_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
