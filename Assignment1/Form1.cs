@@ -1,23 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Assignment1
 {
     public partial class Form1 : Form
     {
-        public Dictionary<string, List<string>> hrData = new Dictionary<string, List<string>>();
+        private Dictionary<string, List<string>> hrData = new Dictionary<string, List<string>>();
         private Dictionary<string, string> param = new Dictionary<string, string>();
-        public List<string> paramsArrays = new List<string>();
-        public int[] arrayTime = new int[] {};
+        private List<string> paramsArrays = new List<string>();
+        private int[] arrayTime = new int[] {};
         public List<string> heartRate = new List<string>();
         public List<string> speed = new List<string>();
         public List<string> speed_miles = new List<string>();
@@ -25,8 +20,7 @@ namespace Assignment1
         public List<string> altitude = new List<string>();
         public List<string> power = new List<string>();
         public List<string> powerBalancePedalling = new List<string>();
-        public string[] device = new string[] { };
-        public string[] unit = { "km/h", "mph" };
+        private string[] device = new string[] { };
         int counter = 0;
         int interval = 0;
         DateTime dt = new DateTime();
@@ -34,7 +28,7 @@ namespace Assignment1
 
         int cad, hrt, pwr, al;
         double sd;
-             int heartCheck =0;
+            int heartCheck = 0;
             int speedCheck = 0;
             int cadenceCheck = 0;
             int altitudeCheck = 0;
@@ -47,7 +41,6 @@ namespace Assignment1
             InitializeComponent();
             InitGrid();
             comboBox1.SelectedIndex = 0;
-
         }
 
         private void openFile(object sender, EventArgs e)
@@ -55,7 +48,6 @@ namespace Assignment1
             ReadFromFile();
             viewHrData();
             summaryCalc();
-
         }
 
 
@@ -74,8 +66,8 @@ namespace Assignment1
                 FileStream fs = (FileStream)od.OpenFile();
                 StreamReader sr = new StreamReader(fs);
 
+                //reads the header file and store it in an paramaArray array
                 while (!(line = sr.ReadLine()).Contains("[Note]"))
-
                 {
                     counter++;
 
@@ -90,6 +82,7 @@ namespace Assignment1
                 }
 
                 try{
+                    //stores header information in a dictionary with keys and values
                     for (int i = 1; i < paramsArrays.Count(); i += 2)
                     {
                         param.Add(paramsArrays[i], paramsArrays[1 + i]);
@@ -104,6 +97,7 @@ namespace Assignment1
                     MessageBox.Show(e.Message);
                 }
 
+                //calculates smode
                 smode = param["SMode"];
                 SMODE(smode);
 
@@ -122,7 +116,7 @@ namespace Assignment1
                 //adding hr data to dictionary for easy access
                 hrDataToDictionary();
 
-
+                //displaying datetime
                 if (param.ContainsKey("Date"))
                 {
                     string dateTime = param["Date"];
@@ -132,6 +126,7 @@ namespace Assignment1
 
                 deviceName.Text = deviceN(param["Monitor"]);
                
+                //displaying starttime in header
                 if (param.ContainsKey("StartTime"))
                 {
                     string time = param["StartTime"];
@@ -152,7 +147,6 @@ namespace Assignment1
         {
             try
             {
-
                 string newline = string.Join(" ", line.Split(findOf, StringSplitOptions.RemoveEmptyEntries));
                 List<string> val = newline.Split(' ').ToList();
                 if (heartCheck == 1)
@@ -178,13 +172,12 @@ namespace Assignment1
                 }
                 heartRate.Add(hrt.ToString());
                 speed.Add((sd * 0.1).ToString());
-                speed_miles.Add(Math.Round((sd * 0.1 * 0.621371), 2, MidpointRounding.AwayFromZero).ToString());
+                speed_miles.Add(roundOff(sd * 0.1 * 0.621371).ToString());
                 cadence.Add(cad.ToString());
                 altitude.Add(al.ToString());
                 power.Add(pwr.ToString());
                 powerBalancePedalling.Add(val[5]);
                 val = null;
-
             }
             catch (IndexOutOfRangeException ex)
             {
@@ -192,6 +185,7 @@ namespace Assignment1
             }
         }
 
+        //timeinterval for each row
         public string calculateTimeInterval(string time)
         {
             // fetch the en-GB culture
@@ -203,8 +197,7 @@ namespace Assignment1
 
         //displayed list data to grid view table
         public void viewHrData()
-        {
-            
+        {      
             if (comboBox1.SelectedIndex == 0)
             {
                 int counter = 0;
@@ -259,9 +252,7 @@ namespace Assignment1
             var maximumHeartRate = Summary.Max(hrData["heartRate"]);
             var minimumHeartRate = Summary.Min(hrData["heartRate"]);
 
-            MessageBox.Show(dataGridView.RowCount + "");
             var totalDis = Summary.TotalDistance(avSpeed, dataGridView.RowCount, Int32.Parse(param["Interval"]));
-
 
             var averagePower = Summary.Average(hrData["power"]);
             var maximumPower = Summary.Max(hrData["power"]);
@@ -270,7 +261,7 @@ namespace Assignment1
             var maximumAltitude = Summary.Max(hrData["altitude"]);
 
             //summary of data 
-            totalDistance.Text = roundOff(totalDis) + " Km/h";
+            totalDistance.Text = roundOff(totalDis) + " Km";
             avgSpeed.Text = roundOff(averageSpeed) + " km/h";
             maximumSpeed.Text = roundOff(maxSpeed)+ " km/h";
             avgHeartRate.Text = roundOff(averageHeartRate) + " bpm";
@@ -279,8 +270,6 @@ namespace Assignment1
             avgPower.Text = roundOff(averagePower) + " watts";
             maxPower.Text =roundOff(maximumPower) + " watts";
             avgAltitude.Text =roundOff(averageAltitude) + " m";
-
-
 
         }
 
@@ -298,6 +287,7 @@ namespace Assignment1
             dataGridView.Columns[6].Name = "Power (watts)";
         }
 
+        //gets the device name 
         private string deviceN(string val)
         {
             string[] device = {
@@ -333,6 +323,7 @@ namespace Assignment1
             return dName;
         }
 
+        //calculateing smode
         private void SMODE(string mode)
         {
             heartCheck = int.Parse(mode.Substring(0, 1));
@@ -347,6 +338,7 @@ namespace Assignment1
 
         }
 
+        //toggleable speed (setting visible column based on toggleable comboitem)
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.SelectedIndex == 0)
@@ -362,12 +354,14 @@ namespace Assignment1
 
         private void btnGraph_Click(object sender, EventArgs e)
         {
+            //instansating summarygraph variable (display in combied graph)
             SummaryGraph sm = new SummaryGraph(heartRate, speed, cadence, altitude, power);
             sm.Show();
         }
 
         private void btnIndividualGraph_Click(object sender, EventArgs e)
         {
+            //instansating individualgraph variable (display individually)
             IndividualGraph id = new IndividualGraph(heartRate, speed, cadence, altitude, power);
             id.Show();
         }
@@ -377,6 +371,7 @@ namespace Assignment1
 
         }
 
+        //minimizing the decimal value to 2
         private static double roundOff(double val)
         {
             double data = Math.Round(val, 2, MidpointRounding.AwayFromZero);

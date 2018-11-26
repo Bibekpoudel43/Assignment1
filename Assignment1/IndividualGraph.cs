@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ZedGraph;
 
@@ -30,6 +27,7 @@ namespace Assignment1
             _power = power;
         }
 
+        //assigning pointpairlist key and value
         private PointPairList buildPointPairList(int[] value)
         {
             PointPairList pr = new PointPairList();
@@ -39,6 +37,7 @@ namespace Assignment1
             }
             return pr;
         }
+        //assigning pointpairlist key and value
         private PointPairList buildPointPairList(double[] value)
         {
             PointPairList pr = new PointPairList();
@@ -50,6 +49,7 @@ namespace Assignment1
         }
         private void plotGraph()
         {
+            //initializing graphpane
             GraphPane myPane = zedGraphControl11.GraphPane;
             GraphPane myPane2 = zedGraphControl2.GraphPane;
             GraphPane myPane3 = zedGraphControl3.GraphPane;
@@ -77,14 +77,14 @@ namespace Assignment1
             myPane5.XAxis.Title = "Time in seconds";
             myPane5.YAxis.Title = "Value";
 
-
+            //initializing pointparlist
             PointPairList heartPairList = new PointPairList();
             PointPairList speedPairList = new PointPairList();
             PointPairList cadencePairList = new PointPairList();
             PointPairList powerPairList = new PointPairList();
             PointPairList altitudePairList = new PointPairList();
 
-
+            
             List<int> hr = _heartRate.Select(s => Convert.ToInt32(s)).ToList();
             heartPairList = buildPointPairList(hr.ToArray());
             List<double> c2 = _speed.Select(s => Convert.ToDouble(s)).ToList();
@@ -97,10 +97,10 @@ namespace Assignment1
             altitudePairList = buildPointPairList(c5.ToArray());
 
 
+            //ploting the line to a graph
             LineItem heartCurve = myPane.AddCurve("HeartRate",
             heartPairList, Color.Red, SymbolType.None);
             
-       
             LineItem speedCurve = myPane2.AddCurve("Speed",
             speedPairList, Color.Blue, SymbolType.None);
            
@@ -120,15 +120,13 @@ namespace Assignment1
             zedGraphControl4.AxisChange();
             zedGraphControl5.AxisChange();
         }
-
-        private void zedGraphControl2_Resize(object sender, EventArgs e)
-        {
-
-        }
-
         private void IndividualGraph_Load(object sender, EventArgs e)
         {
             plotGraph();
+        }
+        private void zedGraphControl2_Resize(object sender, EventArgs e)
+        {
+
         }
 
         private void IndividualGraph_Resize(object sender, EventArgs e)

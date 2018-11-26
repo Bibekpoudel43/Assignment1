@@ -8,7 +8,7 @@ namespace Assignment1
 {
     class Summary
     {
-    
+        //average calculation
         public static double Average(List<string> value)
         {
             double sum = 0;
@@ -21,7 +21,7 @@ namespace Assignment1
             double result  = (sum / value.Count);
             return result;
         }
-
+        //sum calculation
         public static double Sum(List<string> value)
         {
            double sum = 0;
@@ -33,6 +33,7 @@ namespace Assignment1
 
             return sum;
         }
+        //max calculation
         public static double Max(List<string> value)
         {
             double maxVal = 0;
@@ -47,7 +48,7 @@ namespace Assignment1
 
             return maxVal;
         }
-
+        //min calculation
         public static int Min(List<string> value)
         {
             int minVal = Int32.Parse(value.ElementAt(0));
@@ -62,6 +63,7 @@ namespace Assignment1
 
             return minVal;
         }
+        //totaldistnce calculation
         public static double TotalDistance(double average, int count, int interval)
         {
             var time = TimeSpan.FromSeconds(count * interval);
