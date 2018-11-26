@@ -62,6 +62,13 @@ namespace Assignment1
 
             return minVal;
         }
+        public static double TotalDistance(double average, int count, int interval)
+        {
+            var time = TimeSpan.FromSeconds(count * interval);
+            double total1 = average * time.TotalHours;
+
+            return total1;
+        }
 
     }
 }
