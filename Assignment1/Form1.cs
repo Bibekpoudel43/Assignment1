@@ -23,6 +23,7 @@ namespace Assignment1
         private string[] device = new string[] { };
         int counter = 0;
         int interval = 0;
+        string time;
         DateTime dt = new DateTime();
         char[] findOf = { '\t', ' ', '=' };
 
@@ -34,6 +35,7 @@ namespace Assignment1
             int altitudeCheck = 0;
             int powerCheck = 0;
             string smode = "";
+        string env = Environment.NewLine;
 
 
         public Form1()
@@ -48,6 +50,7 @@ namespace Assignment1
             ReadFromFile();
             viewHrData();
             summaryCalc();
+            calculateAdvancedMetrics();
         }
 
 
@@ -245,7 +248,6 @@ namespace Assignment1
         private void summaryCalc()
         {
             var maxSpeed = Summary.Max(hrData["speed"]);
-            //var totalDistanceCovered = Summary.Sum(hrData["cadence"]);
             double averageSpeed = Summary.Average(hrData["speed"]);
             double avSpeed = Summary.Average(hrData["speed"]);
             var averageHeartRate = Summary.Average(hrData["heartRate"]);
@@ -273,7 +275,21 @@ namespace Assignment1
 
         }
 
+        //calculateAdvanceMetrics
+        public void calculateAdvancedMetrics()
+        {
+            Summary sv = new Summary(heartRate, speed, speed_miles, cadence, altitude, power, time);
+            string FTP = sv.CalculateFunctionalThresholdPower();
+            string Np = sv.CalculateNormalizedPower();
+            string If = sv.CalculateIntensityFactor();
+            string Tss = sv.CalculateTrainingStressScore();
 
+            ftplbl.Text = FTP + " watts";
+            tsslbl.Text = Tss + "";
+            iflbl.Text = If + "";
+            pblbl.Text = null;
+            nplbl.Text = Np + " watts";
+        }
         //specifying column header
         private void InitGrid()
         {
@@ -288,7 +304,7 @@ namespace Assignment1
         }
 
         //gets the device name 
-        private string deviceN(string val)
+        public string deviceN(string val)
         {
             string[] device = {
                 "Polar Sport Tester / Vantage XL",
@@ -357,6 +373,18 @@ namespace Assignment1
             //instansating summarygraph variable (display in combied graph)
             SummaryGraph sm = new SummaryGraph(heartRate, speed, cadence, altitude, power);
             sm.Show();
+        }
+
+        private void onClickComapreFile(object sender, EventArgs e)
+        {
+            FileCompare fc = new FileCompare();
+            fc.Show();
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         private void btnIndividualGraph_Click(object sender, EventArgs e)

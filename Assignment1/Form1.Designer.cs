@@ -32,9 +32,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.speedUnitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.kmhMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.mphMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.compareFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -86,6 +84,25 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnIndividualGraph = new System.Windows.Forms.Button();
             this.btnGraph = new System.Windows.Forms.Button();
+            this.label27 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.tsslbl = new System.Windows.Forms.Label();
+            this.nplbl = new System.Windows.Forms.Label();
+            this.pblbl = new System.Windows.Forms.Label();
+            this.ftplbl = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
+            this.label51 = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
+            this.label53 = new System.Windows.Forms.Label();
+            this.label54 = new System.Windows.Forms.Label();
+            this.iflbl = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.cmbChunk = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.panelDataGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -93,23 +110,24 @@
             this.deviceName.SuspendLayout();
             this.panelHeader.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.speedUnitToolStripMenuItem});
+            this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(886, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(930, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem});
+            this.openToolStripMenuItem,
+            this.compareFileToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -117,32 +135,16 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openFile);
             // 
-            // speedUnitToolStripMenuItem
+            // compareFileToolStripMenuItem
             // 
-            this.speedUnitToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.kmhMenu,
-            this.mphMenu});
-            this.speedUnitToolStripMenuItem.Name = "speedUnitToolStripMenuItem";
-            this.speedUnitToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
-            this.speedUnitToolStripMenuItem.Text = "Speed Unit";
-            // 
-            // kmhMenu
-            // 
-            this.kmhMenu.Name = "kmhMenu";
-            this.kmhMenu.Size = new System.Drawing.Size(103, 22);
-            this.kmhMenu.Text = "km/h";
-            this.kmhMenu.Click += new System.EventHandler(this.kmhMenu_Click);
-            // 
-            // mphMenu
-            // 
-            this.mphMenu.Name = "mphMenu";
-            this.mphMenu.Size = new System.Drawing.Size(103, 22);
-            this.mphMenu.Text = "mph";
-            this.mphMenu.Click += new System.EventHandler(this.mphMenu_Click);
+            this.compareFileToolStripMenuItem.Name = "compareFileToolStripMenuItem";
+            this.compareFileToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.compareFileToolStripMenuItem.Text = "Compare File";
+            this.compareFileToolStripMenuItem.Click += new System.EventHandler(this.onClickComapreFile);
             // 
             // contextMenuStrip1
             // 
@@ -155,10 +157,15 @@
             // 
             // panelDataGrid
             // 
+            this.panelDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelDataGrid.Controls.Add(this.cmbChunk);
+            this.panelDataGrid.Controls.Add(this.button1);
+            this.panelDataGrid.Controls.Add(this.label27);
+            this.panelDataGrid.Controls.Add(this.panel3);
             this.panelDataGrid.Controls.Add(this.dataGridView);
             this.panelDataGrid.Location = new System.Drawing.Point(387, 24);
             this.panelDataGrid.Name = "panelDataGrid";
-            this.panelDataGrid.Size = new System.Drawing.Size(487, 517);
+            this.panelDataGrid.Size = new System.Drawing.Size(531, 517);
             this.panelDataGrid.TabIndex = 1;
             // 
             // dataGridView
@@ -166,7 +173,7 @@
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Location = new System.Drawing.Point(8, 0);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(461, 486);
+            this.dataGridView.Size = new System.Drawing.Size(508, 340);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             // 
@@ -183,6 +190,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(376, 517);
             this.panel1.TabIndex = 2;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // comboBox1
             // 
@@ -362,7 +370,7 @@
             this.panel2.Controls.Add(this.label1);
             this.panel2.Location = new System.Drawing.Point(14, 255);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(313, 232);
+            this.panel2.Size = new System.Drawing.Size(289, 232);
             this.panel2.TabIndex = 34;
             // 
             // avgAltitude
@@ -623,7 +631,7 @@
             this.btnIndividualGraph.Name = "btnIndividualGraph";
             this.btnIndividualGraph.Size = new System.Drawing.Size(128, 23);
             this.btnIndividualGraph.TabIndex = 30;
-            this.btnIndividualGraph.Text = "View Individual Graph";
+            this.btnIndividualGraph.Text = "Individual Graph";
             this.btnIndividualGraph.UseVisualStyleBackColor = true;
             this.btnIndividualGraph.Click += new System.EventHandler(this.btnIndividualGraph_Click);
             // 
@@ -633,15 +641,212 @@
             this.btnGraph.Name = "btnGraph";
             this.btnGraph.Size = new System.Drawing.Size(98, 23);
             this.btnGraph.TabIndex = 29;
-            this.btnGraph.Text = "View Graph";
+            this.btnGraph.Text = "Summary Graph";
             this.btnGraph.UseVisualStyleBackColor = true;
             this.btnGraph.Click += new System.EventHandler(this.btnGraph_Click);
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.BackColor = System.Drawing.Color.LightGray;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(277, 350);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(177, 24);
+            this.label27.TabIndex = 59;
+            this.label27.Text = "Advanced Metrics";
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.LightGray;
+            this.panel3.Controls.Add(this.iflbl);
+            this.panel3.Controls.Add(this.label29);
+            this.panel3.Controls.Add(this.label30);
+            this.panel3.Controls.Add(this.tsslbl);
+            this.panel3.Controls.Add(this.nplbl);
+            this.panel3.Controls.Add(this.pblbl);
+            this.panel3.Controls.Add(this.ftplbl);
+            this.panel3.Controls.Add(this.label42);
+            this.panel3.Controls.Add(this.label43);
+            this.panel3.Controls.Add(this.label44);
+            this.panel3.Controls.Add(this.label45);
+            this.panel3.Controls.Add(this.label51);
+            this.panel3.Controls.Add(this.label52);
+            this.panel3.Controls.Add(this.label53);
+            this.panel3.Controls.Add(this.label54);
+            this.panel3.Location = new System.Drawing.Point(233, 384);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(283, 127);
+            this.panel3.TabIndex = 58;
+            // 
+            // tsslbl
+            // 
+            this.tsslbl.AutoSize = true;
+            this.tsslbl.Location = new System.Drawing.Point(208, 83);
+            this.tsslbl.Name = "tsslbl";
+            this.tsslbl.Size = new System.Drawing.Size(13, 13);
+            this.tsslbl.TabIndex = 49;
+            this.tsslbl.Text = "0";
+            // 
+            // nplbl
+            // 
+            this.nplbl.AutoSize = true;
+            this.nplbl.Location = new System.Drawing.Point(208, 60);
+            this.nplbl.Name = "nplbl";
+            this.nplbl.Size = new System.Drawing.Size(13, 13);
+            this.nplbl.TabIndex = 48;
+            this.nplbl.Text = "0";
+            // 
+            // pblbl
+            // 
+            this.pblbl.AutoSize = true;
+            this.pblbl.Location = new System.Drawing.Point(208, 34);
+            this.pblbl.Name = "pblbl";
+            this.pblbl.Size = new System.Drawing.Size(13, 13);
+            this.pblbl.TabIndex = 47;
+            this.pblbl.Text = "0";
+            // 
+            // ftplbl
+            // 
+            this.ftplbl.AutoSize = true;
+            this.ftplbl.Location = new System.Drawing.Point(208, 9);
+            this.ftplbl.Name = "ftplbl";
+            this.ftplbl.Size = new System.Drawing.Size(13, 13);
+            this.ftplbl.TabIndex = 46;
+            this.ftplbl.Text = "0";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label42.Location = new System.Drawing.Point(176, 57);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(12, 16);
+            this.label42.TabIndex = 40;
+            this.label42.Text = ":";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label43.Location = new System.Drawing.Point(176, 80);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(12, 16);
+            this.label43.TabIndex = 39;
+            this.label43.Text = ":";
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label44.Location = new System.Drawing.Point(176, 34);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(12, 16);
+            this.label44.TabIndex = 38;
+            this.label44.Text = ":";
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label45.Location = new System.Drawing.Point(176, 7);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(12, 16);
+            this.label45.TabIndex = 37;
+            this.label45.Text = ":";
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(22, 80);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(138, 13);
+            this.label51.TabIndex = 31;
+            this.label51.Text = "Training Stress Score (TSS)";
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(22, 57);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(92, 13);
+            this.label52.TabIndex = 30;
+            this.label52.Text = "Normalized Power";
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(22, 34);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(79, 13);
+            this.label53.TabIndex = 29;
+            this.label53.Text = "Power Balance";
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(22, 10);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(135, 13);
+            this.label54.TabIndex = 28;
+            this.label54.Text = "Functional Threshold (FTP)";
+            // 
+            // iflbl
+            // 
+            this.iflbl.AutoSize = true;
+            this.iflbl.Location = new System.Drawing.Point(208, 105);
+            this.iflbl.Name = "iflbl";
+            this.iflbl.Size = new System.Drawing.Size(13, 13);
+            this.iflbl.TabIndex = 52;
+            this.iflbl.Text = "0";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.Location = new System.Drawing.Point(176, 102);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(12, 16);
+            this.label29.TabIndex = 51;
+            this.label29.Text = ":";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(22, 102);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(97, 13);
+            this.label30.TabIndex = 50;
+            this.label30.Text = "Intensity Factor (IF)";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(30, 422);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(64, 23);
+            this.button1.TabIndex = 61;
+            this.button1.Text = "Chunk";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // cmbChunk
+            // 
+            this.cmbChunk.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.cmbChunk.FormattingEnabled = true;
+            this.cmbChunk.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4"});
+            this.cmbChunk.Location = new System.Drawing.Point(30, 384);
+            this.cmbChunk.Name = "cmbChunk";
+            this.cmbChunk.Size = new System.Drawing.Size(66, 21);
+            this.cmbChunk.TabIndex = 62;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(886, 547);
+            this.ClientSize = new System.Drawing.Size(930, 547);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelDataGrid);
             this.Controls.Add(this.menuStrip1);
@@ -651,6 +856,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panelDataGrid.ResumeLayout(false);
+            this.panelDataGrid.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -659,6 +865,8 @@
             this.panelHeader.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -718,11 +926,28 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.GroupBox deviceName;
-        private System.Windows.Forms.ToolStripMenuItem speedUnitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem kmhMenu;
-        private System.Windows.Forms.ToolStripMenuItem mphMenu;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.ToolStripMenuItem compareFileToolStripMenuItem;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label iflbl;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Label tsslbl;
+        private System.Windows.Forms.Label nplbl;
+        private System.Windows.Forms.Label pblbl;
+        private System.Windows.Forms.Label ftplbl;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.ComboBox cmbChunk;
+        private System.Windows.Forms.Button button1;
     }
 }
 
