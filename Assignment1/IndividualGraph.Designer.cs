@@ -41,7 +41,7 @@
             this.zedGraphControl11.Location = new System.Drawing.Point(12, 12);
             this.zedGraphControl11.Name = "zedGraphControl11";
             this.zedGraphControl11.PointValueFormat = "G";
-            this.zedGraphControl11.Size = new System.Drawing.Size(806, 147);
+            this.zedGraphControl11.Size = new System.Drawing.Size(897, 147);
             this.zedGraphControl11.TabIndex = 0;
             // 
             // zedGraphControl2
@@ -50,7 +50,7 @@
             this.zedGraphControl2.Location = new System.Drawing.Point(12, 165);
             this.zedGraphControl2.Name = "zedGraphControl2";
             this.zedGraphControl2.PointValueFormat = "G";
-            this.zedGraphControl2.Size = new System.Drawing.Size(806, 134);
+            this.zedGraphControl2.Size = new System.Drawing.Size(897, 134);
             this.zedGraphControl2.TabIndex = 1;
             this.zedGraphControl2.Resize += new System.EventHandler(this.zedGraphControl2_Resize);
             // 
@@ -60,7 +60,7 @@
             this.zedGraphControl3.Location = new System.Drawing.Point(12, 305);
             this.zedGraphControl3.Name = "zedGraphControl3";
             this.zedGraphControl3.PointValueFormat = "G";
-            this.zedGraphControl3.Size = new System.Drawing.Size(806, 151);
+            this.zedGraphControl3.Size = new System.Drawing.Size(897, 151);
             this.zedGraphControl3.TabIndex = 2;
             // 
             // zedGraphControl4
@@ -69,7 +69,7 @@
             this.zedGraphControl4.Location = new System.Drawing.Point(12, 462);
             this.zedGraphControl4.Name = "zedGraphControl4";
             this.zedGraphControl4.PointValueFormat = "G";
-            this.zedGraphControl4.Size = new System.Drawing.Size(806, 151);
+            this.zedGraphControl4.Size = new System.Drawing.Size(897, 151);
             this.zedGraphControl4.TabIndex = 3;
             this.zedGraphControl4.Load += new System.EventHandler(this.zedGraphControl4_Load);
             // 
@@ -79,7 +79,7 @@
             this.zedGraphControl5.Location = new System.Drawing.Point(12, 619);
             this.zedGraphControl5.Name = "zedGraphControl5";
             this.zedGraphControl5.PointValueFormat = "G";
-            this.zedGraphControl5.Size = new System.Drawing.Size(806, 118);
+            this.zedGraphControl5.Size = new System.Drawing.Size(897, 118);
             this.zedGraphControl5.TabIndex = 4;
             // 
             // IndividualGraph
@@ -87,7 +87,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(830, 749);
+            this.ClientSize = new System.Drawing.Size(953, 749);
             this.Controls.Add(this.zedGraphControl5);
             this.Controls.Add(this.zedGraphControl4);
             this.Controls.Add(this.zedGraphControl3);

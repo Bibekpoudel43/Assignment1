@@ -124,6 +124,46 @@ namespace Assignment1
         {
             plotGraph();
         }
+
+        private void SetSize1()
+        {
+            zedGraphControl11.Location = new Point(0, 0);
+            zedGraphControl11.IsShowPointValues = true;
+            zedGraphControl11.Size = new Size(this.ClientRectangle.Width - 20, this.ClientRectangle.Height - 50);
+
+        }
+
+        private void SetSize2()
+        {
+            zedGraphControl2.Location = new Point(0, 0);
+            zedGraphControl2.IsShowPointValues = true;
+            zedGraphControl2.Size = new Size(this.ClientRectangle.Width - 20, this.ClientRectangle.Height - 50);
+
+        }
+
+        private void SetSize3()
+        {
+            zedGraphControl3.Location = new Point(0, 0);
+            zedGraphControl3.IsShowPointValues = true;
+            zedGraphControl3.Size = new Size(this.ClientRectangle.Width - 20, this.ClientRectangle.Height - 50);
+
+        }
+
+        private void SetSize4()
+        {
+            zedGraphControl4.Location = new Point(0, 0);
+            zedGraphControl4.IsShowPointValues = true;
+            zedGraphControl4.Size = new Size(this.ClientRectangle.Width - 20, this.ClientRectangle.Height - 50);
+
+        }
+
+        private void SetSize5()
+        {
+            zedGraphControl5.Location = new Point(0, 0);
+            zedGraphControl5.IsShowPointValues = true;
+            zedGraphControl5.Size = new Size(this.ClientRectangle.Width - 20, this.ClientRectangle.Height - 50);
+
+        }
         private void zedGraphControl2_Resize(object sender, EventArgs e)
         {
 
@@ -131,7 +171,11 @@ namespace Assignment1
 
         private void IndividualGraph_Resize(object sender, EventArgs e)
         {
-
+            SetSize1();
+            SetSize2();
+            SetSize3();
+            SetSize4();
+            SetSize5();
         }
 
         private void zedGraphControl4_Load(object sender, EventArgs e)
