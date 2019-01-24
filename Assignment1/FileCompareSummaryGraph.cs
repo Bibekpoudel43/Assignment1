@@ -89,10 +89,12 @@ namespace Assignment1
             myPane.XAxis.Title = "Time in second";
             myPane.YAxis.Title = "Parameters";
 
+
             GraphPane myPane1 = zedGraphControl2.GraphPane;
             myPane1.Title = "Summary Graph of Second File";
             myPane1.XAxis.Title = "Time in second";
             myPane1.YAxis.Title = "Parameters ";
+
 
             PointPairList heartPairList = new PointPairList();
             PointPairList speedPairList = new PointPairList();

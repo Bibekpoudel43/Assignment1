@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
-            this.zedGraphControl2 = new ZedGraph.ZedGraphControl();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.label25 = new System.Windows.Forms.Label();
@@ -90,34 +88,18 @@
             this.label45 = new System.Windows.Forms.Label();
             this.label46 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
+            this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl2 = new ZedGraph.ZedGraphControl();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // zedGraphControl1
-            // 
-            this.zedGraphControl1.IsShowPointValues = false;
-            this.zedGraphControl1.Location = new System.Drawing.Point(3, 3);
-            this.zedGraphControl1.Name = "zedGraphControl1";
-            this.zedGraphControl1.PointValueFormat = "G";
-            this.zedGraphControl1.Size = new System.Drawing.Size(471, 354);
-            this.zedGraphControl1.TabIndex = 0;
-            // 
-            // zedGraphControl2
-            // 
-            this.zedGraphControl2.IsShowPointValues = false;
-            this.zedGraphControl2.Location = new System.Drawing.Point(498, 3);
-            this.zedGraphControl2.Name = "zedGraphControl2";
-            this.zedGraphControl2.PointValueFormat = "G";
-            this.zedGraphControl2.Size = new System.Drawing.Size(481, 354);
-            this.zedGraphControl2.TabIndex = 1;
-            // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.splitter1);
             this.panel1.Controls.Add(this.zedGraphControl2);
             this.panel1.Controls.Add(this.zedGraphControl1);
+            this.panel1.Controls.Add(this.splitter1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(998, 370);
@@ -727,6 +709,24 @@
             this.label47.TabIndex = 28;
             this.label47.Text = "Total Distance";
             // 
+            // zedGraphControl1
+            // 
+            this.zedGraphControl1.IsShowPointValues = false;
+            this.zedGraphControl1.Location = new System.Drawing.Point(14, 3);
+            this.zedGraphControl1.Name = "zedGraphControl1";
+            this.zedGraphControl1.PointValueFormat = "G";
+            this.zedGraphControl1.Size = new System.Drawing.Size(478, 354);
+            this.zedGraphControl1.TabIndex = 3;
+            // 
+            // zedGraphControl2
+            // 
+            this.zedGraphControl2.IsShowPointValues = false;
+            this.zedGraphControl2.Location = new System.Drawing.Point(498, 3);
+            this.zedGraphControl2.Name = "zedGraphControl2";
+            this.zedGraphControl2.PointValueFormat = "G";
+            this.zedGraphControl2.Size = new System.Drawing.Size(497, 354);
+            this.zedGraphControl2.TabIndex = 4;
+            // 
             // FileCompareSummaryGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -752,9 +752,6 @@
         }
 
         #endregion
-
-        private ZedGraph.ZedGraphControl zedGraphControl1;
-        private ZedGraph.ZedGraphControl zedGraphControl2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Label label25;
@@ -815,5 +812,7 @@
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.Label label46;
         private System.Windows.Forms.Label label47;
+        private ZedGraph.ZedGraphControl zedGraphControl2;
+        private ZedGraph.ZedGraphControl zedGraphControl1;
     }
 }
