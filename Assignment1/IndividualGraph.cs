@@ -50,16 +50,17 @@ namespace Assignment1
         private void plotGraph()
         {
             //initializing graphpane
-            GraphPane myPane = zedGraphControl11.GraphPane;
-            GraphPane myPane2 = zedGraphControl2.GraphPane;
-            GraphPane myPane3 = zedGraphControl3.GraphPane;
-            GraphPane myPane4 = zedGraphControl4.GraphPane;
-            GraphPane myPane5 = zedGraphControl5.GraphPane;
+            GraphPane myPane = zedGraphControl6.GraphPane;
+            GraphPane myPane2 = zedGraphControl7.GraphPane;
+            GraphPane myPane3 = zedGraphControl8.GraphPane;
+            GraphPane myPane4 = zedGraphControl9.GraphPane;
+            GraphPane myPane5 = zedGraphControl10.GraphPane;
 
             // Set the Titles
-            myPane.Title = "Analysis of HeartRate";
+            myPane.Title= "Analysis of HeartRate";
             myPane.XAxis.Title = "Time in seconds";
             myPane.YAxis.Title = "Value";
+
 
             myPane2.Title = "Analysis of Speed";
             myPane2.XAxis.Title = "Time in seconds";
@@ -114,55 +115,15 @@ namespace Assignment1
                   altitudePairList, Color.Crimson, SymbolType.None
                   );
 
-            zedGraphControl11.AxisChange();
-            zedGraphControl2.AxisChange();
-            zedGraphControl3.AxisChange();
-            zedGraphControl4.AxisChange();
-            zedGraphControl5.AxisChange();
+            zedGraphControl6.AxisChange();
+            zedGraphControl7.AxisChange();
+            zedGraphControl8.AxisChange();
+            zedGraphControl9.AxisChange();
+            zedGraphControl10.AxisChange();
         }
         private void IndividualGraph_Load(object sender, EventArgs e)
         {
             plotGraph();
-        }
-
-        private void SetSize1()
-        {
-            zedGraphControl11.Location = new Point(0, 0);
-            zedGraphControl11.IsShowPointValues = true;
-            zedGraphControl11.Size = new Size(this.ClientRectangle.Width - 20, this.ClientRectangle.Height - 50);
-
-        }
-
-        private void SetSize2()
-        {
-            zedGraphControl2.Location = new Point(0, 0);
-            zedGraphControl2.IsShowPointValues = true;
-            zedGraphControl2.Size = new Size(this.ClientRectangle.Width - 20, this.ClientRectangle.Height - 50);
-
-        }
-
-        private void SetSize3()
-        {
-            zedGraphControl3.Location = new Point(0, 0);
-            zedGraphControl3.IsShowPointValues = true;
-            zedGraphControl3.Size = new Size(this.ClientRectangle.Width - 20, this.ClientRectangle.Height - 50);
-
-        }
-
-        private void SetSize4()
-        {
-            zedGraphControl4.Location = new Point(0, 0);
-            zedGraphControl4.IsShowPointValues = true;
-            zedGraphControl4.Size = new Size(this.ClientRectangle.Width - 20, this.ClientRectangle.Height - 50);
-
-        }
-
-        private void SetSize5()
-        {
-            zedGraphControl5.Location = new Point(0, 0);
-            zedGraphControl5.IsShowPointValues = true;
-            zedGraphControl5.Size = new Size(this.ClientRectangle.Width - 20, this.ClientRectangle.Height - 50);
-
         }
         private void zedGraphControl2_Resize(object sender, EventArgs e)
         {
@@ -171,11 +132,7 @@ namespace Assignment1
 
         private void IndividualGraph_Resize(object sender, EventArgs e)
         {
-            SetSize1();
-            SetSize2();
-            SetSize3();
-            SetSize4();
-            SetSize5();
+           
         }
 
         private void zedGraphControl4_Load(object sender, EventArgs e)
