@@ -38,6 +38,29 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.panelDataGrid = new System.Windows.Forms.Panel();
+            this.btnChunk4 = new System.Windows.Forms.Button();
+            this.btnChunk3 = new System.Windows.Forms.Button();
+            this.btnChunk2 = new System.Windows.Forms.Button();
+            this.btnchunk1 = new System.Windows.Forms.Button();
+            this.cmbChunk = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label27 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.iflbl = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.tsslbl = new System.Windows.Forms.Label();
+            this.nplbl = new System.Windows.Forms.Label();
+            this.pblbl = new System.Windows.Forms.Label();
+            this.ftplbl = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
+            this.label51 = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
+            this.label53 = new System.Windows.Forms.Label();
+            this.label54 = new System.Windows.Forms.Label();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -84,33 +107,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnIndividualGraph = new System.Windows.Forms.Button();
             this.btnGraph = new System.Windows.Forms.Button();
-            this.label27 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.tsslbl = new System.Windows.Forms.Label();
-            this.nplbl = new System.Windows.Forms.Label();
-            this.pblbl = new System.Windows.Forms.Label();
-            this.ftplbl = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
-            this.label45 = new System.Windows.Forms.Label();
-            this.label51 = new System.Windows.Forms.Label();
-            this.label52 = new System.Windows.Forms.Label();
-            this.label53 = new System.Windows.Forms.Label();
-            this.label54 = new System.Windows.Forms.Label();
-            this.iflbl = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.cmbChunk = new System.Windows.Forms.ComboBox();
+            this.btnView = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panelDataGrid.SuspendLayout();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.deviceName.SuspendLayout();
             this.panelHeader.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -158,6 +163,11 @@
             // panelDataGrid
             // 
             this.panelDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelDataGrid.Controls.Add(this.btnView);
+            this.panelDataGrid.Controls.Add(this.btnChunk4);
+            this.panelDataGrid.Controls.Add(this.btnChunk3);
+            this.panelDataGrid.Controls.Add(this.btnChunk2);
+            this.panelDataGrid.Controls.Add(this.btnchunk1);
             this.panelDataGrid.Controls.Add(this.cmbChunk);
             this.panelDataGrid.Controls.Add(this.button1);
             this.panelDataGrid.Controls.Add(this.label27);
@@ -167,6 +177,245 @@
             this.panelDataGrid.Name = "panelDataGrid";
             this.panelDataGrid.Size = new System.Drawing.Size(531, 517);
             this.panelDataGrid.TabIndex = 1;
+            // 
+            // btnChunk4
+            // 
+            this.btnChunk4.Location = new System.Drawing.Point(137, 478);
+            this.btnChunk4.Name = "btnChunk4";
+            this.btnChunk4.Size = new System.Drawing.Size(79, 23);
+            this.btnChunk4.TabIndex = 66;
+            this.btnChunk4.Text = "Chunk 4";
+            this.btnChunk4.UseVisualStyleBackColor = true;
+            this.btnChunk4.Click += new System.EventHandler(this.btnChunk4_Click);
+            // 
+            // btnChunk3
+            // 
+            this.btnChunk3.Location = new System.Drawing.Point(137, 449);
+            this.btnChunk3.Name = "btnChunk3";
+            this.btnChunk3.Size = new System.Drawing.Size(79, 23);
+            this.btnChunk3.TabIndex = 65;
+            this.btnChunk3.Text = "Chunk 3";
+            this.btnChunk3.UseVisualStyleBackColor = true;
+            this.btnChunk3.Click += new System.EventHandler(this.btnChunk3_Click);
+            // 
+            // btnChunk2
+            // 
+            this.btnChunk2.Location = new System.Drawing.Point(137, 420);
+            this.btnChunk2.Name = "btnChunk2";
+            this.btnChunk2.Size = new System.Drawing.Size(79, 23);
+            this.btnChunk2.TabIndex = 64;
+            this.btnChunk2.Text = "Chunk 2";
+            this.btnChunk2.UseVisualStyleBackColor = true;
+            this.btnChunk2.Click += new System.EventHandler(this.btnChunk2_Click);
+            // 
+            // btnchunk1
+            // 
+            this.btnchunk1.Location = new System.Drawing.Point(137, 394);
+            this.btnchunk1.Name = "btnchunk1";
+            this.btnchunk1.Size = new System.Drawing.Size(79, 23);
+            this.btnchunk1.TabIndex = 63;
+            this.btnchunk1.Text = "Chunk 1";
+            this.btnchunk1.UseVisualStyleBackColor = true;
+            this.btnchunk1.Click += new System.EventHandler(this.btnchunk1_Click);
+            // 
+            // cmbChunk
+            // 
+            this.cmbChunk.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.cmbChunk.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbChunk.FormattingEnabled = true;
+            this.cmbChunk.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4"});
+            this.cmbChunk.Location = new System.Drawing.Point(30, 422);
+            this.cmbChunk.Name = "cmbChunk";
+            this.cmbChunk.Size = new System.Drawing.Size(69, 21);
+            this.cmbChunk.TabIndex = 62;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(18, 454);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(101, 23);
+            this.button1.TabIndex = 61;
+            this.button1.Text = "Prepare Chunk";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.BackColor = System.Drawing.Color.LightGray;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(277, 350);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(177, 24);
+            this.label27.TabIndex = 59;
+            this.label27.Text = "Advanced Metrics";
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.LightGray;
+            this.panel3.Controls.Add(this.iflbl);
+            this.panel3.Controls.Add(this.label29);
+            this.panel3.Controls.Add(this.label30);
+            this.panel3.Controls.Add(this.tsslbl);
+            this.panel3.Controls.Add(this.nplbl);
+            this.panel3.Controls.Add(this.pblbl);
+            this.panel3.Controls.Add(this.ftplbl);
+            this.panel3.Controls.Add(this.label42);
+            this.panel3.Controls.Add(this.label43);
+            this.panel3.Controls.Add(this.label44);
+            this.panel3.Controls.Add(this.label45);
+            this.panel3.Controls.Add(this.label51);
+            this.panel3.Controls.Add(this.label52);
+            this.panel3.Controls.Add(this.label53);
+            this.panel3.Controls.Add(this.label54);
+            this.panel3.Location = new System.Drawing.Point(233, 384);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(283, 127);
+            this.panel3.TabIndex = 58;
+            // 
+            // iflbl
+            // 
+            this.iflbl.AutoSize = true;
+            this.iflbl.Location = new System.Drawing.Point(208, 105);
+            this.iflbl.Name = "iflbl";
+            this.iflbl.Size = new System.Drawing.Size(13, 13);
+            this.iflbl.TabIndex = 52;
+            this.iflbl.Text = "0";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.Location = new System.Drawing.Point(176, 102);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(12, 16);
+            this.label29.TabIndex = 51;
+            this.label29.Text = ":";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(22, 102);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(97, 13);
+            this.label30.TabIndex = 50;
+            this.label30.Text = "Intensity Factor (IF)";
+            // 
+            // tsslbl
+            // 
+            this.tsslbl.AutoSize = true;
+            this.tsslbl.Location = new System.Drawing.Point(208, 83);
+            this.tsslbl.Name = "tsslbl";
+            this.tsslbl.Size = new System.Drawing.Size(13, 13);
+            this.tsslbl.TabIndex = 49;
+            this.tsslbl.Text = "0";
+            // 
+            // nplbl
+            // 
+            this.nplbl.AutoSize = true;
+            this.nplbl.Location = new System.Drawing.Point(208, 60);
+            this.nplbl.Name = "nplbl";
+            this.nplbl.Size = new System.Drawing.Size(13, 13);
+            this.nplbl.TabIndex = 48;
+            this.nplbl.Text = "0";
+            // 
+            // pblbl
+            // 
+            this.pblbl.AutoSize = true;
+            this.pblbl.Location = new System.Drawing.Point(208, 34);
+            this.pblbl.Name = "pblbl";
+            this.pblbl.Size = new System.Drawing.Size(13, 13);
+            this.pblbl.TabIndex = 47;
+            this.pblbl.Text = "0";
+            // 
+            // ftplbl
+            // 
+            this.ftplbl.AutoSize = true;
+            this.ftplbl.Location = new System.Drawing.Point(208, 9);
+            this.ftplbl.Name = "ftplbl";
+            this.ftplbl.Size = new System.Drawing.Size(13, 13);
+            this.ftplbl.TabIndex = 46;
+            this.ftplbl.Text = "0";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label42.Location = new System.Drawing.Point(176, 57);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(12, 16);
+            this.label42.TabIndex = 40;
+            this.label42.Text = ":";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label43.Location = new System.Drawing.Point(176, 80);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(12, 16);
+            this.label43.TabIndex = 39;
+            this.label43.Text = ":";
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label44.Location = new System.Drawing.Point(176, 34);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(12, 16);
+            this.label44.TabIndex = 38;
+            this.label44.Text = ":";
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label45.Location = new System.Drawing.Point(176, 7);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(12, 16);
+            this.label45.TabIndex = 37;
+            this.label45.Text = ":";
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(22, 80);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(138, 13);
+            this.label51.TabIndex = 31;
+            this.label51.Text = "Training Stress Score (TSS)";
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(22, 57);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(92, 13);
+            this.label52.TabIndex = 30;
+            this.label52.Text = "Normalized Power";
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(22, 34);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(79, 13);
+            this.label53.TabIndex = 29;
+            this.label53.Text = "Power Balance";
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(22, 10);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(135, 13);
+            this.label54.TabIndex = 28;
+            this.label54.Text = "Functional Threshold (FTP)";
             // 
             // dataGridView
             // 
@@ -645,202 +894,15 @@
             this.btnGraph.UseVisualStyleBackColor = true;
             this.btnGraph.Click += new System.EventHandler(this.btnGraph_Click);
             // 
-            // label27
+            // btnView
             // 
-            this.label27.AutoSize = true;
-            this.label27.BackColor = System.Drawing.Color.LightGray;
-            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(277, 350);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(177, 24);
-            this.label27.TabIndex = 59;
-            this.label27.Text = "Advanced Metrics";
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.LightGray;
-            this.panel3.Controls.Add(this.iflbl);
-            this.panel3.Controls.Add(this.label29);
-            this.panel3.Controls.Add(this.label30);
-            this.panel3.Controls.Add(this.tsslbl);
-            this.panel3.Controls.Add(this.nplbl);
-            this.panel3.Controls.Add(this.pblbl);
-            this.panel3.Controls.Add(this.ftplbl);
-            this.panel3.Controls.Add(this.label42);
-            this.panel3.Controls.Add(this.label43);
-            this.panel3.Controls.Add(this.label44);
-            this.panel3.Controls.Add(this.label45);
-            this.panel3.Controls.Add(this.label51);
-            this.panel3.Controls.Add(this.label52);
-            this.panel3.Controls.Add(this.label53);
-            this.panel3.Controls.Add(this.label54);
-            this.panel3.Location = new System.Drawing.Point(233, 384);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(283, 127);
-            this.panel3.TabIndex = 58;
-            // 
-            // tsslbl
-            // 
-            this.tsslbl.AutoSize = true;
-            this.tsslbl.Location = new System.Drawing.Point(208, 83);
-            this.tsslbl.Name = "tsslbl";
-            this.tsslbl.Size = new System.Drawing.Size(13, 13);
-            this.tsslbl.TabIndex = 49;
-            this.tsslbl.Text = "0";
-            // 
-            // nplbl
-            // 
-            this.nplbl.AutoSize = true;
-            this.nplbl.Location = new System.Drawing.Point(208, 60);
-            this.nplbl.Name = "nplbl";
-            this.nplbl.Size = new System.Drawing.Size(13, 13);
-            this.nplbl.TabIndex = 48;
-            this.nplbl.Text = "0";
-            // 
-            // pblbl
-            // 
-            this.pblbl.AutoSize = true;
-            this.pblbl.Location = new System.Drawing.Point(208, 34);
-            this.pblbl.Name = "pblbl";
-            this.pblbl.Size = new System.Drawing.Size(13, 13);
-            this.pblbl.TabIndex = 47;
-            this.pblbl.Text = "0";
-            // 
-            // ftplbl
-            // 
-            this.ftplbl.AutoSize = true;
-            this.ftplbl.Location = new System.Drawing.Point(208, 9);
-            this.ftplbl.Name = "ftplbl";
-            this.ftplbl.Size = new System.Drawing.Size(13, 13);
-            this.ftplbl.TabIndex = 46;
-            this.ftplbl.Text = "0";
-            // 
-            // label42
-            // 
-            this.label42.AutoSize = true;
-            this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label42.Location = new System.Drawing.Point(176, 57);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(12, 16);
-            this.label42.TabIndex = 40;
-            this.label42.Text = ":";
-            // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label43.Location = new System.Drawing.Point(176, 80);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(12, 16);
-            this.label43.TabIndex = 39;
-            this.label43.Text = ":";
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label44.Location = new System.Drawing.Point(176, 34);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(12, 16);
-            this.label44.TabIndex = 38;
-            this.label44.Text = ":";
-            // 
-            // label45
-            // 
-            this.label45.AutoSize = true;
-            this.label45.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label45.Location = new System.Drawing.Point(176, 7);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(12, 16);
-            this.label45.TabIndex = 37;
-            this.label45.Text = ":";
-            // 
-            // label51
-            // 
-            this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(22, 80);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(138, 13);
-            this.label51.TabIndex = 31;
-            this.label51.Text = "Training Stress Score (TSS)";
-            // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(22, 57);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(92, 13);
-            this.label52.TabIndex = 30;
-            this.label52.Text = "Normalized Power";
-            // 
-            // label53
-            // 
-            this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(22, 34);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(79, 13);
-            this.label53.TabIndex = 29;
-            this.label53.Text = "Power Balance";
-            // 
-            // label54
-            // 
-            this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(22, 10);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(135, 13);
-            this.label54.TabIndex = 28;
-            this.label54.Text = "Functional Threshold (FTP)";
-            // 
-            // iflbl
-            // 
-            this.iflbl.AutoSize = true;
-            this.iflbl.Location = new System.Drawing.Point(208, 105);
-            this.iflbl.Name = "iflbl";
-            this.iflbl.Size = new System.Drawing.Size(13, 13);
-            this.iflbl.TabIndex = 52;
-            this.iflbl.Text = "0";
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(176, 102);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(12, 16);
-            this.label29.TabIndex = 51;
-            this.label29.Text = ":";
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(22, 102);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(97, 13);
-            this.label30.TabIndex = 50;
-            this.label30.Text = "Intensity Factor (IF)";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(30, 422);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(64, 23);
-            this.button1.TabIndex = 61;
-            this.button1.Text = "Chunk";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // cmbChunk
-            // 
-            this.cmbChunk.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.cmbChunk.FormattingEnabled = true;
-            this.cmbChunk.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4"});
-            this.cmbChunk.Location = new System.Drawing.Point(30, 384);
-            this.cmbChunk.Name = "cmbChunk";
-            this.cmbChunk.Size = new System.Drawing.Size(66, 21);
-            this.cmbChunk.TabIndex = 62;
+            this.btnView.Location = new System.Drawing.Point(18, 369);
+            this.btnView.Name = "btnView";
+            this.btnView.Size = new System.Drawing.Size(122, 23);
+            this.btnView.TabIndex = 67;
+            this.btnView.Text = "View Selected Rows ";
+            this.btnView.UseVisualStyleBackColor = true;
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
             // Form1
             // 
@@ -857,6 +919,8 @@
             this.menuStrip1.PerformLayout();
             this.panelDataGrid.ResumeLayout(false);
             this.panelDataGrid.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -865,8 +929,6 @@
             this.panelHeader.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -948,6 +1010,11 @@
         private System.Windows.Forms.Label label54;
         private System.Windows.Forms.ComboBox cmbChunk;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnChunk4;
+        private System.Windows.Forms.Button btnChunk3;
+        private System.Windows.Forms.Button btnChunk2;
+        private System.Windows.Forms.Button btnchunk1;
+        private System.Windows.Forms.Button btnView;
     }
 }
 

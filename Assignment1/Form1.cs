@@ -20,10 +20,22 @@ namespace Assignment1
         public List<string> altitude = new List<string>();
         public List<string> power = new List<string>();
         public List<string> powerBalancePedalling = new List<string>();
+        public List<string>  intvTime = new List<string>();
+
+
+        public List<string> chunkHeart = new List<string>();
+        public List<string> chunkSpeed = new List<string>();
+        public List<string> chunkSpeed_miles = new List<string>();
+        public List<string> chunkCadence = new List<string>();
+        public List<string> chunkAltitude = new List<string>();
+        public List<string> chunkPower = new List<string>();
+        public List<string> chunkPowerBalancePedalling = new List<string>();
+
         private string[] device = new string[] { };
         int counter = 0;
         int interval = 0;
         string time;
+        int rowCount = 0;
         DateTime dt = new DateTime();
         char[] findOf = { '\t', ' ', '=' };
 
@@ -35,6 +47,7 @@ namespace Assignment1
             int altitudeCheck = 0;
             int powerCheck = 0;
             string smode = "";
+        int chk_num = 0;
         string env = Environment.NewLine;
 
 
@@ -394,6 +407,271 @@ namespace Assignment1
             id.Show();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (dataCount() >= 4 && !string.IsNullOrEmpty(cmbChunk.Text))
+            {
+            int chunk_number = 0;
+            string[] heart = heartRate.ToArray();
+            int num = heart.Length;
+            chunk_number = int.Parse(cmbChunk.Text);
+            chk_num = int.Parse((num / chunk_number).ToString());
+         
+                if (chunk_number == 1)
+                {
+                    MessageBox.Show("First level chunking is already done. Please select more than 1 chunk");
+                }
+                else if (chunk_number == 2)
+                {
+                    btnchunk1.Enabled = true;
+                    btnChunk2.Enabled = true;
+                    btnChunk3.Enabled = false;
+                    btnChunk4.Enabled = false;
+                }
+                else if (chunk_number == 3)
+                {
+                    btnchunk1.Enabled = true;
+                    btnChunk2.Enabled = true;
+                    btnChunk3.Enabled = true;
+                    btnChunk4.Enabled = false;
+
+                }
+                else if (chunk_number == 4)
+                {
+                    btnchunk1.Enabled = true;
+                    btnChunk2.Enabled = true;
+                    btnChunk3.Enabled = true;
+                    btnChunk4.Enabled = true;
+                }
+                prepareArrays();
+                MessageBox.Show("Chunk Prepared");
+            }
+            else
+            {
+                MessageBox.Show("Four Rows would have been Selected At least.");
+            }
+        }
+
+        public void prepareArrays()
+        {
+            foreach (string var in heartRate)
+            {
+                chunkHeart.Add(var);
+            }
+            foreach (string var in speed)
+            {
+               chunkSpeed.Add(var);
+            }
+            foreach (string var in speed_miles)
+            {
+                chunkSpeed_miles.Add(var);
+            }
+            foreach (string var in cadence)
+            {
+                chunkCadence.Add(var);
+            }
+            foreach (string var in altitude)
+            {
+                chunkAltitude.Add(var);
+            }
+            foreach (string var in power)
+            {
+                chunkPower.Add(var);
+            }
+            foreach (string var in powerBalancePedalling)
+            {
+                chunkPowerBalancePedalling.Add(var);
+            }
+        }
+        private void btnchunk1_Click(object sender, EventArgs e)
+        {
+            if(chk_num > 1)
+            {
+                string[] heart_array = chunkHeart.ToArray();
+                string[] speed_array = chunkSpeed.ToArray();
+                string[] speed_mile_array = chunkSpeed_miles.ToArray();
+                string[] cadence_array = chunkCadence.ToArray();
+                string[] altitude_array = chunkAltitude.ToArray();
+                string[] power_array = chunkPower.ToArray();
+                string[] pow_bal_array = chunkPowerBalancePedalling.ToArray();
+
+                refreshVar();
+                for (int ctr1 = 0; ctr1 < chk_num; ctr1++)
+                {
+                    heartRate.Add(heart_array[ctr1]);
+                    speed.Add(speed_array[ctr1]);
+                    speed_miles.Add(speed_mile_array[ctr1]);
+                    cadence.Add(cadence_array[ctr1]);
+                    altitude.Add(altitude_array[ctr1]);
+                    power.Add(power_array[ctr1]);
+                    powerBalancePedalling.Add(pow_bal_array[ctr1]);
+                }
+                dataGridView.Rows.Clear();
+                dataGridView.Refresh();
+                viewHrData();
+                Dictionary<string, List<string>> hrData = new Dictionary<string, List<string>>();
+                hrDataToDictionary();
+                summaryCalc();
+            }
+            else
+            {
+                MessageBox.Show("Please select chunk level");
+            }
+        }
+
+        private void btnChunk2_Click(object sender, EventArgs e)
+        {
+            if(chk_num > 1)
+            { 
+                string[] heart_array = chunkHeart.ToArray();
+                string[] speed_array = chunkSpeed.ToArray();
+                string[] speed_mile_array = chunkSpeed_miles.ToArray();
+                string[] cadence_array = chunkCadence.ToArray();
+                string[] altitude_array = chunkAltitude.ToArray();
+                string[] power_array = chunkPower.ToArray();
+                string[] pow_bal_array = chunkPowerBalancePedalling.ToArray();
+
+                refreshVar();
+                int chunk2 = chk_num * 2;
+                for (int ctr1 = chk_num; ctr1 < chunk2; ctr1++)
+                {
+                    heartRate.Add(heart_array[ctr1]);
+                    speed.Add(speed_array[ctr1]);
+                    speed_miles.Add(speed_mile_array[ctr1]);
+                    cadence.Add(cadence_array[ctr1]);
+                    altitude.Add(altitude_array[ctr1]);
+                    power.Add(power_array[ctr1]);
+                    powerBalancePedalling.Add(pow_bal_array[ctr1]);
+                }
+                dataGridView.Rows.Clear();
+                dataGridView.Refresh();
+                viewHrData();
+                Dictionary<string, List<string>> hrData = new Dictionary<string, List<string>>();
+                hrDataToDictionary();
+                summaryCalc();
+                 }
+            else
+            {
+                MessageBox.Show("Please select chunk level");
+            }
+}
+
+        private void btnChunk3_Click(object sender, EventArgs e)
+        {
+            if(chk_num > 1)
+            { 
+            string[] heart_array = chunkHeart.ToArray();
+            string[] speed_array = chunkSpeed.ToArray();
+            string[] speed_mile_array = chunkSpeed_miles.ToArray();
+            string[] cadence_array = chunkCadence.ToArray();
+            string[] altitude_array = chunkAltitude.ToArray();
+            string[] power_array = chunkPower.ToArray();
+            string[] pow_bal_array = chunkPowerBalancePedalling.ToArray();
+
+            refreshVar();
+            int chunk3 = chk_num * 3;
+            for (int ctr1 = chk_num*2; ctr1 < chunk3; ctr1++)
+            {
+                heartRate.Add(heart_array[ctr1]);
+                speed.Add(speed_array[ctr1]);
+                speed_miles.Add(speed_mile_array[ctr1]);
+                cadence.Add(cadence_array[ctr1]);
+                altitude.Add(altitude_array[ctr1]);
+                power.Add(power_array[ctr1]);
+                powerBalancePedalling.Add(pow_bal_array[ctr1]);
+            }
+            dataGridView.Rows.Clear();
+            dataGridView.Refresh();
+            viewHrData();
+            Dictionary<string, List<string>> hrData = new Dictionary<string, List<string>>();
+            hrDataToDictionary();
+            summaryCalc();
+             }
+            else
+            {
+                MessageBox.Show("Please select chunk level");
+            }
+}
+
+        private void btnChunk4_Click(object sender, EventArgs e)
+        {
+            if(chk_num > 1)
+            { 
+            string[] heart_array = chunkHeart.ToArray();
+            string[] speed_array = chunkSpeed.ToArray();
+            string[] speed_mile_array = chunkSpeed_miles.ToArray();
+            string[] cadence_array = chunkCadence.ToArray();
+            string[] altitude_array = chunkAltitude.ToArray();
+            string[] power_array = chunkPower.ToArray();
+            string[] pow_bal_array = chunkPowerBalancePedalling.ToArray();
+
+            refreshVar();
+            int chunk4 = chk_num * 4;
+            for (int ctr1 = chk_num*3; ctr1 < chunk4; ctr1++)
+            {
+                heartRate.Add(heart_array[ctr1]);
+                speed.Add(speed_array[ctr1]);
+                speed_miles.Add(speed_mile_array[ctr1]);
+                cadence.Add(cadence_array[ctr1]);
+                altitude.Add(altitude_array[ctr1]);
+                power.Add(power_array[ctr1]);
+                powerBalancePedalling.Add(pow_bal_array[ctr1]);
+            }
+            dataGridView.Rows.Clear();
+            dataGridView.Refresh();
+            viewHrData();
+            Dictionary<string, List<string>> hrData = new Dictionary<string, List<string>>();
+            hrDataToDictionary();
+            summaryCalc();
+            }
+            else
+            {
+                MessageBox.Show("Please select chunk level");
+            }
+}
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            if (dataGridView.SelectedRows.Count < 1 && dataGridView.SelectedColumns.Count < 6)
+            {
+                MessageBox.Show("Please select at least one row");
+            }
+            else
+            {
+                refreshVar();
+                foreach (DataGridViewRow row in dataGridView.SelectedRows)
+                {
+                    string[] line = row.Cells[0].Value.ToString().Split(' ');
+                    intvTime.Add(line[0]);
+
+                    string[] line1 = row.Cells[1].Value.ToString().Split(' ');
+                    heartRate.Add(line1[0]);
+
+                    string[] line2 = row.Cells[2].Value.ToString().Split(' ');
+                    speed.Add(line2[0]);
+
+                    string[] spm = row.Cells[3].Value.ToString().Split(' ');
+                    speed_miles.Add(spm[0]);
+
+                    string[] line3 = row.Cells[4].Value.ToString().Split(' ');
+                    cadence.Add(line3[0]);
+
+                    string[] line4 = row.Cells[5].Value.ToString().Split(' ');
+                    altitude.Add(line4[0]);
+
+                    string[] line5 = row.Cells[6].Value.ToString().Split(' ');
+                    power.Add(line5[0]);
+                    powerBalancePedalling.Add(0.ToString());
+                }
+                dataGridView.Rows.Clear();
+                dataGridView.Refresh();
+                viewHrData();
+                Dictionary<string, List<string>> hrData = new Dictionary<string, List<string>>();
+                hrDataToDictionary();
+                summaryCalc();
+            }
+        }
+
         private void panelHeader_Paint(object sender, PaintEventArgs e)
         {
 
@@ -406,5 +684,32 @@ namespace Assignment1
             return data;
         }
 
+        
+        public void refreshVar()
+        {
+            counter = 0;
+            interval = 0;
+            heartRate = new List<string>();
+            speed = new List<string>();
+            speed_miles = new List<string>();
+            cadence = new List<string>();
+            altitude = new List<string>();
+            power = new List<string>(); ;
+            powerBalancePedalling = new List<string>();
+            intvTime = new List<string>();
+            hrData = new Dictionary<string, List<string>>();
+            heartCheck = 0;
+            speedCheck = 0;
+            cadenceCheck = 0;
+            altitudeCheck = 0;
+            powerCheck = 0;
+
+        }
+
+        public int dataCount()
+        {
+            rowCount =  dataGridView.RowCount;
+            return rowCount;
+        }
     }
 }
