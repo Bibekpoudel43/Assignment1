@@ -43,6 +43,7 @@ namespace Assignment1
         List<DateTime> dateTime1 = new List<DateTime>();
         List<String> summary1 = new List<String>();
         Dictionary<string, List<string>> hrData1 = new Dictionary<string, List<string>>();
+        int countData1 = 0, countData2 = 0;
 
 
         char[] findOf = { '\t', ' ', '=' };
@@ -379,9 +380,16 @@ namespace Assignment1
 
         private void btnSummaryGraph_Click(object sender, EventArgs e)
         {
-            //instansating summarygraph variable (display in combied graph)
-            FileCompareSummaryGraph sm = new FileCompareSummaryGraph(heart, speed, cadence, altitude, power, heart11, speed11, cadence11, altitude11, power11, parameter, parameter1);
-            sm.Show();
+            if (File1GridView.RowCount > 1 && File2GridView.RowCount > 1)
+            {
+                //instansating summarygraph variable (display in combied graph)
+                FileCompareSummaryGraph sm = new FileCompareSummaryGraph(heart, speed, cadence, altitude, power, heart11, speed11, cadence11, altitude11, power11, parameter, parameter1);
+                sm.Show();
+            }
+            else
+            {
+                MessageBox.Show("Please Select the File First");
+            }
         }
 
         public void FillTable1()
@@ -534,7 +542,5 @@ namespace Assignment1
             rst = num1 - num2;
             return rst.ToString();
         }
-
-
     }
 }
