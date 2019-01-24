@@ -60,23 +60,32 @@ namespace Assignment1
             myPane.Title= "Analysis of HeartRate";
             myPane.XAxis.Title = "Time in seconds";
             myPane.YAxis.Title = "Value";
-
+            myPane.AxisFill.Color = Color.MintCream;
+            myPane.PaneFill.Color = Color.LightGray;
 
             myPane2.Title = "Analysis of Speed";
             myPane2.XAxis.Title = "Time in seconds";
             myPane2.YAxis.Title = "Value";
+            myPane2.AxisFill.Color = Color.MintCream;
+            myPane2.PaneFill.Color = Color.LightGray;
 
             myPane4.Title = "Analysis of Power";
             myPane4.XAxis.Title = "Time in seconds";
             myPane4.YAxis.Title = "Value";
+            myPane4.AxisFill.Color = Color.MintCream;
+            myPane4.PaneFill.Color = Color.LightGray;
 
             myPane3.Title = "Analysis of Cadence";
             myPane3.XAxis.Title = "Time in seconds";
             myPane3.YAxis.Title = "Value";
+            myPane3.AxisFill.Color = Color.MintCream;
+            myPane3.PaneFill.Color = Color.LightGray;
 
             myPane5.Title = "Analysis of Altitude";
             myPane5.XAxis.Title = "Time in seconds";
             myPane5.YAxis.Title = "Value";
+            myPane5.AxisFill.Color = Color.MintCream;
+            myPane5.PaneFill.Color = Color.LightGray;
 
             //initializing pointparlist
             PointPairList heartPairList = new PointPairList();
