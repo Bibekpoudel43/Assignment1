@@ -88,14 +88,15 @@ namespace Assignment1
             myPane.Title = "Summary Graph of First File";
             myPane.XAxis.Title = "Time in second";
             myPane.YAxis.Title = "Parameters";
-
+            myPane.PaneFill.Color = Color.LightGray;
+            myPane.AxisFill.Color = Color.MintCream;
 
             GraphPane myPane1 = zedGraphControl2.GraphPane;
             myPane1.Title = "Summary Graph of Second File";
             myPane1.XAxis.Title = "Time in second";
             myPane1.YAxis.Title = "Parameters ";
-
-
+            myPane1.PaneFill.Color = Color.LightGray;
+            myPane1.AxisFill.Color = Color.MintCream;
             PointPairList heartPairList = new PointPairList();
             PointPairList speedPairList = new PointPairList();
             PointPairList cadencePAirList = new PointPairList();
