@@ -30,6 +30,32 @@ namespace Assignment1
 
 
         }
+
+        /// <summary>
+        /// Get the average from the provided list of the strings.
+        /// </summary>
+        /// <param name="psdData">the list of the data read from the file</param>
+        /// <param name="index">the default index of the number to be read</param>
+        /// <returns>the aerage value of number at the given index</returns>
+        public static double GetAverage(List<string[]> psdData, int index)
+        {
+            double total = 0;
+            foreach (var items in psdData)
+            {
+                string str = items[index];
+
+                if (str.Length > 1)
+                {
+                    str = str.Insert(str.Length - 1, ".");
+                }
+
+                total += double.Parse(str);
+            }
+
+            total = total / psdData.Count;
+
+            return total;
+        }
         //average calculation
         public static double Average(List<string> value)
         {
@@ -56,6 +82,19 @@ namespace Assignment1
 
             double result = (sum / value.Count);
             return result;
+        }
+
+        public static string AverageID(List<string> value)
+        {
+            double sum = 0;
+
+            foreach (var val in value)
+            {
+                sum = sum + double.Parse(val);
+            }
+
+            double result = (sum / value.Count);
+            return result.ToString();
         }
 
         //average calculation
@@ -251,6 +290,43 @@ namespace Assignment1
             double TSS = Math.Round(TSS1, 2);
 
             return TSS.ToString();
+        }
+
+        public static List<int> intervalIndexes;
+
+        /// <summary>
+        /// The method which calculates the power balance for the given data dump.
+        /// </summary>
+        /// <param name="dataSet">the set of data extracted from the source hrm files</param>
+        /// <returns>the calculated power balance value</returns>
+        public static int DetectClearInterval(List<string> dataSet)
+        {
+            int result = 0;
+            List<int> indexes = new List<int>();
+
+            bool countIt = true;
+            for (int i = 0; i < dataSet.Count; i++)
+            {
+                if (i + 1 > dataSet.Count - 1) break;
+
+                if (dataSet[i].Equals("0"))
+                {
+                    // set last index of zero
+                    if (countIt)
+                    {
+                        result++;
+                        countIt = false;
+                        indexes.Add(i);
+                    }
+                }
+                else
+                {
+                    countIt = true;
+                }
+            }
+
+            Summary.intervalIndexes = indexes;
+            return result;
         }
 
     }
