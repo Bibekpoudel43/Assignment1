@@ -6,26 +6,26 @@ using System.Threading.Tasks;
 
 namespace Assignment1
 {
-    class Summary
+    public class Summary
     {
-        List<string> heartRate = new List<string>();
-        List<string> speed = new List<string>();
-        List<string> speed_mile = new List<string>();
-        List<string> cadence = new List<string>();
-        List<string> altitude = new List<string>();
-        List<string> power = new List<string>();
-        List<string> powerbalance = new List<string>();
+        public static List<string> heartRate = new List<string>();
+        public static List<string> speed = new List<string>();
+        public static List<string> speed_mile = new List<string>();
+        public static List<string> cadence = new List<string>();
+        public static List<string> altitude = new List<string>();
+       public static List<string> power = new List<string>();
+        public static List<string> powerbalance = new List<string>();
         string time = "";
-        double FTP = 0, NP = 0, PB = 12, IF = 0;
+       public static double FTP = 0, NP = 0, PB = 12, IF = 0;
 
         public Summary(List<string> heartRate, List<string> speed, List<string> speed_mile, List<string> cadence, List<string> altitude, List<string> power, string time)
         {
-            this.heartRate = heartRate;
-            this.speed = speed;
-            this.speed_mile = speed_mile;
-            this.cadence = cadence;
-            this.altitude = altitude;
-            this.power = power;
+            Summary.heartRate = heartRate;
+            Summary.speed = speed;
+            Summary.speed_mile = speed_mile;
+            Summary.cadence = cadence;
+            Summary.altitude = altitude;
+            Summary.power = power;
             this.time = time;
 
 
@@ -46,7 +46,7 @@ namespace Assignment1
 
                 if (str.Length > 1)
                 {
-                    str = str.Insert(str.Length - 1, ".");
+                    str = str.Insert(str.Length - 1, "");
                 }
 
                 total += double.Parse(str);
@@ -281,7 +281,7 @@ namespace Assignment1
             return IF.ToString();
         }
 
-        public string CalculateTrainingStressScore()
+        public static string CalculateTrainingStressScore(List<string> heartRate)
         {
             string[] heart1 = heartRate.ToArray();
             int sec = heart1.Length;
@@ -327,6 +327,33 @@ namespace Assignment1
 
             Summary.intervalIndexes = indexes;
             return result;
+        }
+
+        /// <summary>
+        /// Generates the power balance value of the give array of string of data.
+        /// </summary>
+        /// <returns>the average power balance value from the file loaded.</returns>
+        public static double CalculatePowerBalance(List<string> power)
+        {
+            List<string> pwr = new List<string>();
+            string[] power1 = power.ToArray();
+            double result = 0.0;
+
+            double temp = 0.0;
+            foreach (string arrStr in power1)
+            {
+                double.TryParse(arrStr, out temp);
+                result += temp;
+            }
+
+            return result / power1.Length;
+        }
+
+        //minimizing the decimal value to 2
+        public static double roundOff(double val)
+        {
+            double data = Math.Round(val, 2, MidpointRounding.AwayFromZero);
+            return data;
         }
 
     }
