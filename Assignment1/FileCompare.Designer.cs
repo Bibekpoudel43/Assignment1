@@ -49,6 +49,7 @@
             // 
             this.file1txt.Location = new System.Drawing.Point(37, 20);
             this.file1txt.Name = "file1txt";
+            this.file1txt.ReadOnly = true;
             this.file1txt.Size = new System.Drawing.Size(168, 20);
             this.file1txt.TabIndex = 2;
             // 
@@ -56,6 +57,7 @@
             // 
             this.file2txt.Location = new System.Drawing.Point(37, 44);
             this.file2txt.Name = "file2txt";
+            this.file2txt.ReadOnly = true;
             this.file2txt.Size = new System.Drawing.Size(168, 20);
             this.file2txt.TabIndex = 3;
             // 
@@ -144,6 +146,7 @@
             this.textBox1.Location = new System.Drawing.Point(495, 183);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(397, 222);
             this.textBox1.TabIndex = 11;
             // 

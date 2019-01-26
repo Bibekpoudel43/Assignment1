@@ -366,16 +366,18 @@ namespace Assignment1
 
         private void btnCompare_Click(object sender, EventArgs e)
         {
-            fileprocessing(file1txt.Text);
-            FillTable1();
+            if(string.IsNullOrEmpty(file1txt.Text) && string.IsNullOrEmpty(file2txt.Text))
+            {
+                MessageBox.Show("Please choose the file first");
+            }
+            else
+            {
+                fileprocessing(file1txt.Text);
+                FillTable1();
 
-            fileprocessing1(file2txt.Text);
-            FillTable2();
-
-            //SummaryFiller();
-
-            //createWholeGraph();
-            //CreateIndividualGraph();
+                fileprocessing1(file2txt.Text);
+                FillTable2();
+            }
         }
 
         private void btnSummaryGraph_Click(object sender, EventArgs e)
