@@ -18,7 +18,7 @@ namespace Assignment1
         List<string> _cadence = null;
         List<string> _altitude = null;
         List<string> _power = null;
-        
+
 
         public SummaryGraph(List<string> heartRate, List<string> speed, List<string> cadence, List<string> altitude, List<string> power)
         {
@@ -28,6 +28,7 @@ namespace Assignment1
             _cadence = cadence;
             _altitude = altitude;
             _power = power;
+
         }
 
         private void SummaryGraph_Resize(object sender, EventArgs e)
@@ -70,14 +71,18 @@ namespace Assignment1
              myPane.YAxis.Scale.Mag = 0;
              myPane.XAxis.Scale.Max = 1000;*/
 
+            myPane.AxisFill.Color = Color.MintCream;
+            myPane.PaneFill.Color = Color.LightGray;
+
+
             PointPairList heartPairList = new PointPairList();
             PointPairList speedPairList = new PointPairList();
             PointPairList cadencePairList = new PointPairList();
             PointPairList powerPairList = new PointPairList();
             PointPairList altitudePairList = new PointPairList();
 
-             List<int> hr = _heartRate.Select(s => Convert.ToInt32(s)).ToList();
-             heartPairList = buildPointPairList(hr.ToArray());
+            List<int> hr = _heartRate.Select(s => Convert.ToInt32(s)).ToList();
+            heartPairList = buildPointPairList(hr.ToArray());
             List<double> c2 = _speed.Select(s => Convert.ToDouble(s)).ToList();
             speedPairList = buildPointPairList(c2.ToArray());
             List<int> c3 = _cadence.Select(s => Convert.ToInt32(s)).ToList();
@@ -113,6 +118,5 @@ namespace Assignment1
             zedGraphControl1.Size = new Size(this.ClientRectangle.Width - 20, this.ClientRectangle.Height - 50);
 
         }
-
     }
 }
