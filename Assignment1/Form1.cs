@@ -7,6 +7,9 @@ using System.Windows.Forms;
 
 namespace Assignment1
 {
+    /// <summary>
+    /// this is a main form class
+    /// </summary>
     public partial class Form1 : Form
     {
         private Dictionary<string, List<string>> hrData = new Dictionary<string, List<string>>();
@@ -34,7 +37,7 @@ namespace Assignment1
         private string[] device = new string[] { };
         int counter = 0;
         int interval = 0;
-        string time;
+        string time ="";
         int rowCount = 0;
         DateTime dt = new DateTime();
         char[] findOf = { '\t', ' ', '=' };
@@ -51,16 +54,25 @@ namespace Assignment1
         string chunkedData = "";
         string env = Environment.NewLine;
 
-
+        /// <summary>
+        /// constructor for this class
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
+            //invoking a function of this class
             InitGrid();
+            //default speed is in km/hr, in combo box it is in index zero
             comboBox1.SelectedIndex = 0;
         }
-
+        /// <summary>
+        /// executes when user open the file using a submenu 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void openFile(object sender, EventArgs e)
         {
+            //invoking functions of this class
             ReadFromFile();
             viewHrData();
             summaryCalc();
@@ -68,10 +80,12 @@ namespace Assignment1
         }
 
 
-        //read the text from  file
+        /// <summary>
+        /// reads the text from a file and store every line into a array
+        /// header info to seperate array and hrdata to a seperate array
+        /// </summary>
         public void ReadFromFile()
-        {
-            
+        {    
             string line = "";
             OpenFileDialog od = new OpenFileDialog();
             od.Filter = "HRM|*.hrm|Text Document|*.txt";
@@ -87,12 +101,12 @@ namespace Assignment1
                 while (!(line = sr.ReadLine()).Contains("[Note]"))
                 {
                     counter++;
-
                     string newline = string.Join(" ", line.Split(findOf, StringSplitOptions.RemoveEmptyEntries));
                     List<string> val = newline.Split(' ').ToList();
 
                     for (int i = 0; i < val.Count(); i++)
                     {
+                        //adding the splitted value in an array
                         paramsArrays.Add(val[i]);
                     }
 
@@ -118,13 +132,14 @@ namespace Assignment1
                 smode = param["SMode"];
                 SMODE(smode);
 
+                //reads data of a file until the end of pages hit
                 while (!sr.EndOfStream)
                 {
                     if ((line = sr.ReadLine()).Contains("[HRData]"))
                     {
                         while ((line = sr.ReadLine()) != null)
                         {
-                            //add specific type data to array 
+                            //add specific type data to an array 
                             sortDataIntoArray(line);
                         }
                     }
@@ -154,12 +169,13 @@ namespace Assignment1
                     string intval = param["Interval"];
                     lblInterval.Text = intval;
                 }
-
-
             }
         }
 
-        //split data and adding into list array
+        /// <summary>
+        /// split data and adding into list array checking smode value
+        /// </summary>
+        /// <param name="line"></param>
         public void sortDataIntoArray(string line)
         {
             try
@@ -167,7 +183,10 @@ namespace Assignment1
                 string newline = string.Join(" ", line.Split(findOf, StringSplitOptions.RemoveEmptyEntries));
                 List<string> val = newline.Split(' ').ToList();
 
+                //adding a splitted value into a list array 
                 dataFromFileOriginal.Add(newline.Split());
+
+                //checking a smode value and adding a data into a specific array accordingly
                 if (heartCheck == 1)
                 {
                     hrt = int.Parse(val[0]);
@@ -189,6 +208,8 @@ namespace Assignment1
                 {
                     al = int.Parse(val[3]);
                 }
+
+                //adding a data to an specified list array
                 heartRate.Add(hrt.ToString());
                 speed.Add((sd * 0.1).ToString());
                 speed_miles.Add(roundOff(sd * 0.1 * 0.621371).ToString());
@@ -204,7 +225,11 @@ namespace Assignment1
             }
         }
 
-        //timeinterval for each row
+        /// <summary>
+        /// timeinterval for each row
+        /// </summary>
+        /// <param name="time">accepts the time from header information</param>
+        /// <returns>returns the times for each row of data</returns>
         public string calculateTimeInterval(string time)
         {
             // fetch the en-GB culture
@@ -214,7 +239,10 @@ namespace Assignment1
             return result;
         }
 
-        //displayed list data to grid view table
+
+        /// <summary>
+        /// fill the rows of data grid table 
+        /// </summary>
         public void viewHrData()
         {      
             if (comboBox1.SelectedIndex == 0)
@@ -248,7 +276,9 @@ namespace Assignment1
 
         }
 
-        //adding HRdata to dictionary 
+        /// <summary>
+        /// adding HRdata to dictionary 
+        /// </summary>
         private void hrDataToDictionary()
         {
             hrData.Add("heartRate", heartRate);
@@ -260,7 +290,9 @@ namespace Assignment1
         }
 
 
-        //summary calculation
+        /// <summary>
+        /// summary calculation of a entire data 
+        /// </summary>
         private void summaryCalc()
         {
             var maxSpeed = Summary.Max(hrData["speed"]);
@@ -278,7 +310,7 @@ namespace Assignment1
             var averageAltitude = Summary.Average(hrData["altitude"]);
             var maximumAltitude = Summary.Max(hrData["altitude"]);
 
-            //summary of data 
+            //displaying summary of data 
             totalDistance.Text = roundOff(totalDis) + " Km";
             avgSpeed.Text = roundOff(averageSpeed) + " km/h";
             maximumSpeed.Text = roundOff(maxSpeed)+ " km/h";
@@ -309,7 +341,10 @@ namespace Assignment1
             nplbl.Text = Np + " watts";
             pblbl.Text = roundOff(pb).ToString();
         }
-        //specifying column header
+
+        /// <summary>
+        /// specifying column header
+        /// </summary>
         private void InitGrid()
         {
             dataGridView.ColumnCount = 7;
@@ -322,7 +357,11 @@ namespace Assignment1
             dataGridView.Columns[6].Name = "Power (watts)";
         }
 
-        //gets the device name 
+       /// <summary>
+       /// setting of device name
+       /// </summary>
+       /// <param name="val">accepts the unique number of a device</param>
+       /// <returns>returns a device name</returns>
         public string deviceN(string val)
         {
             string[] device = {
@@ -358,7 +397,10 @@ namespace Assignment1
             return dName;
         }
 
-        //calculateing smode
+        /// <summary>
+        /// calculates smode whether to show a specific column or not
+        /// </summary>
+        /// <param name="mode">accepts smode values from heading parameter information</param>
         private void SMODE(string mode)
         {
             heartCheck = int.Parse(mode.Substring(0, 1));
@@ -373,7 +415,11 @@ namespace Assignment1
 
         }
 
-        //toggleable speed (setting visible column based on toggleable comboitem)
+        /// <summary>
+        /// toggleable speed unit(setting visible column based on toggleable comboitem)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.SelectedIndex == 0)
@@ -387,6 +433,12 @@ namespace Assignment1
 
         }
 
+        /// <summary>
+        /// executes when user clicks on a view summary graph button
+        /// summary graph form will be open when this button is fired
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnGraph_Click(object sender, EventArgs e)
         {
             //instansating summarygraph variable (display in combied graph)
@@ -394,11 +446,15 @@ namespace Assignment1
             sm.Show();
         }
 
+        /// <summary>
+        /// filecompare form will be open when user clicks this form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void onClickComapreFile(object sender, EventArgs e)
         {
             FileCompare fc = new FileCompare();
             fc.Show();
-
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -406,6 +462,11 @@ namespace Assignment1
 
         }
 
+        /// <summary>
+        /// individual graph form will be open when user clicks this form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnIndividualGraph_Click(object sender, EventArgs e)
         {
             //instansating individualgraph variable (display individually)
@@ -413,6 +474,11 @@ namespace Assignment1
             id.Show();
         }
 
+        /// <summary>
+        /// this function is used when user wants to chunks the data in a different level
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             if (dataCount() >= 4 && !string.IsNullOrEmpty(cmbChunk.Text))
@@ -449,6 +515,7 @@ namespace Assignment1
                     btnChunk3.Enabled = true;
                     btnChunk4.Enabled = true;
                 }
+                ///invoking a funciton
                 prepareArrays();
                 MessageBox.Show("Chunk Prepared");
             }
@@ -458,6 +525,9 @@ namespace Assignment1
             }
         }
 
+        /// <summary>
+        /// prepares an array for chunking
+        /// </summary>
         public void prepareArrays()
         {
             foreach (string var in heartRate)
@@ -489,6 +559,13 @@ namespace Assignment1
                 chunkPowerBalancePedalling.Add(var);
             }
         }
+
+        /// <summary>
+        /// excutes when chunk 1 button is clicked
+        /// chunked data will be displayed on a grid table 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnchunk1_Click(object sender, EventArgs e)
         {
             if(chk_num > 1)
@@ -501,7 +578,9 @@ namespace Assignment1
                 string[] power_array = chunkPower.ToArray();
                 string[] pow_bal_array = chunkPowerBalancePedalling.ToArray();
 
+                //setting a null value to a list array and other certain variables that is used only in this function 
                 refreshVar();
+                //adding a chunked data into a specific array
                 for (int ctr1 = 0; ctr1 < chk_num; ctr1++)
                 {
                     heartRate.Add(heart_array[ctr1]);
@@ -514,17 +593,27 @@ namespace Assignment1
                 }
                 dataGridView.Rows.Clear();
                 dataGridView.Refresh();
+                //dispay chunked data into a data grid table
                 viewHrData();
                 Dictionary<string, List<string>> hrData = new Dictionary<string, List<string>>();
+                //adding to dictionary 
                 hrDataToDictionary();
+                //summary of a chunked data 
                 summaryCalc();
             }
             else
             {
+                //when user clicks the button without chunking a data 
                 MessageBox.Show("Please select chunk level");
             }
         }
 
+        /// <summary>
+        /// excutes when chunk 2 button is clicked
+        /// chunked data will be displayed on a grid table 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnChunk2_Click(object sender, EventArgs e)
         {
             if(chk_num > 1)
@@ -537,8 +626,10 @@ namespace Assignment1
                 string[] power_array = chunkPower.ToArray();
                 string[] pow_bal_array = chunkPowerBalancePedalling.ToArray();
 
+                //setting a null value to a list array and other certain variables that is used only in this function 
                 refreshVar();
                 int chunk2 = chk_num * 2;
+                //adding a chunked data into a specific array
                 for (int ctr1 = chk_num; ctr1 < chunk2; ctr1++)
                 {
                     heartRate.Add(heart_array[ctr1]);
@@ -551,17 +642,26 @@ namespace Assignment1
                 }
                 dataGridView.Rows.Clear();
                 dataGridView.Refresh();
+                //dispay chunked data into a data grid table
                 viewHrData();
                 Dictionary<string, List<string>> hrData = new Dictionary<string, List<string>>();
+                //adding to dictionary 
                 hrDataToDictionary();
+                //summary of a chunked data 
                 summaryCalc();
                  }
             else
             {
+                //when user clicks the button without chunking a data 
                 MessageBox.Show("Please select chunk level");
             }
-}
-
+        }
+        /// <summary>
+        /// excutes when chunk 3 button is clicked
+        /// chunked data will be displayed on a grid table 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnChunk3_Click(object sender, EventArgs e)
         {
             if(chk_num > 1)
@@ -574,8 +674,10 @@ namespace Assignment1
             string[] power_array = chunkPower.ToArray();
             string[] pow_bal_array = chunkPowerBalancePedalling.ToArray();
 
+            //setting a null value to a list array and other certain variables that is used only in this function 
             refreshVar();
             int chunk3 = chk_num * 3;
+            //adding a chunked data into a specific array
             for (int ctr1 = chk_num*2; ctr1 < chunk3; ctr1++)
             {
                 heartRate.Add(heart_array[ctr1]);
@@ -588,17 +690,27 @@ namespace Assignment1
             }
             dataGridView.Rows.Clear();
             dataGridView.Refresh();
+            //dispay chunked data into a data grid table
             viewHrData();
             Dictionary<string, List<string>> hrData = new Dictionary<string, List<string>>();
+            //adding to dictionary 
             hrDataToDictionary();
+            //summary of a chunked data 
             summaryCalc();
              }
             else
             {
-                MessageBox.Show("Please select chunk level");
+            //when user clicks the button without chunking a data 
+            MessageBox.Show("Please select chunk level");
             }
-}
+        }
 
+        /// <summary>
+        /// excutes when chunk 4 button is clicked
+        /// chunked data will be displayed on a grid table 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnChunk4_Click(object sender, EventArgs e)
         {
             if(chk_num > 1)
@@ -611,8 +723,10 @@ namespace Assignment1
             string[] power_array = chunkPower.ToArray();
             string[] pow_bal_array = chunkPowerBalancePedalling.ToArray();
 
+            //setting a null value to a list array and other certain variables that is used only in this function 
             refreshVar();
             int chunk4 = chk_num * 4;
+            //adding a chunked data into a specific array
             for (int ctr1 = chk_num*3; ctr1 < chunk4; ctr1++)
             {
                 heartRate.Add(heart_array[ctr1]);
@@ -625,25 +739,37 @@ namespace Assignment1
             }
             dataGridView.Rows.Clear();
             dataGridView.Refresh();
+            //dispay chunked data into a data grid table
             viewHrData();
             Dictionary<string, List<string>> hrData = new Dictionary<string, List<string>>();
+            //adding to dictionary 
             hrDataToDictionary();
+            //summary of a chunked data 
             summaryCalc();
             }
             else
             {
-                MessageBox.Show("Please select chunk level");
+            //when user clicks the button without chunking a data 
+            MessageBox.Show("Please select chunk level");
             }
-}
+        }
 
+        /// <summary>
+        /// this function executes when user cliks the view selected button 
+        /// display only the selected row into a gri table 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnView_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count < 1 && dataGridView.SelectedColumns.Count < 6)
             {
+                //when no rows is selected
                 MessageBox.Show("Please select at least one row");
             }
             else
             {
+                //setting a null value to a list array and other certain variables that is used only in this function 
                 refreshVar();
                 foreach (DataGridViewRow row in dataGridView.SelectedRows)
                 {
@@ -671,9 +797,12 @@ namespace Assignment1
                 }
                 dataGridView.Rows.Clear();
                 dataGridView.Refresh();
+                //dispay selected row's data into a data grid table
                 viewHrData();
                 Dictionary<string, List<string>> hrData = new Dictionary<string, List<string>>();
+                //adding to dictionary 
                 hrDataToDictionary();
+                //summary of a selected row's data 
                 summaryCalc();
             }
         }
@@ -687,7 +816,7 @@ namespace Assignment1
         /// Calculates and retruns the average of the chunked data.
         /// </summary>
         /// <param name="totalData">the chunk of data whose averages should be calculated.</param>
-        /// <returns></returns>
+        /// <returns>returns the averages of a chunked interval data</returns>
         private string CalculateAverageOfChunks(List<List<string[]>> totalData)
         {
             string result = "";
@@ -761,39 +890,55 @@ namespace Assignment1
             return comparisonData;
         }
 
-        private int singleChunkStartIndex = 0;
-        private int singleChunkEndIndex = 1;
-
+        /// <summary>
+        /// this function is used when user wants to detect the interval of a cycling 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnIntervalDetection_Click(object sender, EventArgs e)
         {
+            //when no data is found 
             if (dataCount() == 0)
             {
                 txtIntervalDetectionLabel.Text = "To detect interval you must load a file first.";
                 return;
             }
 
+            //invoking a function from a summary class
+            //calculates the interval
             int intervals = Summary.DetectClearInterval(speed);
 
+            //invoking a function of this class
+            //passing a interval and total data from a file
             List<List<string[]>> totalData = BreakDataIntoChunks(intervals, dataFromFileOriginal);
 
+            //invoking a function of this class
+            //passing a total data to a function and the returned value is stored in a string
             string average = CalculateAverageOfChunks(totalData);
             chunkedData = average;
 
+            //passing a averages to a form and invoking that form
             IntervalDetectionSummary id = new IntervalDetectionSummary(chunkedData);
             id.Show();
 
-
+            //showing a interval in a textbox
             txtIntervalDetectionLabel.Text = "There were " + Convert.ToString(intervals) + " intervals during the period of cycling.";
         }
 
-        //minimizing the decimal value to 2
+        /// <summary>
+        /// minimizing the decimal value to 2
+        /// </summary>
+        /// <param name="val">accepts a double value</param>
+        /// <returns>returns a round off value </returns>
         private static double roundOff(double val)
         {
             double data = Math.Round(val, 2, MidpointRounding.AwayFromZero);
             return data;
         }
 
-        
+        /// <summary>
+        /// array and certain variable nuller
+        /// </summary>
         public void refreshVar()
         {
             counter = 0;
@@ -815,6 +960,10 @@ namespace Assignment1
 
         }
 
+        /// <summary>
+        /// counts the data in a table
+        /// </summary>
+        /// <returns>returns the count of total data in a grid table</returns>
         public int dataCount()
         {
             rowCount =  dataGridView.RowCount;

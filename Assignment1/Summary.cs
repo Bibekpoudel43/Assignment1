@@ -6,18 +6,32 @@ using System.Threading.Tasks;
 
 namespace Assignment1
 {
+    /// <summary>
+    /// this class help in certain mathmatical calculation like average, max, min, ftp.
+    /// </summary>
     public class Summary
     {
+        
         public static List<string> heartRate = new List<string>();
         public static List<string> speed = new List<string>();
         public static List<string> speed_mile = new List<string>();
         public static List<string> cadence = new List<string>();
         public static List<string> altitude = new List<string>();
-       public static List<string> power = new List<string>();
+        public static List<string> power = new List<string>();
         public static List<string> powerbalance = new List<string>();
         string time = "";
        public static double FTP = 0, NP = 0, PB = 12, IF = 0;
 
+        /// <summary>
+        /// Summary class Constructer
+        /// </summary>
+        /// <param name="heartRate"></param>
+        /// <param name="speed"></param>
+        /// <param name="speed_mile"></param>
+        /// <param name="cadence"></param>
+        /// <param name="altitude"></param>
+        /// <param name="power"></param>
+        /// <param name="time"></param>
         public Summary(List<string> heartRate, List<string> speed, List<string> speed_mile, List<string> cadence, List<string> altitude, List<string> power, string time)
         {
             Summary.heartRate = heartRate;
@@ -27,8 +41,6 @@ namespace Assignment1
             Summary.altitude = altitude;
             Summary.power = power;
             this.time = time;
-
-
         }
 
         /// <summary>
@@ -56,7 +68,11 @@ namespace Assignment1
 
             return total;
         }
-        //average calculation
+        /// <summary>
+        /// this function calculates the averages of the provided value
+        /// </summary>
+        /// <param name="value">accepts string type parameter</param>
+        /// <returns>returns averages of double data type</returns>
         public static double Average(List<string> value)
         {
             double sum = 0;
@@ -70,7 +86,11 @@ namespace Assignment1
             return result;
         }
 
-        //average calculation
+        /// <summary>
+        ///  this function calculates the averages of the provided value
+        /// </summary>
+        /// <param name="value">accepts double data type parameter</param>
+        /// <returns> returns averages of a double data type</returns>
         public static double Average(List<double> value)
         {
             double sum = 0;
@@ -84,6 +104,11 @@ namespace Assignment1
             return result;
         }
 
+        /// <summary>
+        ///  this function calculates the averages of the provided value for interval detection 
+        /// </summary>
+        /// <param name="value">accepts the string data type parameter</param>
+        /// <returns> returns averages of a double data type</returns>
         public static string AverageID(List<string> value)
         {
             double sum = 0;
@@ -97,7 +122,11 @@ namespace Assignment1
             return result.ToString();
         }
 
-        //average calculation
+        /// <summary>
+        /// this function calculates the averages of the provided value
+        /// </summary>
+        /// <param name="value">accepts the integer type parameter</param>
+        /// <returns>returns averages of a double data type</returns>
         public static double Average(List<int> value)
         {
             double sum = 0;
@@ -110,7 +139,11 @@ namespace Assignment1
             double result = (sum / value.Count);
             return result;
         }
-        //sum calculation
+        /// <summary>
+        /// this function help to calculate the sum of given values
+        /// </summary>
+        /// <param name="value">any value with string data type</param>
+        /// <returns>return sum in double data type</returns>
         public static double Sum(List<string> value)
         {
            double sum = 0;
@@ -122,7 +155,11 @@ namespace Assignment1
 
             return sum;
         }
-        //max calculation
+        /// <summary>
+        /// this function help to calculate the max of given values
+        /// </summary>
+        /// <param name="value">any value with string data type</param>
+        /// <returns>return max value in double data type</returns>
         public static double Max(List<string> value)
         {
             double maxVal = 0;
@@ -138,7 +175,12 @@ namespace Assignment1
             return maxVal;
         }
 
-        //max calculation
+
+        /// <summary>
+        /// this function help to calculate the sum of given values
+        /// </summary>
+        /// <param name="value">any value with double data type</param>
+        /// <returns>return sum in double data type</returns>
         public static double Max(List<double> value)
         {
             double maxVal = 0;
@@ -154,7 +196,11 @@ namespace Assignment1
             return maxVal;
         }
 
-        //max calculation
+        /// <summary>
+        /// this function help to calculate the sum of given values
+        /// </summary>
+        /// <param name="value">any value with integer data type</param>
+        /// <returns>return sum in double data type</returns>
         public static double Max(List<int> value)
         {
             double maxVal = 0;
@@ -169,7 +215,11 @@ namespace Assignment1
 
             return maxVal;
         }
-        //min calculation
+        /// <summary>
+        /// this function help to calculate the minimum of given values
+        /// </summary>
+        /// <param name="value">any value with string data type</param>
+        /// <returns>return minimum value in integer data type</returns>
         public static int Min(List<string> value)
         {
             int minVal = Int32.Parse(value.ElementAt(0));
@@ -185,7 +235,11 @@ namespace Assignment1
             return minVal;
         }
 
-        //min calculation
+        /// <summary>
+        /// this function help to calculate the minimum of given values
+        /// </summary>
+        /// <param name="value">any value with integer data type</param>
+        /// <returns>returns minimum value in integer data type</returns>
         public static int Min(List<int> value)
         {
             int minVal = (value.ElementAt(0));
@@ -200,7 +254,13 @@ namespace Assignment1
 
             return minVal;
         }
-        //totaldistnce calculation
+        /// <summary>
+        /// calculate the total distance in km/hr 
+        /// </summary>
+        /// <param name="average">accept the average sped</param>
+        /// <param name="count">accept the total data of grid table</param>
+        /// <param name="interval">accept interval in seconds</param>
+        /// <returns>returns total distance travelled by the racer in double data type</returns>
         public static double TotalDistance(double average, int count, int interval)
         {
             var time = TimeSpan.FromSeconds(count * interval);
@@ -209,7 +269,10 @@ namespace Assignment1
             return total1;
         }
 
-
+        /// <summary>
+        /// calculates the functional threshold power
+        /// </summary>
+        /// <returns>returns FTP from a power value</returns>
         public string CalculateFunctionalThresholdPower()
         {
             double num = 0;
@@ -226,7 +289,10 @@ namespace Assignment1
             return FTP.ToString();
         }
 
-
+        /// <summary>
+        /// this function calculates the normalized power
+        /// </summary>
+        /// <returns>returns NP based on a power value</returns>
         public string CalculateNormalizedPower()
         {
             List<double> power1 = new List<double>();
@@ -272,7 +338,10 @@ namespace Assignment1
             return NP.ToString();
 
         }
-
+        /// <summary>
+        /// this function calculates intensity factor by accepting NP, IF and FTP
+        /// </summary>
+        /// <returns>returns intensity factor of a string data type</returns>
         public string CalculateIntensityFactor()
         {
             double IF1 = NP / FTP;
@@ -281,6 +350,11 @@ namespace Assignment1
             return IF.ToString();
         }
 
+        /// <summary>
+        /// this function calculates the training stress score based on heartrate, accepting NP, If, and FTP
+        /// </summary>
+        /// <param name="heartRate">accepts heart rate of string type list array</param>
+        /// <returns>returns TSS of a string data types</returns>
         public static string CalculateTrainingStressScore(List<string> heartRate)
         {
             string[] heart1 = heartRate.ToArray();
@@ -292,6 +366,10 @@ namespace Assignment1
             return TSS.ToString();
         }
 
+        /// <summary>
+        /// variable declaration of integer list type array 
+        /// which is used in interval detection
+        /// </summary>
         public static List<int> intervalIndexes;
 
         /// <summary>
@@ -349,7 +427,11 @@ namespace Assignment1
             return result / power1.Length;
         }
 
-        //minimizing the decimal value to 2
+        /// <summary>
+        /// this function round off the double type value into .2 decimal point
+        /// </summary>
+        /// <param name="val">aceepts the double data type parameter</param>
+        /// <returns>returns round off value of a double data type</returns>
         public static double roundOff(double val)
         {
             double data = Math.Round(val, 2, MidpointRounding.AwayFromZero);

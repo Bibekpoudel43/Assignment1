@@ -8,6 +8,9 @@ using ZedGraph;
 
 namespace Assignment1
 {
+    /// <summary>
+    /// this class is created to provide the individual graph for heart, speed, cadence, power, and altitude
+    /// </summary>
     public partial class IndividualGraph : Form
     {
         List<string> _heartRate = null;
@@ -15,8 +18,15 @@ namespace Assignment1
         List<string> _cadence = null;
         List<string> _altitude = null;
         List<string> _power = null;
-        
 
+        /// <summary>
+        /// constructor of this class
+        /// </summary>
+        /// <param name="heartRate">accepts the heartrate from wherever this class is called and initialized</param>
+        /// <param name="speed">accepts the speed from wherever this class is called and initialized</param>
+        /// <param name="cadence">accepts the cadence from wherever this class is called and initialized</param>
+        /// <param name="altitude">accepts the altitude from wherever this class is called and initialized</param>
+        /// <param name="power">accepts the power from wherever this class is called and initialized</param>
         public IndividualGraph(List<string> heartRate, List<string> speed, List<string> cadence, List<string> altitude, List<string> power)
         {
             InitializeComponent();
@@ -27,7 +37,11 @@ namespace Assignment1
             _power = power;
         }
 
-        //assigning pointpairlist key and value
+        /// <summary>
+        /// this function help in assigning pointpairlist key and value
+        /// </summary>
+        /// <param name="value">accepts value of integer array type</param>
+        /// <returns>returns the points</returns>
         private PointPairList buildPointPairList(int[] value)
         {
             PointPairList pr = new PointPairList();
@@ -37,7 +51,12 @@ namespace Assignment1
             }
             return pr;
         }
-        //assigning pointpairlist key and value
+
+        /// <summary>
+        /// this function help in assigning pointpairlist key and value
+        /// </summary>
+        /// <param name="value">accepts value of double array type</param>
+        /// <returns>returns the points</returns>
         private PointPairList buildPointPairList(double[] value)
         {
             PointPairList pr = new PointPairList();
@@ -47,6 +66,10 @@ namespace Assignment1
             }
             return pr;
         }
+
+        /// <summary>
+        /// this function help in creating zedgraph based on a provided values
+        /// </summary>
         private void plotGraph()
         {
             //initializing graphpane
@@ -94,7 +117,7 @@ namespace Assignment1
             PointPairList powerPairList = new PointPairList();
             PointPairList altitudePairList = new PointPairList();
 
-            
+            //setting points of a heart, sped, cadence, power and altitude 
             List<int> hr = _heartRate.Select(s => Convert.ToInt32(s)).ToList();
             heartPairList = buildPointPairList(hr.ToArray());
             List<double> c2 = _speed.Select(s => Convert.ToDouble(s)).ToList();
@@ -130,6 +153,11 @@ namespace Assignment1
             zedGraphControl9.AxisChange();
             zedGraphControl10.AxisChange();
         }
+        /// <summary>
+        /// executes when this form is loaded
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void IndividualGraph_Load(object sender, EventArgs e)
         {
             plotGraph();

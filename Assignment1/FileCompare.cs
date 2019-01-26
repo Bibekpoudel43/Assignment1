@@ -13,9 +13,13 @@ using ZedGraph;
 
 namespace Assignment1
 {
+    /// <summary>
+    /// this class is used in file comparision
+    /// two files will be comapred and associates result will be displayed
+    /// </summary>
     public partial class FileCompare : Form
     {
-        
+        //variable declaration for file1
         List<string> parametersArray = new List<string>();
         Dictionary<string, string> parameter = new Dictionary<string, string>();
         List<int> heart = new List<int>();
@@ -30,7 +34,7 @@ namespace Assignment1
         Dictionary<string, List<string>> hrData = new Dictionary<string, List<string>>();
        
 
-
+        //variable declaraion for file 2
         List<string> parametersArray1 = new List<string>();
         Dictionary<string, string> parameter1 = new Dictionary<string, string>(); 
         List<int> heart11 = new List<int>();
@@ -43,8 +47,6 @@ namespace Assignment1
         List<DateTime> dateTime1 = new List<DateTime>();
         List<String> summary1 = new List<String>();
         Dictionary<string, List<string>> hrData1 = new Dictionary<string, List<string>>();
-        int countData1 = 0, countData2 = 0;
-
 
         char[] findOf = { '\t', ' ', '=' };
         DateTime dt = new DateTime();
@@ -57,22 +59,24 @@ namespace Assignment1
 
         int interval = 0;
 
-        String smode = "";
-        String time = "";
-        String ntime = "";
-        String timee = "";
+        string smode = "";
 
-        String smode1 = "";
-        String time1 = "";
-        String ntime1 = "";
-        String timee1 = "";
+        /// <summary>
+        /// constructor of this class
+        /// </summary>
         public FileCompare()
         {
             InitializeComponent();
+            //invoking functions 
             InitGrid();
             InitGrid1();
         }
 
+        /// <summary>
+        /// executes when browse button for file 1 is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void file1btn_Click(object sender, EventArgs e)
         {
             OpenFileDialog od = new OpenFileDialog();
@@ -83,6 +87,11 @@ namespace Assignment1
             }
         }
 
+        /// <summary>
+        /// executes when browse button for file 2 is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void file2btn_Click_1(object sender, EventArgs e)
         {
             OpenFileDialog od = new OpenFileDialog();
@@ -92,6 +101,11 @@ namespace Assignment1
                 file2txt.Text = Path.GetFullPath(od.FileName);
             }
         }
+
+        /// <summary>
+        /// this function helps in file processing and sorting the accepted data into a certain list array and dictionary
+        /// </summary>
+        /// <param name="filePath">actual directory path of a file </param>
         public void fileprocessing(string filePath)
         {
             try
@@ -104,13 +118,14 @@ namespace Assignment1
 
                 while (!(line = sr.ReadLine()).Contains("[Note]"))
                 {
-
                     counter++;
+                    //splitting the line 
                     string newline = string.Join(" ", line.Split(findOf, StringSplitOptions.RemoveEmptyEntries));
                     List<string> val = newline.Split(' ').ToList();
 
                     for (int i = 0; i < val.Count(); i++)
                     {
+                        //adding the splitted value in an array
                         parametersArray.Add(val[i]);
                     }
 
@@ -136,15 +151,14 @@ namespace Assignment1
                 smode = parameter["SMode"];
                 SMODE(smode);
 
+                //reads data of a file until the end of pages hit
                 while (!sr.EndOfStream)
                 {
                     if ((line = sr.ReadLine()).Contains("[HRData]"))
                     {
-
-
                         while ((newLine = sr.ReadLine()) != null)
                         {
-
+                            //invoking a function which helps to sort the data into a specific list array
                             sortDataIntoArray(newLine);
                         }
                     }
@@ -155,26 +169,26 @@ namespace Assignment1
             {
                 MessageBox.Show(exc.ToString());
             }
-
-
-
+   
             catch (IOException e)
             {
                 Console.WriteLine(e);
             }
 
+            //class's object is initilaized and passed a parameter
             Form1 f = new Form1();
             deviceName.Text = f.deviceN(parameter["Monitor"]);
 
         }
 
+        /// <summary>
+        /// this function helps in file processing and sorting the accepted data into a certain list array and dictionary
+        /// </summary>
+        /// <param name="filePath">actual directory path of a file [file 2 ] </param>
         public void fileprocessing1(string filePath)
         {
-
             try
             {
-                Console.WriteLine(file2txt.Text);
-
                 StreamReader sr = new StreamReader(filePath);
                 string line = "";
                 string newLine = "";
@@ -184,11 +198,13 @@ namespace Assignment1
                 {
 
                     counter1++;
+                    //splitting the line 
                     string newline = string.Join(" ", line.Split(findOf, StringSplitOptions.RemoveEmptyEntries));
                     List<string> val = newline.Split(' ').ToList();
 
                     for (int i = 0; i < val.Count(); i++)
                     {
+                        //adding the splitted value in an array
                         parametersArray1.Add(val[i]);
                     }
 
@@ -214,15 +230,14 @@ namespace Assignment1
                 smode = parameter1["SMode"];
                 SMODE(smode);
 
+                //reads data of a file until the end of pages hit
                 while (!sr.EndOfStream)
                 {
                     if ((line = sr.ReadLine()).Contains("[HRData]"))
                     {
-
-
                         while ((newLine = sr.ReadLine()) != null)
                         {
-
+                            //invoking a function which helps to sort the data into a specific list array
                             sortDataIntoArray1(newLine);
 
                         }
@@ -240,19 +255,28 @@ namespace Assignment1
                 Console.WriteLine(e);
             }
 
+            //class's object is initilaized and passed a parameter
             Form1 fm = new Form1();
             deviceName1.Text = fm.deviceN(parameter1["Monitor"]);
 
         }
 
+        /// <summary>
+        /// this function helps to sort data into array list based on a smode value
+        /// </summary>
+        /// <param name="line">accepts a one row values of a file</param>
         public void sortDataIntoArray(string line)
         {
             try
             {
                 int heart11 = 0;
                 int speed1 = 0, cadence1 = 0, altitude1 = 0, power1 = 0, powerbal = 0;
+                //spitting line and join it with one space
                 string newline = string.Join(" ", line.Split(findOf, StringSplitOptions.RemoveEmptyEntries));
+                //stores the splitted value to an array
                 List<string> val = newline.Split(' ').ToList();
+
+                //checking smode value 
                 if (heartCheck == 1)
                 {
                     heart11 = int.Parse(val[0]);
@@ -276,6 +300,7 @@ namespace Assignment1
                     altitude1 = int.Parse(val[3]);
                 }
 
+                //adding a data to an specified list array
                 heart.Add(heart11);
                 speed.Add(speed1 * 0.1);
                 speed_mile.Add(roundOff(speed1 * 0.1 * 0.621371));
@@ -289,17 +314,22 @@ namespace Assignment1
             {
                 MessageBox.Show(e.Message);
             }
-
-
         }
 
+        /// <summary>
+        /// this function helps to sort data into array list based on a smode value
+        /// </summary>
+        /// <param name="line">accepts a one row values of a file</param>
         public void sortDataIntoArray1(string line)
         {
             try
             {
                 int hrt = 0, sp = 0, cd = 0, al = 0, pw = 0, pwb = 0;
+                //spitting line and join it with one space
                 string newline = string.Join(" ", line.Split(findOf, StringSplitOptions.RemoveEmptyEntries));
+                //stores the splitted value to an array
                 List<string> val = newline.Split(' ').ToList();
+                //checking smode value 
                 if (heartCheck == 1)
                 {
                     hrt = int.Parse(val[0]);
@@ -323,6 +353,7 @@ namespace Assignment1
                     al = int.Parse(val[3]);
                 }
 
+                //adding a data to an specified list array
                 heart11.Add(hrt);
                 speed11.Add(sp * 0.1);
                 speed_mile11.Add(roundOff(sp * 0.1 * 0.621371));
@@ -337,14 +368,22 @@ namespace Assignment1
                 MessageBox.Show(e.Message);
             }
         }
-        //minimizing the decimal value to 2
+
+        /// <summary>
+        /// minimizing the decimal value to 2
+        /// </summary>
+        /// <param name="val">accepts the value of double data type</param>
+        /// <returns>returns the round off value </returns>
         public static double roundOff(double val)
         {
             double data = Math.Round(val, 2, MidpointRounding.AwayFromZero);
             return data;
         }
 
-        //calculateing smode
+        /// <summary>
+        /// calculating smode
+        /// </summary>
+        /// <param name="mode">parameter header smode information</param>
         private void SMODE(string mode)
         {
             heartCheck = int.Parse(mode.Substring(0, 1));
@@ -354,7 +393,11 @@ namespace Assignment1
             powerCheck = int.Parse(mode.Substring(4, 1));
         }
 
-        //timeinterval for each row
+        /// <summary>
+        /// timeinterval for each row
+        /// </summary>
+        /// <param name="time">accepts the time from header information</param>
+        /// <returns>returns the times for each row of data</returns>
         public string timeBuilder(string time)
         {
             // fetch the en-GB culture
@@ -364,42 +407,59 @@ namespace Assignment1
             return result;
         }
 
+        /// <summary>
+        /// executes when comapare button is clicked
+        /// comapre the data from two files
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCompare_Click(object sender, EventArgs e)
         {
+            //when file 1 and file 2 textbox is empty 
             if(string.IsNullOrEmpty(file1txt.Text) && string.IsNullOrEmpty(file2txt.Text))
             {
                 MessageBox.Show("Please choose the file first");
             }
             else
             {
+                //invoking a functions for file 1
                 fileprocessing(file1txt.Text);
                 FillTable1();
 
+                //invoking a functions for file 2
                 fileprocessing1(file2txt.Text);
                 FillTable2();
             }
         }
 
+        /// <summary>
+        /// executes when summary graph button is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSummaryGraph_Click(object sender, EventArgs e)
         {
             if (File1GridView.RowCount > 1 && File2GridView.RowCount > 1)
             {
-                //instansating summarygraph variable (display in combied graph)
+                //instansating summarygraph variable (display in combined graph)
                 FileCompareSummaryGraph sm = new FileCompareSummaryGraph(heart, speed, cadence, altitude, power, heart11, speed11, cadence11, altitude11, power11, parameter, parameter1);
                 sm.Show();
             }
             else
             {
+                //when user click the view graph button without loading a files
                 MessageBox.Show("Please Select the File First");
             }
         }
 
+        /// <summary>
+        /// fill the rows of data grid table 
+        /// </summary>
         public void FillTable1()
         {
                 int counter = 0;
                 foreach (int value in heart)
                 {
-
                     File1GridView.Rows.Add(timeBuilder(parameter["StartTime"])
                         , heart[counter]
                         , speed[counter]
@@ -413,7 +473,9 @@ namespace Assignment1
                 }
         }
 
-
+        /// <summary>
+        /// fill the rows of data grid table 
+        /// </summary>
         public void FillTable2()
         {
             int interval = 0;
@@ -434,7 +496,9 @@ namespace Assignment1
 
         }
 
-        //specifying column header
+        /// <summary>
+        /// specifying column header for file 1
+        /// </summary>
         private void InitGrid()
         {
             File1GridView.ColumnCount = 7;
@@ -447,7 +511,10 @@ namespace Assignment1
             File1GridView.Columns[6].Name = "Power Balance";
         }
 
-        //specifying column header
+
+        /// <summary>
+        /// specifying column header for file 2
+        /// </summary>
         private void InitGrid1()
         {
             File2GridView.ColumnCount =7;
@@ -460,6 +527,10 @@ namespace Assignment1
             File2GridView.Columns[6].Name = "Power Balance";
         }
 
+        /// <summary>
+        /// counts the row of file 1
+        /// </summary>
+        /// <returns>returns the counted row of integer data type</returns>
         public int rowCount()
         {
             int count = 0;
@@ -467,6 +538,10 @@ namespace Assignment1
             return count;
         }
 
+        /// <summary>
+        /// counts the row of file 2
+        /// </summary>
+        /// <returns>returns the counted row of integer data type</returns>
         public int rowCount1()
         {
             int count = 0;
@@ -474,11 +549,16 @@ namespace Assignment1
             return count;
         }
 
-
+        /// <summary>
+        /// this function fires when user click the single row of a table 1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void File1GridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (File1GridView.SelectedRows.Count == 0 || File1GridView.SelectedRows.Count > 1)
             {
+                
                 MessageBox.Show("Select a Row");
             }
             else
@@ -490,6 +570,8 @@ namespace Assignment1
                 File2GridView.ClearSelection();
                 File2GridView.Rows[e.RowIndex].Selected = true;
 
+                //when user select a single row
+                //get a data from a specific cell [file 1]
                 foreach (DataGridViewRow row in File1GridView.SelectedRows)
                 {
                     heart = row.Cells[1].Value.ToString().Split(' ');
@@ -499,7 +581,8 @@ namespace Assignment1
                     power = row.Cells[5].Value.ToString().Split(' ');
                     powerBalance = row.Cells[6].Value.ToString().Split(' ');
                 }
-
+                //when user select a single row
+                //get a data from a specific cell [file 2]
                 foreach (DataGridViewRow row in File2GridView.SelectedRows)
                 {
                     heart1 = row.Cells[1].Value.ToString().Split(' ');
@@ -510,6 +593,7 @@ namespace Assignment1
                     powerBalance1 = row.Cells[6].Value.ToString().Split(' ');
                 }
 
+                //parsing a data into a doule data types
                 double heartNum = double.Parse(heart[0]);
                 double speedNum = double.Parse(speed[0]);
                 double cadenceNum = double.Parse(cadence[0]);
@@ -524,7 +608,7 @@ namespace Assignment1
                 double powerNum1 = double.Parse(power1[0]);
                 double powerbalanceNum1 = double.Parse(powerBalance1[0]);
 
-                //String header=dataGridView2=
+                //Displaying a data into a textbox
                 string env = Environment.NewLine;
                 textBox1.Text = "Difference In " + env +  env +
                     "Heart Rate: " + heartNum + " - " + heartNum1 + " =  " + CalculateDifference(heartNum, heartNum1) +
@@ -537,7 +621,13 @@ namespace Assignment1
 
             }
         }
-        //calculate difference
+
+        /// <summary>
+        /// calculates difference 
+        /// </summary>
+        /// <param name="num1">accepts first parameter of double data type</param>
+        /// <param name="num2">accepts second parameter of double data type</param>
+        /// <returns>returns difference of two vaules in a string data type</returns>
         public string CalculateDifference(double num1, double num2)
         {
             double rst = 0;

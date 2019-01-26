@@ -11,6 +11,9 @@ using ZedGraph;
 
 namespace Assignment1
 {
+    /// <summary>
+    /// this class is created to plot a summary graph for two compared file
+    /// </summary>
     public partial class FileCompareSummaryGraph : Form
     {
         List<int> heart = null;
@@ -27,8 +30,24 @@ namespace Assignment1
         Dictionary<string, string> parameter = null;
         Dictionary<string, string> parameter1 = null;
 
+        //initializing filecompare class file
         FileCompare fm = new FileCompare();
 
+        /// <summary>
+        /// constructor of this class
+        /// </summary>
+        /// <param name="heart">heart of integer data type</param>
+        /// <param name="speed">speed of double data type</param>
+        /// <param name="cadence">cadence of integer data type</param>
+        /// <param name="altitude">altitude of integer data type</param>
+        /// <param name="power">power of integer data type</param>
+        /// <param name="heart11">heart of second file/integer data type </param>
+        /// <param name="speed11">speed of second file/double data type</param>
+        /// <param name="cadence11">cadence of second file/integer data type</param>
+        /// <param name="altitude11">altitude of second file/integer data type</param>
+        /// <param name="power11">power of second file/integer data type</param>
+        /// <param name="parameter">contains header information of first file/string data type</param>
+        /// <param name="parameter1">contains header information of second file/string data type</param>
         public FileCompareSummaryGraph(List<int> heart, 
             List<double> speed, 
             List<int> cadence, 
@@ -59,6 +78,11 @@ namespace Assignment1
             this.parameter1 = parameter1;
         }
 
+        /// <summary>
+        /// this function help in assigning pointpairlist key and value
+        /// </summary>
+        /// <param name="data">accepts value of integer array type</param>
+        /// <returns>returns the points</returns>
         private PointPairList buildPointPairList(int[] data)
         {
             PointPairList pt = new PointPairList();
@@ -70,6 +94,12 @@ namespace Assignment1
             return pt;
 
         }
+
+        /// <summary>
+        /// this function help in assigning pointpairlist key and value
+        /// </summary>
+        /// <param name="data">accepts value of double array type</param>
+        /// <returns>returns the points</returns>
         private PointPairList buildPointPairList(double[] data)
         {
             PointPairList pt = new PointPairList();
@@ -82,21 +112,30 @@ namespace Assignment1
 
         }
 
+        /// <summary>
+        /// this function help in creating zedgraph based on a provided values
+        /// </summary>
         private void plotToGraph()
         {
+            //initialing graphpane
             GraphPane myPane = zedGraphControl1.GraphPane;
+            // Set the Titles
             myPane.Title = "Summary Graph of First File";
             myPane.XAxis.Title = "Time in second";
             myPane.YAxis.Title = "Parameters";
             myPane.PaneFill.Color = Color.LightGray;
             myPane.AxisFill.Color = Color.MintCream;
 
+            //initialing graphpane
             GraphPane myPane1 = zedGraphControl2.GraphPane;
+            // Set the Titles
             myPane1.Title = "Summary Graph of Second File";
             myPane1.XAxis.Title = "Time in second";
             myPane1.YAxis.Title = "Parameters ";
             myPane1.PaneFill.Color = Color.LightGray;
             myPane1.AxisFill.Color = Color.MintCream;
+
+            //initializing pointparlist
             PointPairList heartPairList = new PointPairList();
             PointPairList speedPairList = new PointPairList();
             PointPairList cadencePAirList = new PointPairList();
@@ -110,20 +149,21 @@ namespace Assignment1
             PointPairList altitudePairList1 = new PointPairList();
 
 
-
+            //setting points of a heart, speed, cadence, power and altitude
             heartPairList = buildPointPairList(heart.ToArray());
             speedPairList = buildPointPairList(speed.ToArray());
             cadencePAirList = buildPointPairList(cadence.ToArray());
             powerPairList = buildPointPairList(power.ToArray());
             altitudePairList = buildPointPairList(altitude.ToArray());
 
+            //setting points of a heart, sped, cadence, power and altitude for second file's data
             heartPairList1 = buildPointPairList(heart11.ToArray());
             speedPairList1 = buildPointPairList(speed11.ToArray());
             cadencePAirList1 = buildPointPairList(cadence11.ToArray());
             powerPairList1 = buildPointPairList(power11.ToArray());
             altitudePairList1 = buildPointPairList(altitude11.ToArray());
 
-
+            //ploting the line to a graph
             LineItem teamACurve = myPane.AddCurve("Heart Rate", heartPairList, Color.Red, SymbolType.None);
             LineItem teamACurve1 = myPane.AddCurve("Speed", speedPairList, Color.Blue, SymbolType.None);
             LineItem teamACurve2 = myPane.AddCurve("Cadence", cadencePAirList, Color.Yellow, SymbolType.None);
@@ -140,6 +180,10 @@ namespace Assignment1
             zedGraphControl1.AxisChange();
             zedGraphControl2.AxisChange();
         }
+
+        /// <summary>
+        /// sizing of zedgraph
+        /// </summary>
         private void SetSize()
         {
             zedGraphControl1.Location = new Point(0, 0);
@@ -148,6 +192,9 @@ namespace Assignment1
 
         }
 
+        /// <summary>
+        /// sizing of zedgraph
+        /// </summary>
         private void SetSize1()
         {
             zedGraphControl2.Location = new Point(0, 0);
@@ -156,12 +203,22 @@ namespace Assignment1
 
         }
 
+        /// <summary>
+        /// initiated when form is resized
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FileCompareSummaryGraph_Resize(object sender, EventArgs e)
         {
             SetSize();
             SetSize1();
         }
 
+        /// <summary>
+        /// when the form loads
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FileCompareSummaryGraph_Load(object sender, EventArgs e)
         {
             plotToGraph();
@@ -169,7 +226,9 @@ namespace Assignment1
         }
 
 
-        //summary calculation
+        /// <summary>
+        /// summary calculation of first file
+        /// </summary>
         private void summaryCalc()
         {
             var maxSpeed = Summary.Max(speed);
@@ -200,7 +259,9 @@ namespace Assignment1
 
         }
 
-        //summary calculation
+        /// <summary>
+        /// summary calculation of second file
+        /// </summary>
         private void summaryCalc1()
         {
             var maxSpeed = Summary.Max(speed11);
