@@ -38,6 +38,8 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.panelDataGrid = new System.Windows.Forms.Panel();
+            this.txtIntervalDetectionLabel = new System.Windows.Forms.TextBox();
+            this.btnIntervalDetection = new System.Windows.Forms.Button();
             this.btnView = new System.Windows.Forms.Button();
             this.btnChunk4 = new System.Windows.Forms.Button();
             this.btnChunk3 = new System.Windows.Forms.Button();
@@ -108,8 +110,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnIndividualGraph = new System.Windows.Forms.Button();
             this.btnGraph = new System.Windows.Forms.Button();
-            this.btnIntervalDetection = new System.Windows.Forms.Button();
-            this.txtIntervalDetectionLabel = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.panelDataGrid.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -181,6 +181,26 @@
             this.panelDataGrid.Name = "panelDataGrid";
             this.panelDataGrid.Size = new System.Drawing.Size(555, 517);
             this.panelDataGrid.TabIndex = 1;
+            // 
+            // txtIntervalDetectionLabel
+            // 
+            this.txtIntervalDetectionLabel.BackColor = System.Drawing.Color.Silver;
+            this.txtIntervalDetectionLabel.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.txtIntervalDetectionLabel.Location = new System.Drawing.Point(12, 357);
+            this.txtIntervalDetectionLabel.Name = "txtIntervalDetectionLabel";
+            this.txtIntervalDetectionLabel.ReadOnly = true;
+            this.txtIntervalDetectionLabel.Size = new System.Drawing.Size(291, 20);
+            this.txtIntervalDetectionLabel.TabIndex = 69;
+            // 
+            // btnIntervalDetection
+            // 
+            this.btnIntervalDetection.Location = new System.Drawing.Point(23, 387);
+            this.btnIntervalDetection.Name = "btnIntervalDetection";
+            this.btnIntervalDetection.Size = new System.Drawing.Size(141, 23);
+            this.btnIntervalDetection.TabIndex = 68;
+            this.btnIntervalDetection.Text = "Interval Detect";
+            this.btnIntervalDetection.UseVisualStyleBackColor = true;
+            this.btnIntervalDetection.Click += new System.EventHandler(this.btnIntervalDetection_Click);
             // 
             // btnView
             // 
@@ -907,23 +927,6 @@
             this.btnGraph.Text = "Summary Graph";
             this.btnGraph.UseVisualStyleBackColor = true;
             this.btnGraph.Click += new System.EventHandler(this.btnGraph_Click);
-            // 
-            // btnIntervalDetection
-            // 
-            this.btnIntervalDetection.Location = new System.Drawing.Point(23, 387);
-            this.btnIntervalDetection.Name = "btnIntervalDetection";
-            this.btnIntervalDetection.Size = new System.Drawing.Size(141, 23);
-            this.btnIntervalDetection.TabIndex = 68;
-            this.btnIntervalDetection.Text = "Interval Detect";
-            this.btnIntervalDetection.UseVisualStyleBackColor = true;
-            this.btnIntervalDetection.Click += new System.EventHandler(this.btnIntervalDetection_Click);
-            // 
-            // txtIntervalDetectionLabel
-            // 
-            this.txtIntervalDetectionLabel.Location = new System.Drawing.Point(12, 357);
-            this.txtIntervalDetectionLabel.Name = "txtIntervalDetectionLabel";
-            this.txtIntervalDetectionLabel.Size = new System.Drawing.Size(291, 20);
-            this.txtIntervalDetectionLabel.TabIndex = 69;
             // 
             // Form1
             // 

@@ -291,20 +291,23 @@ namespace Assignment1
 
         }
 
-        //calculateAdvanceMetrics
+        /// <summary>
+        /// show calculated advanced metrices to a label
+        /// </summary>
         public void calculateAdvancedMetrics()
         {
             Summary sv = new Summary(heartRate, speed, speed_miles, cadence, altitude, power, time);
             string FTP = sv.CalculateFunctionalThresholdPower();
             string Np = sv.CalculateNormalizedPower();
             string If = sv.CalculateIntensityFactor();
-            string Tss = sv.CalculateTrainingStressScore();
+            string Tss = Summary.CalculateTrainingStressScore(heartRate);
+            double pb = Summary.CalculatePowerBalance(power);
 
             ftplbl.Text = FTP + " watts";
             tsslbl.Text = Tss + "";
             iflbl.Text = If + "";
-            pblbl.Text = null;
             nplbl.Text = Np + " watts";
+            pblbl.Text = roundOff(pb).ToString();
         }
         //specifying column header
         private void InitGrid()
@@ -693,26 +696,26 @@ namespace Assignment1
 
             foreach (List<string[]> strList in totalData)
             {
-                result += ("Average For Chunk #" + chunkCounter + "\n");
+                result += ("Average For Interval " + chunkCounter + "\n");
                 // heart rate, speed, cadence, altitude, power
-                double heartRate = 0;
-                double speed = 0;
-                double cadence = 0;
-                double altitude = 0;
-                double power = 0;
+                double hr1 = 0;
+                double sp1 = 0;
+                double cd1 = 0;
+                double al1 = 0;
+                double p1 = 0;
 
                 // calculating average now
-                heartRate = Summary.GetAverage(strList, 0);
-                speed = Summary.GetAverage(strList, 1);
-                cadence = Summary.GetAverage(strList, 2);
-                altitude = Summary.GetAverage(strList, 3);
-                power = Summary.GetAverage(strList, 4);
+                hr1 = Summary.GetAverage(strList, 0);
+                sp1 = Summary.GetAverage(strList, 1);
+                cd1 = Summary.GetAverage(strList, 2);
+                al1 = Summary.GetAverage(strList, 3);
+                p1 = Summary.GetAverage(strList, 4);
 
-                result += "Average Heart Rate : " + heartRate + "\n";
-                result += "Average Speed : " + speed + "\n";
-                result += "Average Cadence : " + cadence + "\n";
-                result += "Average Altitude : " + altitude + "\n";
-                result += "Average Power : " + power + "\n\n\n";
+                result += "Average Heart Rate : " + roundOff(hr1) + "\n";
+                result += "Average Speed : " + roundOff(sp1 * 0.1) + "\n";
+                result += "Average Cadence : " + roundOff(cd1) + "\n";
+                result += "Average Altitude : " + roundOff(al1) + "\n";
+                result += "Average Power : " + roundOff(p1) + "\n\n\n";
 
                 // next chunk
                 chunkCounter++;
@@ -748,7 +751,7 @@ namespace Assignment1
                 for (int j = 0; j < endAt; j++)
                 {
                     // get the values upto the specified index
-                    temp.Add(data[0]);
+                    temp.Add(data[j]);
                 }
 
                 // add the value to the file
@@ -776,7 +779,7 @@ namespace Assignment1
             string average = CalculateAverageOfChunks(totalData);
             chunkedData = average;
 
-            IntervalDetectionSummary id = new IntervalDetectionSummary(average);
+            IntervalDetectionSummary id = new IntervalDetectionSummary(chunkedData);
             id.Show();
 
 
