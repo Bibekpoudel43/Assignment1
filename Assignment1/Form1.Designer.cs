@@ -38,6 +38,7 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.panelDataGrid = new System.Windows.Forms.Panel();
+            this.btnView = new System.Windows.Forms.Button();
             this.btnChunk4 = new System.Windows.Forms.Button();
             this.btnChunk3 = new System.Windows.Forms.Button();
             this.btnChunk2 = new System.Windows.Forms.Button();
@@ -107,7 +108,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnIndividualGraph = new System.Windows.Forms.Button();
             this.btnGraph = new System.Windows.Forms.Button();
-            this.btnView = new System.Windows.Forms.Button();
+            this.btnIntervalDetection = new System.Windows.Forms.Button();
+            this.txtIntervalDetectionLabel = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.panelDataGrid.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -163,6 +165,8 @@
             // panelDataGrid
             // 
             this.panelDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelDataGrid.Controls.Add(this.txtIntervalDetectionLabel);
+            this.panelDataGrid.Controls.Add(this.btnIntervalDetection);
             this.panelDataGrid.Controls.Add(this.btnView);
             this.panelDataGrid.Controls.Add(this.btnChunk4);
             this.panelDataGrid.Controls.Add(this.btnChunk3);
@@ -173,14 +177,24 @@
             this.panelDataGrid.Controls.Add(this.label27);
             this.panelDataGrid.Controls.Add(this.panel3);
             this.panelDataGrid.Controls.Add(this.dataGridView);
-            this.panelDataGrid.Location = new System.Drawing.Point(387, 24);
+            this.panelDataGrid.Location = new System.Drawing.Point(363, 24);
             this.panelDataGrid.Name = "panelDataGrid";
-            this.panelDataGrid.Size = new System.Drawing.Size(531, 517);
+            this.panelDataGrid.Size = new System.Drawing.Size(555, 517);
             this.panelDataGrid.TabIndex = 1;
+            // 
+            // btnView
+            // 
+            this.btnView.Location = new System.Drawing.Point(33, 475);
+            this.btnView.Name = "btnView";
+            this.btnView.Size = new System.Drawing.Size(122, 23);
+            this.btnView.TabIndex = 67;
+            this.btnView.Text = "View Selected Rows ";
+            this.btnView.UseVisualStyleBackColor = true;
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
             // btnChunk4
             // 
-            this.btnChunk4.Location = new System.Drawing.Point(137, 478);
+            this.btnChunk4.Location = new System.Drawing.Point(180, 482);
             this.btnChunk4.Name = "btnChunk4";
             this.btnChunk4.Size = new System.Drawing.Size(79, 23);
             this.btnChunk4.TabIndex = 66;
@@ -190,7 +204,7 @@
             // 
             // btnChunk3
             // 
-            this.btnChunk3.Location = new System.Drawing.Point(137, 449);
+            this.btnChunk3.Location = new System.Drawing.Point(180, 453);
             this.btnChunk3.Name = "btnChunk3";
             this.btnChunk3.Size = new System.Drawing.Size(79, 23);
             this.btnChunk3.TabIndex = 65;
@@ -200,7 +214,7 @@
             // 
             // btnChunk2
             // 
-            this.btnChunk2.Location = new System.Drawing.Point(137, 420);
+            this.btnChunk2.Location = new System.Drawing.Point(180, 424);
             this.btnChunk2.Name = "btnChunk2";
             this.btnChunk2.Size = new System.Drawing.Size(79, 23);
             this.btnChunk2.TabIndex = 64;
@@ -210,7 +224,7 @@
             // 
             // btnchunk1
             // 
-            this.btnchunk1.Location = new System.Drawing.Point(137, 394);
+            this.btnchunk1.Location = new System.Drawing.Point(180, 398);
             this.btnchunk1.Name = "btnchunk1";
             this.btnchunk1.Size = new System.Drawing.Size(79, 23);
             this.btnchunk1.TabIndex = 63;
@@ -228,14 +242,14 @@
             "2",
             "3",
             "4"});
-            this.cmbChunk.Location = new System.Drawing.Point(30, 422);
+            this.cmbChunk.Location = new System.Drawing.Point(60, 420);
             this.cmbChunk.Name = "cmbChunk";
             this.cmbChunk.Size = new System.Drawing.Size(69, 21);
             this.cmbChunk.TabIndex = 62;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(18, 454);
+            this.button1.Location = new System.Drawing.Point(44, 443);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(101, 23);
             this.button1.TabIndex = 61;
@@ -248,7 +262,7 @@
             this.label27.AutoSize = true;
             this.label27.BackColor = System.Drawing.Color.LightGray;
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(277, 350);
+            this.label27.Location = new System.Drawing.Point(318, 356);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(177, 24);
             this.label27.TabIndex = 59;
@@ -272,7 +286,7 @@
             this.panel3.Controls.Add(this.label52);
             this.panel3.Controls.Add(this.label53);
             this.panel3.Controls.Add(this.label54);
-            this.panel3.Location = new System.Drawing.Point(233, 384);
+            this.panel3.Location = new System.Drawing.Point(265, 383);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(283, 127);
             this.panel3.TabIndex = 58;
@@ -420,9 +434,9 @@
             // dataGridView
             // 
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(8, 0);
+            this.dataGridView.Location = new System.Drawing.Point(3, 1);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(508, 340);
+            this.dataGridView.Size = new System.Drawing.Size(545, 340);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             // 
@@ -437,7 +451,7 @@
             this.panel1.Controls.Add(this.btnGraph);
             this.panel1.Location = new System.Drawing.Point(13, 27);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(376, 517);
+            this.panel1.Size = new System.Drawing.Size(344, 517);
             this.panel1.TabIndex = 2;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -894,15 +908,22 @@
             this.btnGraph.UseVisualStyleBackColor = true;
             this.btnGraph.Click += new System.EventHandler(this.btnGraph_Click);
             // 
-            // btnView
+            // btnIntervalDetection
             // 
-            this.btnView.Location = new System.Drawing.Point(18, 369);
-            this.btnView.Name = "btnView";
-            this.btnView.Size = new System.Drawing.Size(122, 23);
-            this.btnView.TabIndex = 67;
-            this.btnView.Text = "View Selected Rows ";
-            this.btnView.UseVisualStyleBackColor = true;
-            this.btnView.Click += new System.EventHandler(this.btnView_Click);
+            this.btnIntervalDetection.Location = new System.Drawing.Point(23, 387);
+            this.btnIntervalDetection.Name = "btnIntervalDetection";
+            this.btnIntervalDetection.Size = new System.Drawing.Size(141, 23);
+            this.btnIntervalDetection.TabIndex = 68;
+            this.btnIntervalDetection.Text = "Interval Detect";
+            this.btnIntervalDetection.UseVisualStyleBackColor = true;
+            this.btnIntervalDetection.Click += new System.EventHandler(this.btnIntervalDetection_Click);
+            // 
+            // txtIntervalDetectionLabel
+            // 
+            this.txtIntervalDetectionLabel.Location = new System.Drawing.Point(12, 357);
+            this.txtIntervalDetectionLabel.Name = "txtIntervalDetectionLabel";
+            this.txtIntervalDetectionLabel.Size = new System.Drawing.Size(291, 20);
+            this.txtIntervalDetectionLabel.TabIndex = 69;
             // 
             // Form1
             // 
@@ -1015,6 +1036,8 @@
         private System.Windows.Forms.Button btnChunk2;
         private System.Windows.Forms.Button btnchunk1;
         private System.Windows.Forms.Button btnView;
+        private System.Windows.Forms.TextBox txtIntervalDetectionLabel;
+        private System.Windows.Forms.Button btnIntervalDetection;
     }
 }
 
